@@ -3,466 +3,374 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Benefit Navigator — Uzbekistan 2026</title>
+<title>Benefit Nav — Uzbekistan</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
   --bg:#080d18;--sidebar:#0a0f1e;--card:#0f1729;--card2:#131d30;
   --border:#1a2540;--border2:#1e2d48;
-  --teal:#00d4b8;--teal2:#00b89e;--teal-glow:rgba(0,212,184,.12);
-  --teal-soft:rgba(0,212,184,.08);
+  --teal:#00d4b8;--teal-glow:rgba(0,212,184,.12);--teal-soft:rgba(0,212,184,.08);
   --text:#e8eef8;--text2:#8a9bbf;--text3:#4a5a7a;
-  --red:#ff4d6d;--gold:#f5c542;--green:#22c55e;--blue:#3b82f6;
+  --red:#ff4d6d;--gold:#f5c542;--green:#22c55e;
   --font:'Inter',system-ui,sans-serif;
-  --radius:12px;--radius-sm:8px;--radius-xs:6px;
+  --r:12px;--rs:8px;
 }
 body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
-body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(rgba(0,212,184,.06) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;z-index:0;}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(rgba(0,212,184,.05) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;z-index:0}
 
-/* ══ ONBOARDING ══ */
-#onboarding{position:fixed;inset:0;z-index:1000;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:16px;}
-.ob-box{background:var(--card);border:1px solid var(--border2);border-radius:20px;padding:40px 44px;max-width:640px;width:100%;position:relative;z-index:1;}
-.ob-logo{display:flex;align-items:center;gap:12px;margin-bottom:28px}
-.ob-logo .icon{width:44px;height:44px;background:var(--teal);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:800;color:#080d18}
-.ob-title{font-size:1.4rem;font-weight:700;margin-bottom:8px}
-.ob-sub{color:var(--text2);font-size:.88rem;margin-bottom:28px;line-height:1.6}
+/* ONBOARDING */
+#ob{position:fixed;inset:0;z-index:1000;background:var(--bg);display:flex;align-items:center;justify-content:center}
+.ob-box{background:var(--card);border:1px solid var(--border2);border-radius:20px;padding:44px;max-width:640px;width:90%;position:relative;z-index:1}
+.ob-logo{display:flex;align-items:center;gap:10px;margin-bottom:28px}
+.ob-logo .ico{width:40px;height:40px;background:var(--teal);border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;color:#080d18}
+.ob-logo b{font-size:1.1rem;font-weight:700}
+.ob-logo small{color:var(--text2);font-size:.72rem;display:block}
+.ob-h{font-size:1.4rem;font-weight:700;margin-bottom:6px}
+.ob-sub{color:var(--text2);font-size:.87rem;margin-bottom:28px;line-height:1.6}
 .ob-types{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
-.ob-type{background:var(--card2);border:2px solid var(--border);border-radius:var(--radius);padding:16px;cursor:pointer;transition:all .2s;}
-.ob-type:hover{border-color:var(--teal);background:var(--teal-soft)}
-.ob-type.selected{border-color:var(--teal);background:var(--teal-glow)}
-.ob-type-icon{font-size:1.4rem;margin-bottom:6px}
-.ob-type-name{font-weight:600;font-size:.9rem;margin-bottom:3px}
-.ob-type-desc{font-size:.75rem;color:var(--text2);line-height:1.4}
-.ob-start{width:100%;background:var(--teal);color:#080d18;font-family:var(--font);font-weight:700;font-size:.95rem;padding:13px;border-radius:var(--radius-sm);border:none;cursor:pointer;transition:all .2s;}
-.ob-start:hover{background:#00e0c8;transform:translateY(-1px)}
-.ob-start:disabled{background:var(--border);color:var(--text3);cursor:not-allowed;transform:none}
-.ob-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
-.ob-input{background:var(--card2);border:1px solid var(--border2);border-radius:var(--radius-sm);color:var(--text);font-family:var(--font);font-size:.88rem;padding:11px 13px;outline:none;transition:border-color .2s;width:100%}
-.ob-input:focus{border-color:var(--teal)}
-.ob-input::placeholder{color:var(--text3)}
-.ob-select{background:var(--card2);border:1px solid var(--border2);border-radius:var(--radius-sm);color:var(--text);font-family:var(--font);font-size:.88rem;padding:11px 13px;outline:none;cursor:pointer;width:100%}
-.ob-select option{background:var(--card)}
-.ob-step{display:none}
-.ob-step.active{display:block}
+.ob-type{background:var(--card2);border:2px solid var(--border);border-radius:var(--r);padding:18px;cursor:pointer;transition:all .2s}
+.ob-type:hover,.ob-type.sel{border-color:var(--teal);background:var(--teal-soft)}
+.ob-type-ico{font-size:1.4rem;margin-bottom:7px}
+.ob-type-n{font-weight:600;font-size:.9rem;margin-bottom:3px}
+.ob-type-d{font-size:.75rem;color:var(--text2);line-height:1.4}
+.ob-btn{width:100%;background:var(--teal);color:#080d18;font-family:var(--font);font-weight:700;font-size:.95rem;padding:13px;border-radius:var(--rs);border:none;cursor:pointer;transition:all .2s}
+.ob-btn:hover{background:#00e8cc}
+.ob-btn:disabled{background:var(--border);color:var(--text3);cursor:not-allowed}
+.ob-flds{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:22px}
+.ob-inp{width:100%;background:var(--card2);border:1px solid var(--border2);border-radius:var(--rs);color:var(--text);font-family:var(--font);font-size:.87rem;padding:11px 13px;outline:none;transition:border-color .2s}
+.ob-inp:focus{border-color:var(--teal)}
+.ob-inp::placeholder{color:var(--text3)}
+.ob-sel{width:100%;background:var(--card2);border:1px solid var(--border2);border-radius:var(--rs);color:var(--text);font-family:var(--font);font-size:.87rem;padding:11px 13px;outline:none;cursor:pointer}
+.ob-sel option{background:var(--card)}
+.ob-step{display:none}.ob-step.act{display:block}
 .ob-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
-.ob-back{background:none;border:1px solid var(--border2);color:var(--text2);padding:7px 16px;border-radius:var(--radius-sm);cursor:pointer;font-family:var(--font);font-size:.85rem}
+.ob-back{background:none;border:1px solid var(--border2);color:var(--text2);padding:7px 16px;border-radius:var(--rs);cursor:pointer;font-family:var(--font);font-size:.82rem}
 .ob-back:hover{border-color:var(--teal);color:var(--teal)}
-.step-dots{display:flex;gap:6px;align-items:center}
-.step-dot{width:8px;height:8px;border-radius:50%;background:var(--border2)}
-.step-dot.active{background:var(--teal);width:22px;border-radius:99px}
+.dots{display:flex;gap:5px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--border2)}
+.dot.a{background:var(--teal);width:18px;border-radius:99px}
 
-/* ══ APP SHELL ══ */
+/* APP */
 #app{display:none;height:100vh;position:relative;z-index:1}
-.layout{display:grid;grid-template-columns:220px 1fr;height:100vh}
+.layout{display:grid;grid-template-columns:216px 1fr;height:100vh}
 
-/* ══ SIDEBAR ══ */
-.sidebar{background:var(--sidebar);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:0;overflow-y:auto;position:relative;}
-.sidebar::-webkit-scrollbar{width:0}
-.s-logo{padding:18px 16px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);cursor:pointer;}
-.s-logo .icon{width:34px;height:34px;background:var(--teal);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;color:#080d18;flex-shrink:0}
-.s-logo-text{font-weight:700;font-size:.92rem;line-height:1.2}
-.s-logo-sub{font-size:.7rem;color:var(--text2)}
-.s-section{padding:5px 16px;font-size:.67rem;font-weight:600;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin-top:8px}
-.s-item{margin:2px 8px;display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:var(--radius-sm);cursor:pointer;font-size:.83rem;color:var(--text2);transition:all .15s;position:relative;}
-.s-item:hover{background:var(--card2);color:var(--text)}
-.s-item.active{background:rgba(0,212,184,.12);color:var(--teal);font-weight:500}
-.s-item.active::before{content:'';position:absolute;left:0;top:20%;bottom:20%;width:3px;background:var(--teal);border-radius:99px}
-.s-item .ico{font-size:.95rem;width:20px;text-align:center;flex-shrink:0}
-.s-item .badge{margin-left:auto;background:var(--teal);color:#080d18;font-size:.64rem;font-weight:700;padding:2px 6px;border-radius:99px}
-.s-badge-red{background:var(--red)!important}
-.s-bottom{margin-top:auto;padding:12px;border-top:1px solid var(--border);}
-.s-trust{background:var(--teal-soft);border:1px solid rgba(0,212,184,.2);border-radius:var(--radius-sm);padding:10px;display:flex;align-items:center;gap:8px;font-size:.76rem;}
-.s-trust .icon{font-size:1rem}
-.s-trust-text{font-weight:600;color:var(--teal);display:block}
-.s-trust-sub{color:var(--text2);font-size:.7rem}
+/* SIDEBAR */
+.sb{background:var(--sidebar);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto}
+.sb::-webkit-scrollbar{width:0}
+.sb-logo{padding:18px 16px 14px;display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--border);cursor:pointer}
+.sb-logo .ico{width:32px;height:32px;background:var(--teal);border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.95rem;color:#080d18;flex-shrink:0}
+.sb-logo b{font-size:.9rem;font-weight:700;display:block;line-height:1.2}
+.sb-logo small{font-size:.68rem;color:var(--text2)}
+.sb-lang{padding:9px 10px;margin:9px 9px 3px;background:var(--card2);border:1px solid var(--border);border-radius:var(--rs);display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-size:.8rem;color:var(--text2)}
+.sb-lang:hover{border-color:var(--teal);color:var(--text)}
+.nav-i{margin:2px 7px;display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:var(--rs);cursor:pointer;font-size:.83rem;color:var(--text2);transition:all .15s;position:relative}
+.nav-i:hover{background:var(--card2);color:var(--text)}
+.nav-i.act{background:var(--teal-glow);color:var(--teal);font-weight:500}
+.nav-i.act::before{content:'';position:absolute;left:0;top:20%;bottom:20%;width:3px;background:var(--teal);border-radius:99px}
+.nav-i .ico{font-size:.95rem;width:18px;text-align:center;flex-shrink:0}
+.nav-i .bdg{margin-left:auto;background:var(--teal);color:#080d18;font-size:.62rem;font-weight:700;padding:1px 5px;border-radius:99px}
+.sb-bot{margin-top:auto;padding:10px;border-top:1px solid var(--border)}
+.sb-trust{background:var(--teal-soft);border:1px solid rgba(0,212,184,.2);border-radius:var(--rs);padding:10px 12px;display:flex;align-items:center;gap:7px;font-size:.75rem}
+.sb-trust b{color:var(--teal);display:block}
+.sb-trust span{color:var(--text2);font-size:.7rem}
 
-/* ══ MAIN ══ */
+/* MAIN */
 .main{display:flex;flex-direction:column;overflow:hidden}
-.topbar{background:rgba(8,13,24,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 24px;height:54px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;position:sticky;top:0;z-index:50;}
-.topbar-left{display:flex;align-items:center;gap:12px}
-.page-title{font-size:.95rem;font-weight:600}
-.topbar-right{display:flex;align-items:center;gap:8px}
-.tb-btn{background:var(--card);border:1px solid var(--border);color:var(--text2);padding:6px 11px;border-radius:var(--radius-sm);cursor:pointer;font-size:.78rem;font-family:var(--font);display:flex;align-items:center;gap:6px;transition:all .2s;}
+.topbar{background:rgba(8,13,24,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;position:sticky;top:0;z-index:50}
+.tb-l{display:flex;align-items:center;gap:10px}
+.pg-title{font-size:.95rem;font-weight:600}
+.tb-r{display:flex;align-items:center;gap:7px}
+.tb-btn{background:var(--card);border:1px solid var(--border);color:var(--text2);padding:6px 11px;border-radius:var(--rs);cursor:pointer;font-size:.77rem;font-family:var(--font);display:flex;align-items:center;gap:5px;transition:all .2s}
 .tb-btn:hover{border-color:var(--teal);color:var(--teal)}
-.tb-kbd{background:var(--border);padding:2px 5px;border-radius:3px;font-size:.68rem}
-.tb-icon{width:30px;height:30px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;font-size:.85rem}
-.tb-icon:hover{border-color:var(--teal);color:var(--teal)}
-.tb-status{display:flex;align-items:center;gap:6px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);padding:4px 10px;border-radius:99px;font-size:.72rem;color:var(--green)}
-.tb-status::before{content:'';width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.tb-kbd{background:var(--border);padding:1px 4px;border-radius:3px;font-size:.67rem}
+.tb-ico{width:30px;height:30px;background:var(--card);border:1px solid var(--border);border-radius:var(--rs);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.85rem}
+.tb-status{display:flex;align-items:center;gap:5px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);padding:4px 11px;border-radius:99px;font-size:.72rem;color:var(--green)}
+.tb-status::before{content:'';width:5px;height:5px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
 
 .content{flex:1;overflow-y:auto;padding:24px}
 .content::-webkit-scrollbar{width:4px}
 .content::-webkit-scrollbar-thumb{background:var(--border2);border-radius:99px}
+.page{display:none}.page.act{display:block}
 
-/* ══ PAGES ══ */
-.page{display:none}
-.page.active{display:block}
+/* CARDS */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px}
+.stat-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:20px}
+.sc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px;position:relative;overflow:hidden}
+.sc-lbl{font-size:.77rem;color:var(--text2);margin-bottom:10px}
+.sc-ico{width:34px;height:34px;border-radius:var(--rs);display:flex;align-items:center;justify-content:center;font-size:.95rem;position:absolute;top:18px;right:18px}
+.ic-teal{background:rgba(0,212,184,.15)}
+.ic-amber{background:rgba(245,197,66,.15)}
+.sc-num{font-size:1.8rem;font-weight:700;line-height:1;letter-spacing:-.02em}
+.sc-sub{font-size:.72rem;color:var(--text3);margin-top:5px}
+.sc-live{display:flex;align-items:center;gap:4px;font-size:.7rem;color:var(--teal);margin-top:7px}
+.sc-live::before{content:'';width:5px;height:5px;background:var(--teal);border-radius:50%;animation:pulse 2s infinite}
+.ai-sc{background:linear-gradient(135deg,var(--teal-glow),rgba(59,130,246,.07));border-color:rgba(0,212,184,.22);cursor:pointer}
+.ai-sc:hover{border-color:var(--teal)}
+.ai-sc-ico{width:48px;height:48px;background:linear-gradient(135deg,var(--teal),#3b82f6);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:10px}
 
-/* ══ DASHBOARD ══ */
-.dash-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;gap:16px}
-.dash-welcome{font-size:1.3rem;font-weight:700}
-.dash-welcome span{color:var(--teal)}
-.dash-sub{font-size:.83rem;color:var(--text2);margin-top:4px}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
-.stat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;position:relative;overflow:hidden;}
-.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),transparent)}
-.stat-num{font-size:1.8rem;font-weight:700;color:var(--teal)}
-.stat-label{font-size:.75rem;color:var(--text2);margin-top:4px}
-.stat-delta{font-size:.7rem;color:var(--green);margin-top:2px}
+.two-col{display:grid;grid-template-columns:1.4fr 1fr;gap:14px;margin-bottom:20px}
+.insight-i{background:var(--card2);border:1px solid var(--border);border-radius:var(--rs);padding:10px 13px;font-size:.8rem;color:var(--text2);margin-bottom:7px;border-left:3px solid var(--teal)}
+.trend-wrap{height:100px;display:flex;align-items:flex-end;gap:5px;margin:8px 0 4px}
+.bar{flex:1;background:rgba(0,212,184,.18);border-radius:3px 3px 0 0;cursor:pointer;transition:background .2s}
+.bar:hover{background:rgba(0,212,184,.45)}
+.bar.td{background:rgba(0,212,184,.55)}
+.tl{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.tl-i{text-align:center;font-size:.62rem;color:var(--text3)}
+.badge-live{display:inline-flex;align-items:center;gap:4px;background:var(--teal-glow);border:1px solid rgba(0,212,184,.22);color:var(--teal);font-size:.68rem;font-weight:600;padding:2px 8px;border-radius:99px}
+.badge-live::before{content:'';width:4px;height:4px;background:var(--teal);border-radius:50%;animation:pulse 2s infinite}
+.sec-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.sec-t{font-size:.9rem;font-weight:600}
+.sec-a{font-size:.75rem;color:var(--teal);cursor:pointer}
+.sec-a:hover{text-decoration:underline}
 
-/* SECTOR IMAGES */
-.sector-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
-.sector-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:all .2s;position:relative;}
-.sector-card:hover{border-color:var(--teal);transform:translateY(-2px)}
-.sector-img{width:100%;height:100px;object-fit:cover;display:block;}
-.sector-img-placeholder{width:100%;height:100px;display:flex;align-items:center;justify-content:center;font-size:2.5rem;background:var(--card2)}
-.sector-info{padding:10px 12px}
-.sector-name{font-size:.82rem;font-weight:600;margin-bottom:2px}
-.sector-count{font-size:.72rem;color:var(--teal)}
+/* NEWS */
+.news-c{background:var(--card2);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:10px;cursor:pointer;transition:border-color .2s}
+.news-c:hover{border-color:rgba(0,212,184,.3)}
+.src-tag{background:rgba(0,212,184,.1);border:1px solid rgba(0,212,184,.2);color:var(--teal);font-size:.67rem;font-weight:600;padding:2px 7px;border-radius:3px}
+.news-path{font-size:.67rem;color:var(--text3);margin-left:5px}
+.news-t{font-size:.87rem;font-weight:600;margin:8px 0 5px;line-height:1.35}
+.news-s{font-size:.77rem;color:var(--text2);line-height:1.5}
+.news-m{margin-top:9px;font-size:.7rem;color:var(--text3);display:flex;gap:10px}
 
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px}
-.card-title{font-size:.85rem;font-weight:600;display:flex;align-items:center;gap:6px}
-.news-card{background:var(--card2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;margin-bottom:8px;cursor:pointer;transition:all .15s;}
-.news-card:hover{border-color:var(--teal)}
-.source-tag{font-size:.68rem;font-weight:700;background:var(--teal-soft);color:var(--teal);padding:2px 8px;border-radius:99px;border:1px solid rgba(0,212,184,.2)}
-.news-title{font-size:.8rem;font-weight:600;margin:6px 0 4px;line-height:1.4}
-.news-snippet{font-size:.73rem;color:var(--text2);line-height:1.5}
-.news-meta{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:.7rem;color:var(--text3)}
-.news-path{font-size:.67rem;color:var(--text3);margin-left:6px}
+/* IMTIYOZLAR */
+.filt{display:flex;align-items:center;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+.fp{background:var(--card);border:1px solid var(--border);color:var(--text2);font-size:.78rem;padding:6px 13px;border-radius:99px;cursor:pointer;transition:all .15s;font-family:var(--font)}
+.fp:hover,.fp.act{background:var(--teal-glow);border-color:rgba(0,212,184,.35);color:var(--teal)}
+.srch{background:var(--card);border:1px solid var(--border);border-radius:var(--rs);color:var(--text);font-family:var(--font);font-size:.83rem;padding:8px 13px;outline:none;width:240px;transition:border-color .2s}
+.srch:focus{border-color:var(--teal)}
+.srch::placeholder{color:var(--text3)}
+.im-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.im-c{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px;transition:all .2s;cursor:pointer}
+.im-c:hover{border-color:rgba(0,212,184,.32);transform:translateY(-2px)}
+.im-hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
+.im-t{font-size:.88rem;font-weight:600;line-height:1.3;margin-bottom:3px}
+.im-src{font-size:.7rem;color:var(--text3)}
+.im-bdg{font-size:.65rem;font-weight:700;padding:2px 7px;border-radius:99px;white-space:nowrap;flex-shrink:0}
+.ba{background:rgba(0,212,184,.1);color:var(--teal);border:1px solid rgba(0,212,184,.2)}
+.bn{background:rgba(245,197,66,.1);color:var(--gold);border:1px solid rgba(245,197,66,.2)}
+.im-d{font-size:.78rem;color:var(--text2);line-height:1.5;margin-bottom:10px}
+.im-tags{display:flex;gap:6px;flex-wrap:wrap}
+.im-tag{font-size:.68rem;background:var(--card2);border:1px solid var(--border);color:var(--text3);padding:2px 7px;border-radius:4px}
+.im-ap{width:100%;margin-top:10px;background:var(--teal-soft);border:1px solid rgba(0,212,184,.22);color:var(--teal);font-family:var(--font);font-size:.78rem;font-weight:600;padding:7px;border-radius:var(--rs);cursor:pointer;transition:all .2s}
+.im-ap:hover{background:var(--teal);color:#080d18}
 
-/* AI INSIGHTS */
-.ai-insights{background:linear-gradient(135deg,rgba(0,212,184,.08),rgba(0,212,184,.03));border:1px solid rgba(0,212,184,.2);border-radius:var(--radius);padding:16px;margin-bottom:20px}
-.ai-insight-item{font-size:.8rem;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);color:var(--text2)}
-.ai-insight-item:last-child{border-bottom:none}
+/* AI CHAT (offline FAQ) */
+.ai-wrap{display:grid;grid-template-columns:1fr 300px;gap:14px;height:calc(100vh - 104px)}
+.ai-main{background:var(--card);border:1px solid var(--border);border-radius:var(--r);display:flex;flex-direction:column;overflow:hidden}
+.ai-hd{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.ai-hd-l{display:flex;align-items:center;gap:9px}
+.ai-av{width:34px;height:34px;background:linear-gradient(135deg,var(--teal),#3b82f6);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.95rem}
+.ai-name{font-size:.9rem;font-weight:700}
+.ai-st{font-size:.7rem;color:var(--teal);display:flex;align-items:center;gap:4px}
+.ai-st::before{content:'';width:5px;height:5px;background:var(--teal);border-radius:50%;animation:pulse 2s infinite}
+.bdg-anal{background:var(--teal-glow);border:1px solid rgba(0,212,184,.22);color:var(--teal);font-size:.7rem;font-weight:600;padding:3px 9px;border-radius:99px}
+.chat-msgs{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:12px}
+.chat-msgs::-webkit-scrollbar{width:3px}
+.chat-msgs::-webkit-scrollbar-thumb{background:var(--border2)}
+.msg{max-width:82%;display:flex;flex-direction:column;gap:3px;animation:fadeUp .22s ease both}
+.msg.bot{align-self:flex-start}.msg.usr{align-self:flex-end}
+.bbl{padding:11px 14px;border-radius:11px;font-size:.83rem;line-height:1.65}
+.msg.bot .bbl{background:var(--card2);border:1px solid var(--border2);color:var(--text);border-bottom-left-radius:3px}
+.msg.usr .bbl{background:var(--teal);color:#080d18;font-weight:500;border-bottom-right-radius:3px}
+.msg-t{font-size:.66rem;color:var(--text3);padding:0 3px}
+.msg.usr .msg-t{text-align:right}
+.typing{display:flex;gap:4px;padding:11px 14px;background:var(--card2);border:1px solid var(--border2);border-radius:11px;border-bottom-left-radius:3px;width:fit-content}
+.td{width:6px;height:6px;background:var(--text3);border-radius:50%;animation:typing 1.2s infinite}
+.td:nth-child(2){animation-delay:.2s}.td:nth-child(3){animation-delay:.4s}
+.suggs{padding:10px 18px;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;gap:7px}
+.sp{background:var(--card2);border:1px solid var(--border2);color:var(--text2);font-size:.76rem;padding:5px 11px;border-radius:99px;cursor:pointer;transition:all .15s;font-family:var(--font)}
+.sp:hover{border-color:var(--teal);color:var(--teal);background:var(--teal-soft)}
+.chat-in{padding:12px 18px;border-top:1px solid var(--border);display:flex;gap:9px;align-items:flex-end}
+.ci{flex:1;background:var(--bg);border:1px solid var(--border2);border-radius:var(--rs);color:var(--text);font-family:var(--font);font-size:.85rem;padding:10px 13px;outline:none;resize:none;min-height:42px;max-height:100px;transition:border-color .2s;line-height:1.5}
+.ci:focus{border-color:var(--teal)}
+.ci::placeholder{color:var(--text3)}
+.sb-btn{width:42px;height:42px;background:var(--teal);border:none;border-radius:var(--rs);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+.sb-btn:hover{background:#00e8cc}
+.disc{padding:5px 18px 9px;font-size:.66rem;color:var(--text3);text-align:center}
 
-/* BAR CHART */
-.trend-chart{display:flex;align-items:flex-end;gap:4px;height:60px;padding:8px 0}
-.bar{background:var(--border2);border-radius:3px 3px 0 0;flex:1;min-height:4px;transition:background .2s}
-.bar.today{background:var(--teal)}
-.bar:hover{background:var(--teal2)}
+/* AI sidebar */
+.ai-side{display:flex;flex-direction:column;gap:12px}
+.faq-hint{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px}
+.faq-hint-t{font-size:.8rem;font-weight:600;color:var(--text2);margin-bottom:10px;display:block;text-transform:uppercase;letter-spacing:.05em}
+.fq{padding:7px 0;border-bottom:1px solid var(--border);font-size:.78rem;color:var(--text2);cursor:pointer;transition:color .15s;display:flex;align-items:flex-start;gap:7px}
+.fq:last-child{border-bottom:none}
+.fq:hover{color:var(--teal)}
+.fq::before{content:'→';color:var(--teal);flex-shrink:0;font-size:.75rem;margin-top:1px}
 
-/* ══ SCROLLING BANNER ══ */
-.banner{background:linear-gradient(90deg,#1a0808,#2a0a0a,#1a0808);border:1px solid rgba(255,77,109,.3);border-radius:var(--radius-sm);overflow:hidden;padding:8px 0;margin-bottom:20px;position:relative;}
-.banner-track{display:flex;animation:marquee 20s linear infinite;white-space:nowrap;}
-.banner-text{font-size:.78rem;font-weight:600;color:#ff8096;padding:0 40px;flex-shrink:0}
-@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+/* AVTO ARIZA */
+.af-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:26px;margin-bottom:14px}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.fl{font-size:.73rem;font-weight:600;color:var(--text2);display:block;margin-bottom:4px}
+.fi{width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:var(--rs);color:var(--text);font-family:var(--font);font-size:.86rem;padding:10px 13px;outline:none;transition:border-color .2s}
+.fi:focus{border-color:var(--teal)}
+.fi::placeholder{color:var(--text3)}
+.fsel{width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:var(--rs);color:var(--text);font-family:var(--font);font-size:.86rem;padding:10px 13px;outline:none;cursor:pointer}
+.fsel option{background:var(--card)}
+.btn-p{background:var(--teal);color:#080d18;font-family:var(--font);font-weight:700;font-size:.87rem;padding:11px 22px;border-radius:var(--rs);border:none;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:7px}
+.btn-p:hover{background:#00e8cc;transform:translateY(-1px)}
+.btn-o{background:transparent;color:var(--teal);font-family:var(--font);font-weight:600;font-size:.83rem;padding:10px 18px;border-radius:var(--rs);border:1px solid rgba(0,212,184,.35);cursor:pointer;transition:all .2s}
+.btn-o:hover{background:var(--teal-soft)}
+.ai-flow{display:inline-flex;align-items:center;gap:6px;background:var(--teal-glow);border:1px solid rgba(0,212,184,.22);color:var(--teal);font-size:.73rem;font-weight:600;padding:4px 11px;border-radius:99px;margin-bottom:18px}
+.ai-flow::before{content:'';width:6px;height:6px;background:var(--teal);border-radius:50%;animation:pulse 2s infinite}
+.mon-box{background:var(--card2);border:1px solid var(--border);border-radius:var(--r);padding:26px;text-align:center;color:var(--text2)}
+.mon-box.on{background:var(--teal-soft);border-color:rgba(0,212,184,.28)}
+.res-i{background:var(--card);border:1px solid var(--border);border-radius:var(--rs);padding:12px 15px;margin-bottom:7px;display:flex;align-items:center;justify-content:space-between}
+.res-st{font-size:.7rem;font-weight:600;padding:3px 9px;border-radius:99px}
+.st-f{background:rgba(0,212,184,.1);color:var(--teal)}
+.st-w{background:rgba(245,197,66,.1);color:var(--gold)}
 
-/* ══ AI PAGE ══ */
-.ai-page{display:grid;grid-template-columns:1fr 280px;gap:16px;height:calc(100vh - 54px - 48px);max-height:720px}
-.ai-main{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);display:flex;flex-direction:column;overflow:hidden}
-.ai-header{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.ai-header-left{display:flex;align-items:center;gap:10px}
-.ai-avatar{width:36px;height:36px;background:linear-gradient(135deg,var(--teal),var(--teal2));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem}
-.ai-header-name{font-weight:600;font-size:.88rem}
-.ai-header-status{font-size:.7rem;color:var(--green);display:flex;align-items:center;gap:4px}
-.ai-header-status::before{content:'';width:5px;height:5px;background:var(--green);border-radius:50%}
-.badge-analysis{background:rgba(59,130,246,.15);color:var(--blue);font-size:.68rem;font-weight:600;padding:3px 8px;border-radius:99px;border:1px solid rgba(59,130,246,.2)}
-.chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
-.chat-messages::-webkit-scrollbar{width:3px}
-.chat-messages::-webkit-scrollbar-thumb{background:var(--border2);border-radius:99px}
-.msg{display:flex;flex-direction:column;max-width:82%}
-.msg.user{align-self:flex-end;align-items:flex-end}
-.msg.bot{align-self:flex-start}
-.msg-bbl{padding:10px 13px;border-radius:12px;font-size:.83rem;line-height:1.6}
-.msg.user .msg-bbl{background:var(--teal);color:#080d18;border-radius:12px 12px 4px 12px}
-.msg.bot .msg-bbl{background:var(--card2);border:1px solid var(--border);color:var(--text);border-radius:12px 12px 12px 4px}
-.msg-time{font-size:.65rem;color:var(--text3);margin-top:3px;padding:0 4px}
-.suggestions{display:flex;flex-wrap:wrap;gap:6px;padding:10px 16px;border-top:1px solid var(--border)}
-.sugg-pill{background:var(--card2);border:1px solid var(--border);color:var(--text2);padding:5px 12px;border-radius:99px;font-size:.75rem;cursor:pointer;transition:all .15s;font-family:var(--font)}
-.sugg-pill:hover{border-color:var(--teal);color:var(--teal)}
-.chat-input-area{display:flex;align-items:flex-end;gap:8px;padding:12px 14px;border-top:1px solid var(--border)}
-.chat-inp{flex:1;background:var(--card2);border:1px solid var(--border2);border-radius:var(--radius-sm);color:var(--text);font-family:var(--font);font-size:.83rem;padding:9px 12px;resize:none;outline:none;max-height:120px;transition:border-color .2s;line-height:1.5}
-.chat-inp:focus{border-color:var(--teal)}
-.send-btn{width:36px;height:36px;background:var(--teal);border:none;border-radius:var(--radius-sm);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
-.send-btn:hover{background:#00e0c8}
-.send-btn:disabled{background:var(--border);cursor:not-allowed}
-.chat-disclaimer{font-size:.68rem;color:var(--text3);padding:6px 16px 10px;text-align:center}
-.ai-sidebar{display:flex;flex-direction:column;gap:12px}
-.ai-key-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px}
-.ai-key-label{font-size:.75rem;font-weight:600;display:block;margin-bottom:8px}
-.ai-key-row{display:flex;gap:6px;margin-bottom:8px}
-.key-inp{flex:1;background:var(--card2);border:1px solid var(--border2);border-radius:var(--radius-sm);color:var(--text);font-family:var(--font);font-size:.8rem;padding:8px 10px;outline:none}
-.key-inp:focus{border-color:var(--teal)}
-.key-btn{background:var(--teal);color:#080d18;border:none;padding:8px 12px;border-radius:var(--radius-sm);cursor:pointer;font-weight:600;font-size:.78rem;font-family:var(--font);white-space:nowrap}
-.key-status{font-size:.73rem;padding:5px 8px;border-radius:var(--radius-xs)}
-.key-status.ok{background:rgba(34,197,94,.1);color:var(--green);border:1px solid rgba(34,197,94,.2)}
-.key-status.no{background:rgba(255,77,109,.1);color:var(--red);border:1px solid rgba(255,77,109,.2)}
-.quota-widget{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px}
-.quota-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-.quota-big{font-size:1.6rem;font-weight:700;color:var(--teal)}
-.quota-bar{background:var(--border);border-radius:99px;height:4px;overflow:hidden;margin-bottom:6px}
-.quota-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--teal2));border-radius:99px;transition:width .5s}
-.quota-txt{font-size:.7rem;color:var(--text3)}
-.typing-ind{display:flex;gap:4px;padding:4px 0}
-.t-dot{width:6px;height:6px;background:var(--teal);border-radius:50%;animation:bounce .8s infinite}
-.t-dot:nth-child(2){animation-delay:.15s}
-.t-dot:nth-child(3){animation-delay:.3s}
-@keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}}
+/* MANBALAR */
+.mn-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.mn-c{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px;transition:all .2s}
+.mn-c:hover{border-color:rgba(0,212,184,.28);transform:translateY(-2px)}
+.mn-vrf{display:inline-flex;align-items:center;gap:4px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);color:var(--green);font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:99px;margin-bottom:12px}
+.mn-n{font-size:1.05rem;font-weight:700;margin-bottom:3px}
+.mn-u{font-size:.72rem;color:var(--text3);margin-bottom:9px}
+.mn-d{font-size:.8rem;color:var(--text2);line-height:1.55;margin-bottom:12px}
+.mn-f{border-top:1px solid var(--border);padding-top:10px;font-size:.7rem;color:var(--text3);display:flex;justify-content:space-between}
+.mn-cnt{font-weight:600;color:var(--teal)}
 
-/* ══ IMTIYOZLAR ══ */
-.filter-bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;align-items:center}
-.search-box{background:var(--card);border:1px solid var(--border);color:var(--text);padding:8px 14px;border-radius:var(--radius-sm);font-size:.83rem;outline:none;font-family:var(--font);width:240px}
-.search-box:focus{border-color:var(--teal)}
-.filter-pill{background:var(--card);border:1px solid var(--border);color:var(--text2);padding:7px 14px;border-radius:99px;font-size:.78rem;cursor:pointer;font-family:var(--font);transition:all .15s}
-.filter-pill:hover,.filter-pill.active{background:var(--teal-glow);border-color:var(--teal);color:var(--teal)}
-.imtiyoz-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
-.imtiyoz-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;transition:all .2s;position:relative;overflow:hidden;}
-.imtiyoz-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),transparent);opacity:0;transition:opacity .2s}
-.imtiyoz-card:hover{border-color:var(--teal)}
-.imtiyoz-card:hover::before{opacity:1}
-.im-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
-.im-icon{font-size:1.4rem}
-.im-title{font-size:.85rem;font-weight:600;line-height:1.3}
-.im-source{font-size:.7rem;color:var(--text3);margin-top:2px}
-.im-badge{font-size:.65rem;font-weight:700;padding:3px 8px;border-radius:99px;flex-shrink:0}
-.badge-active{background:rgba(34,197,94,.15);color:var(--green);border:1px solid rgba(34,197,94,.2)}
-.badge-new{background:rgba(59,130,246,.15);color:var(--blue);border:1px solid rgba(59,130,246,.2)}
-.badge-soon{background:rgba(245,197,66,.15);color:var(--gold);border:1px solid rgba(245,197,66,.2)}
-.im-desc{font-size:.78rem;color:var(--text2);line-height:1.5;margin-bottom:10px}
-.im-meta{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px}
-.im-tag{font-size:.68rem;background:var(--card2);border:1px solid var(--border);padding:2px 8px;border-radius:99px;color:var(--text3)}
-.im-apply{width:100%;background:var(--card2);border:1px solid var(--border);color:var(--text);padding:8px;border-radius:var(--radius-sm);cursor:pointer;font-size:.78rem;font-family:var(--font);transition:all .2s}
-.im-apply:hover{border-color:var(--teal);color:var(--teal);background:var(--teal-soft)}
+/* PROFIL */
+.pr-grid{display:grid;grid-template-columns:280px 1fr;gap:14px}
+.pr-av{width:66px;height:66px;background:var(--teal);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:800;color:#080d18;margin-bottom:14px}
+.pr-nm{font-size:1.05rem;font-weight:700;margin-bottom:4px}
+.pr-tp{display:inline-flex;align-items:center;gap:4px;background:var(--teal-glow);border:1px solid rgba(0,212,184,.28);color:var(--teal);font-size:.72rem;font-weight:600;padding:2px 9px;border-radius:99px;margin-bottom:14px}
+.pr-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:.8rem}
+.pr-row:last-child{border-bottom:none}
+.pr-k{color:var(--text2)}.pr-v{color:var(--text);font-weight:500;text-align:right}
 
-/* ══ ARIZA ══ */
-.ariza-form-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.field-label{font-size:.72rem;color:var(--text2);display:block;margin-bottom:5px;font-weight:500}
-.f-input,.f-select{width:100%;background:var(--card2);border:1px solid var(--border2);border-radius:var(--radius-sm);color:var(--text);font-family:var(--font);font-size:.83rem;padding:9px 12px;outline:none;transition:border-color .2s}
-.f-input:focus,.f-select:focus{border-color:var(--teal)}
-.f-select option{background:var(--card)}
-.btn-primary{background:var(--teal);color:#080d18;border:none;padding:10px 20px;border-radius:var(--radius-sm);cursor:pointer;font-weight:600;font-size:.83rem;font-family:var(--font);transition:all .2s}
-.btn-primary:hover{background:#00e0c8}
-.btn-outline{background:transparent;color:var(--text2);border:1px solid var(--border);padding:10px 20px;border-radius:var(--radius-sm);cursor:pointer;font-size:.83rem;font-family:var(--font);transition:all .2s}
-.btn-outline:hover{border-color:var(--teal);color:var(--teal)}
-.monitoring-box{background:var(--card2);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px;display:none;text-align:center}
-.monitoring-box.active{display:block}
-.monitoring-title{font-weight:600;font-size:.9rem}
-.monitoring-title.green{color:var(--green)}
-.ai-auto-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,212,184,.1);border:1px solid rgba(0,212,184,.2);color:var(--teal);font-size:.72rem;font-weight:600;padding:4px 10px;border-radius:99px;margin-bottom:14px}
-.ai-auto-badge::before{content:'';width:5px;height:5px;background:var(--teal);border-radius:50%;animation:pulse 1.5s infinite}
-.result-item{display:flex;align-items:center;justify-content:space-between;padding:10px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:6px}
-.result-left{display:flex;align-items:center;gap:10px}
-.result-icon{font-size:1.2rem}
-.result-name{font-size:.8rem;font-weight:500}
-.result-sub{font-size:.7rem;color:var(--text3)}
-.result-status{font-size:.7rem;font-weight:600;padding:3px 10px;border-radius:99px}
-.status-found{background:rgba(34,197,94,.15);color:var(--green);border:1px solid rgba(34,197,94,.2)}
-.status-wait{background:rgba(245,197,66,.15);color:var(--gold);border:1px solid rgba(245,197,66,.2)}
+/* HAQIDA */
+.ab-st{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px}
+.ab-s{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px;text-align:center}
+.ab-n{font-size:1.7rem;font-weight:700;color:var(--teal);display:block}
+.ab-l{font-size:.72rem;color:var(--text2);margin-top:3px;display:block}
+.bl-i{display:flex;align-items:flex-start;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:9px;transition:border-color .2s}
+.bl-i:hover{border-color:rgba(0,212,184,.28)}
+.bl-ico{font-size:1.3rem;width:36px;text-align:center;flex-shrink:0}
+.bl-t h4{font-size:.87rem;font-weight:600;margin-bottom:3px}
+.bl-t p{font-size:.78rem;color:var(--text2);line-height:1.5}
 
-/* ══ MANBALAR ══ */
-.manbalar-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
-.manba-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:all .2s}
-.manba-card:hover{border-color:var(--teal)}
-.manba-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.manba-ico{width:40px;height:40px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:1.2rem}
-.manba-title{font-weight:600;font-size:.88rem}
-.manba-url{font-size:.72rem;color:var(--text3);display:block;margin-top:2px}
-.manba-desc{font-size:.77rem;color:var(--text2);line-height:1.5;margin-bottom:10px}
-.manba-tags{display:flex;flex-wrap:wrap;gap:4px}
-.manba-tag{font-size:.67rem;background:var(--card2);border:1px solid var(--border);padding:2px 8px;border-radius:99px;color:var(--text3)}
-.manba-status{display:flex;align-items:center;gap:5px;font-size:.7rem;color:var(--green);margin-top:10px}
-.manba-status::before{content:'';width:5px;height:5px;background:var(--green);border-radius:50%}
+/* PREMIUM */
+.pr-plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+.plan{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:28px;position:relative;transition:all .2s}
+.plan:hover{border-color:rgba(0,212,184,.3)}
+.plan.pop{border-color:var(--teal);background:linear-gradient(135deg,var(--card),rgba(0,212,184,.05))}
+.plan-badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--teal);color:#080d18;font-size:.7rem;font-weight:700;padding:3px 12px;border-radius:99px;white-space:nowrap}
+.plan-n{font-size:1rem;font-weight:700;margin-bottom:4px}
+.plan-p{font-size:2rem;font-weight:800;color:var(--teal);letter-spacing:-.03em;margin-bottom:4px}
+.plan-p span{font-size:.85rem;font-weight:400;color:var(--text2)}
+.plan-d{font-size:.78rem;color:var(--text2);margin-bottom:20px;line-height:1.5}
+.plan-f{list-style:none;margin-bottom:24px;display:flex;flex-direction:column;gap:8px}
+.plan-f li{font-size:.82rem;display:flex;align-items:flex-start;gap:8px;color:var(--text2)}
+.plan-f li::before{content:'✓';color:var(--teal);font-weight:700;flex-shrink:0}
+.plan-f li.no{color:var(--text3)}
+.plan-f li.no::before{content:'✕';color:var(--text3)}
+.plan-btn{width:100%;background:var(--teal-soft);border:1px solid rgba(0,212,184,.3);color:var(--teal);font-family:var(--font);font-weight:700;font-size:.87rem;padding:11px;border-radius:var(--rs);cursor:pointer;transition:all .2s}
+.plan-btn:hover{background:var(--teal);color:#080d18}
+.plan.pop .plan-btn{background:var(--teal);color:#080d18}
+.plan.pop .plan-btn:hover{background:#00e8cc}
 
-/* ══ PROFIL ══ */
-.profil-grid{display:grid;grid-template-columns:260px 1fr;gap:16px}
-.profil-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
-.profil-avatar{width:60px;height:60px;background:linear-gradient(135deg,var(--teal),var(--teal2));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:700;color:#080d18;margin:0 auto 12px}
-.profil-name{text-align:center;font-weight:700;font-size:1rem;margin-bottom:4px}
-.profil-type{text-align:center;font-size:.75rem;color:var(--teal);margin-bottom:16px;font-weight:500}
-.profil-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:.78rem}
-.profil-row:last-child{border-bottom:none}
-.profil-row .key{color:var(--text3)}
-.profil-row .val{color:var(--text);font-weight:500}
-.ab-stat{background:var(--card2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;text-align:center}
-.ab-num{display:block;font-size:1.5rem;font-weight:700;color:var(--teal)}
-.ab-label{font-size:.7rem;color:var(--text3);margin-top:2px}
+/* SHARTLAR */
+.terms{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:30px}
+.terms h2{font-size:1.2rem;font-weight:700;margin-bottom:5px}
+.terms .dt{font-size:.75rem;color:var(--text3);margin-bottom:22px}
+.terms h3{font-size:.95rem;font-weight:600;margin:18px 0 7px;color:var(--teal)}
+.terms p{font-size:.82rem;color:var(--text2);line-height:1.7;margin-bottom:9px}
+.terms ul{padding-left:18px;font-size:.82rem;color:var(--text2);line-height:1.7}
+.terms ul li{margin-bottom:4px}
 
-/* ══ ABOUT ══ */
-.about-hero{text-align:center;padding:32px 20px;background:linear-gradient(135deg,rgba(0,212,184,.06),transparent);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px}
-.about-title{font-size:1.4rem;font-weight:700;margin-bottom:10px}
-.about-title span{color:var(--teal)}
-.about-sub{font-size:.85rem;color:var(--text2);max-width:500px;margin:0 auto;line-height:1.6}
-.about-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
-.benefit-list-simple{display:flex;flex-direction:column;gap:8px}
-.bl-item{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;display:flex;gap:12px}
-.bl-ico{font-size:1.3rem;flex-shrink:0}
-.bl-text h4{font-size:.85rem;font-weight:600;margin-bottom:4px}
-.bl-text p{font-size:.78rem;color:var(--text2);line-height:1.5}
-.sec-header{display:flex;align-items:center;gap:8px}
-.sec-title{font-size:.88rem;font-weight:600}
+/* SOZLAMALAR */
+.soz-g{display:grid;grid-template-columns:200px 1fr;gap:14px}
+.soz-nav{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:10px}
+.soz-ni{padding:9px 13px;border-radius:var(--rs);font-size:.83rem;cursor:pointer;color:var(--text2);transition:all .15s;margin-bottom:2px}
+.soz-ni:hover{background:var(--card2);color:var(--text)}
+.soz-ni.act{background:var(--teal-glow);color:var(--teal)}
+.soz-c{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px}
+.soz-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border)}
+.soz-row:last-child{border-bottom:none}
+.soz-lbl{font-size:.85rem;font-weight:500;margin-bottom:2px}
+.soz-d{font-size:.72rem;color:var(--text2)}
+.tog{width:40px;height:22px;background:var(--border);border-radius:99px;position:relative;cursor:pointer;border:none;transition:background .2s;flex-shrink:0}
+.tog.on{background:var(--teal)}
+.tog::after{content:'';position:absolute;top:3px;left:3px;width:16px;height:16px;background:#fff;border-radius:50%;transition:transform .2s}
+.tog.on::after{transform:translateX(18px)}
 
-/* ══ SOZLAMALAR ══ */
-.sozl-grid{display:grid;grid-template-columns:200px 1fr;gap:16px}
-.sozl-nav{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:10px;display:flex;flex-direction:column;gap:2px;height:fit-content}
-.sozl-nav-item{padding:9px 12px;border-radius:var(--radius-sm);font-size:.83rem;color:var(--text2);cursor:pointer;transition:all .15s}
-.sozl-nav-item:hover{background:var(--card2);color:var(--text)}
-.sozl-nav-item.active{background:var(--teal-glow);color:var(--teal)}
-.sozl-content{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
-.sozl-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border)}
-.sozl-row:last-of-type{border-bottom:none}
-.sozl-label{font-size:.83rem;font-weight:500;margin-bottom:3px}
-.sozl-desc{font-size:.73rem;color:var(--text2)}
-.toggle{width:44px;height:24px;background:var(--border2);border:none;border-radius:99px;cursor:pointer;position:relative;transition:background .2s;flex-shrink:0}
-.toggle::after{content:'';position:absolute;top:3px;left:3px;width:18px;height:18px;background:var(--text3);border-radius:50%;transition:all .2s}
-.toggle.on{background:var(--teal)}
-.toggle.on::after{left:23px;background:#080d18}
+/* MODAL */
+.mo{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:500;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.mo.open{display:flex}
+.mb{background:var(--card);border:1px solid var(--border2);border-radius:16px;padding:30px;max-width:500px;width:90%;position:relative;animation:fadeUp .2s ease both}
+.mc{position:absolute;top:14px;right:14px;background:var(--card2);border:1px solid var(--border);color:var(--text2);width:28px;height:28px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:all .2s}
+.mc:hover{border-color:var(--teal);color:var(--teal)}
+.m-t{font-size:1.1rem;font-weight:700;margin-bottom:5px}
+.m-s{font-size:.8rem;color:var(--text2);margin-bottom:18px;line-height:1.55}
+.m-fld{margin-bottom:12px}
+.m-act{display:flex;gap:9px;margin-top:18px}
 
-/* ══ MONETIZATION PAGE ══ */
-.plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px}
-.plan-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:all .2s;position:relative;}
-.plan-card.featured{border-color:var(--teal);background:linear-gradient(135deg,rgba(0,212,184,.06),var(--card))}
-.plan-card.featured::before{content:'⭐ Eng mashhur';position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--teal);color:#080d18;font-size:.65rem;font-weight:700;padding:3px 10px;border-radius:99px;white-space:nowrap}
-.plan-badge{font-size:.65rem;font-weight:700;padding:3px 10px;border-radius:99px;display:inline-block;margin-bottom:8px}
-.plan-free .plan-badge{background:rgba(255,255,255,.06);color:var(--text2)}
-.plan-pro .plan-badge{background:rgba(0,212,184,.15);color:var(--teal)}
-.plan-biz .plan-badge{background:rgba(245,197,66,.15);color:var(--gold)}
-.plan-price{font-size:1.6rem;font-weight:700;margin:8px 0 4px}
-.plan-period{font-size:.72rem;color:var(--text3)}
-.plan-name{font-size:1rem;font-weight:600;margin-bottom:14px}
-.plan-features{list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
-.plan-features li{font-size:.78rem;color:var(--text2);display:flex;align-items:center;gap:7px}
-.plan-features li::before{content:'✓';color:var(--teal);font-size:.75rem;font-weight:700;flex-shrink:0}
-.plan-features li.no{color:var(--text3)}
-.plan-features li.no::before{content:'✗';color:var(--text3)}
-.plan-btn{width:100%;padding:10px;border-radius:var(--radius-sm);font-family:var(--font);font-weight:600;font-size:.82rem;cursor:pointer;transition:all .2s;border:1px solid var(--border)}
-.plan-btn-outline{background:transparent;color:var(--text2)}
-.plan-btn-outline:hover{border-color:var(--teal);color:var(--teal)}
-.plan-btn-teal{background:var(--teal);color:#080d18;border-color:var(--teal)}
-.plan-btn-teal:hover{background:#00e0c8}
-.plan-btn-gold{background:rgba(245,197,66,.15);color:var(--gold);border-color:rgba(245,197,66,.3)}
-.plan-btn-gold:hover{background:rgba(245,197,66,.25)}
-.monetize-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
-.rev-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center}
-.rev-num{font-size:1.4rem;font-weight:700;color:var(--teal)}
-.rev-label{font-size:.72rem;color:var(--text2);margin-top:4px}
-.partner-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px}
-.partner-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;display:flex;gap:12px;align-items:flex-start}
-.partner-ico{font-size:1.6rem;flex-shrink:0}
-.partner-title{font-size:.85rem;font-weight:600;margin-bottom:4px}
-.partner-desc{font-size:.75rem;color:var(--text2);line-height:1.5}
-.partner-price{font-size:.8rem;color:var(--teal);font-weight:600;margin-top:6px}
+/* QA MODAL */
+.qa-mo{position:fixed;inset:0;z-index:600;display:none;align-items:flex-start;justify-content:center;padding-top:14vh;background:rgba(0,0,0,.6);backdrop-filter:blur(5px)}
+.qa-mo.open{display:flex}
+.qa-b{background:var(--card);border:1px solid var(--border2);border-radius:14px;width:520px;overflow:hidden;animation:fadeUp .14s ease both}
+.qa-inp{width:100%;background:transparent;border:none;color:var(--text);font-family:var(--font);font-size:.97rem;padding:16px 18px;outline:none}
+.qa-div{height:1px;background:var(--border)}
+.qa-li{padding:6px 0;max-height:300px;overflow-y:auto}
+.qa-i{padding:10px 18px;font-size:.84rem;cursor:pointer;color:var(--text2);display:flex;align-items:center;gap:9px;transition:all .15s}
+.qa-i:hover{background:var(--teal-soft);color:var(--teal)}
+.qa-ico{width:26px;height:26px;background:var(--card2);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0}
 
-/* ══ YANGILIKLAR ══ */
-.news-full-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:10px;transition:all .2s}
-.news-full-card:hover{border-color:var(--teal)}
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;z-index:1000;background:var(--card2);border:1px solid rgba(0,212,184,.28);border-radius:var(--r);padding:12px 18px;display:flex;align-items:center;gap:9px;font-size:.83rem;min-width:240px;transform:translateY(90px);opacity:0;transition:all .3s cubic-bezier(.34,1.56,.64,1);pointer-events:none}
+.toast.show{transform:translateY(0);opacity:1;pointer-events:auto}
 
-/* ══ TERMS ══ */
-.terms-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;max-width:720px}
-.terms-card h2{font-size:1.1rem;font-weight:700;margin-bottom:6px}
-.terms-card .date{font-size:.73rem;color:var(--text3);margin-bottom:20px}
-.terms-card h3{font-size:.85rem;font-weight:600;margin:16px 0 6px;color:var(--teal)}
-.terms-card p,.terms-card ul{font-size:.8rem;color:var(--text2);line-height:1.7}
-.terms-card ul{padding-left:16px}
-
-/* ══ QUICK ACTIONS ══ */
-.qa-modal{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);z-index:500;display:none;align-items:flex-start;justify-content:center;padding-top:80px}
-.qa-modal.open{display:flex}
-.qa-box{background:var(--card);border:1px solid var(--border2);border-radius:var(--radius);width:100%;max-width:520px;overflow:hidden}
-.qa-input{width:100%;background:transparent;border:none;color:var(--text);font-family:var(--font);font-size:.95rem;padding:16px 20px;outline:none}
-.qa-divider{height:1px;background:var(--border)}
-.qa-list{max-height:320px;overflow-y:auto}
-.qa-item{display:flex;align-items:center;gap:12px;padding:11px 20px;cursor:pointer;font-size:.85rem;color:var(--text2);transition:all .15s}
-.qa-item:hover{background:var(--card2);color:var(--text)}
-.qa-ico{font-size:1rem;width:20px;text-align:center}
-
-/* ══ MODAL ══ */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);z-index:400;display:none;align-items:center;justify-content:center;padding:16px}
-.modal-overlay.open{display:flex}
-.modal-box{background:var(--card);border:1px solid var(--border2);border-radius:var(--radius);width:100%;max-width:420px;padding:24px;position:relative}
-.modal-close{position:absolute;top:14px;right:14px;background:none;border:1px solid var(--border);color:var(--text2);width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:.8rem;display:flex;align-items:center;justify-content:center}
-.modal-title{font-size:1rem;font-weight:600;margin-bottom:6px}
-.modal-sub{font-size:.78rem;color:var(--text2);margin-bottom:16px;line-height:1.5}
-.modal-field{margin-bottom:12px}
-.modal-actions{display:flex;gap:8px;margin-top:16px}
-
-/* ══ TOAST ══ */
-.toast{position:fixed;bottom:24px;right:24px;background:var(--card);border:1px solid var(--border2);border-radius:var(--radius-sm);padding:12px 18px;display:flex;align-items:center;gap:10px;font-size:.82rem;z-index:999;transform:translateY(80px);opacity:0;transition:all .3s;max-width:320px}
-.toast.show{transform:translateY(0);opacity:1}
-.toast-icon{font-size:1rem}
-
-/* ══ SHARING BUTTONS (EMBED) ══ */
-.embed-bar{background:var(--card2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:20px}
-.embed-label{font-size:.78rem;color:var(--text2);font-weight:500}
-.embed-btn{background:var(--card);border:1px solid var(--border);color:var(--text2);padding:6px 14px;border-radius:99px;font-size:.75rem;cursor:pointer;transition:all .2s;font-family:var(--font);display:flex;align-items:center;gap:6px}
-.embed-btn:hover{border-color:var(--teal);color:var(--teal)}
-.embed-btn.tg{border-color:rgba(59,130,246,.3);color:#60a5fa}
-.embed-btn.wa{border-color:rgba(34,197,94,.3);color:var(--green)}
-.embed-btn.li{border-color:rgba(59,130,246,.4);color:#93c5fd}
-
-/* RESPONSIVE */
-@media(max-width:768px){
-  .layout{grid-template-columns:1fr}
-  .sidebar{display:none}
-  .stats-grid{grid-template-columns:repeat(2,1fr)}
-  .sector-grid{grid-template-columns:repeat(2,1fr)}
-  .plan-grid{grid-template-columns:1fr}
-  .profil-grid{grid-template-columns:1fr}
-  .sozl-grid{grid-template-columns:1fr}
-  .ai-page{grid-template-columns:1fr}
-  .ai-sidebar{display:none}
-}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+@keyframes typing{0%,80%,100%{transform:translateY(0);opacity:.4}40%{transform:translateY(-5px);opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 </style>
 </head>
 <body>
 
-<!-- ════════ ONBOARDING ════════ -->
-<div id="onboarding">
+<!-- ONBOARDING -->
+<div id="ob">
 <div class="ob-box">
   <div class="ob-logo">
-    <div class="icon">B</div>
-    <div>
-      <div style="font-size:1.1rem;font-weight:700">Benefit Navigator</div>
-      <small style="color:#8a9bbf;font-size:.73rem">Uzbekistan • 2026</small>
-    </div>
+    <div class="ico">B</div>
+    <div><b>Benefit Navigator</b><small>Uzbekistan • 2026</small></div>
   </div>
-
-  <!-- Step 1 -->
-  <div class="ob-step active" id="step1">
-    <div class="step-dots" style="margin-bottom:18px">
-      <div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div>
-    </div>
-    <div class="ob-title">Biznes turingizni tanlang</div>
+  <div class="ob-step act" id="s1">
+    <div class="dots" style="margin-bottom:18px"><div class="dot a"></div><div class="dot"></div><div class="dot"></div></div>
+    <div class="ob-h">Biznes turingizni tanlang</div>
     <div class="ob-sub">Siz uchun eng mos imtiyozlar ko'rsatiladi</div>
-    <div class="ob-types" id="biznesTurlar">
-      <div class="ob-type" data-type="ytt" onclick="selectType(this)">
-        <div class="ob-type-icon">👤</div>
-        <div class="ob-type-name">Yakka tadbirkor (YTT)</div>
-        <div class="ob-type-desc">Shaxsiy patent asosida ish yurituvchilar</div>
+    <div class="ob-types" id="obTypes">
+      <div class="ob-type" data-t="ytt" onclick="selType(this)">
+        <div class="ob-type-ico">👤</div>
+        <div class="ob-type-n">Yakka tadbirkor (YTT)</div>
+        <div class="ob-type-d">Patent asosida. Soddalashtirilgan soliq va ro'yxat.</div>
       </div>
-      <div class="ob-type" data-type="kichik" onclick="selectType(this)">
-        <div class="ob-type-icon">🏪</div>
-        <div class="ob-type-name">Kichik biznes</div>
-        <div class="ob-type-desc">Yillik daromad 1 mlrd so'mgacha</div>
+      <div class="ob-type" data-t="kichik" onclick="selType(this)">
+        <div class="ob-type-ico">🏪</div>
+        <div class="ob-type-n">Kichik biznes</div>
+        <div class="ob-type-d">Yillik 1 mlrd so'mgacha. QQS dan ozod.</div>
       </div>
-      <div class="ob-type" data-type="orta" onclick="selectType(this)">
-        <div class="ob-type-icon">🏢</div>
-        <div class="ob-type-name">O'rta biznes / MCHJ</div>
-        <div class="ob-type-desc">Yillik 1–10 mlrd so'm</div>
+      <div class="ob-type" data-t="orta" onclick="selType(this)">
+        <div class="ob-type-ico">🏢</div>
+        <div class="ob-type-n">O'rta biznes / MCHJ</div>
+        <div class="ob-type-d">1–10 mlrd so'm. Investitsiya va eksport imtiyozlari.</div>
       </div>
-      <div class="ob-type" data-type="katta" onclick="selectType(this)">
-        <div class="ob-type-icon">🏭</div>
-        <div class="ob-type-name">Katta korxona / AJ</div>
-        <div class="ob-type-desc">10 mlrd+ so'm, SEZ va maxsus imtiyozlar</div>
+      <div class="ob-type" data-t="katta" onclick="selType(this)">
+        <div class="ob-type-ico">🏭</div>
+        <div class="ob-type-n">Katta korxona / AJ</div>
+        <div class="ob-type-d">10 mlrd+. SEZ va xalqaro investitsiya.</div>
       </div>
     </div>
-    <button class="ob-start" id="nextBtn1" disabled onclick="goStep(2)">Davom etish →</button>
+    <button class="ob-btn" id="nb1" disabled onclick="goS(2)">Davom etish →</button>
   </div>
-
-  <!-- Step 2 -->
-  <div class="ob-step" id="step2">
-    <div class="ob-nav">
-      <button class="ob-back" onclick="goStep(1)">← Orqaga</button>
-      <div class="step-dots"><div class="step-dot"></div><div class="step-dot active"></div><div class="step-dot"></div></div>
-    </div>
-    <div class="ob-title">Asosiy ma'lumotlar</div>
-    <div class="ob-sub">Mos imtiyozlarni topish uchun kerakli ma'lumotlar</div>
-    <div class="ob-fields">
-      <input class="ob-input" id="biznesNomi" placeholder="Biznes nomi (ixtiyoriy)"/>
-      <select class="ob-select" id="hudud">
+  <div class="ob-step" id="s2">
+    <div class="ob-nav"><button class="ob-back" onclick="goS(1)">← Orqaga</button><div class="dots"><div class="dot"></div><div class="dot a"></div><div class="dot"></div></div></div>
+    <div class="ob-h">Asosiy ma'lumotlar</div>
+    <div class="ob-sub">Mos imtiyozlarni aniq topish uchun</div>
+    <div class="ob-flds">
+      <input class="ob-inp" id="oBizNom" placeholder="Biznes nomi (ixtiyoriy)"/>
+      <select class="ob-sel" id="oHudud">
         <option value="">Hududni tanlang</option>
         <option>Toshkent shahri</option><option>Toshkent viloyati</option>
         <option>Samarqand viloyati</option><option>Buxoro viloyati</option>
@@ -472,1257 +380,712 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
         <option>Jizzax viloyati</option><option>Sirdaryo viloyati</option>
         <option>Xorazm viloyati</option><option>Qoraqalpog'iston</option>
       </select>
-      <select class="ob-select" id="soha">
+      <select class="ob-sel" id="oSoha">
         <option value="">Faoliyat sohasi</option>
         <option>IT va texnologiya</option><option>Ishlab chiqarish</option>
         <option>Savdo va xizmatlar</option><option>Qishloq xo'jaligi</option>
-        <option>Qurilish</option><option>Turizm va mehmonxona</option>
+        <option>Qurilish</option><option>Turizm</option>
         <option>Transport va logistika</option><option>Ta'lim</option>
-        <option>Tibbiyot va sog'liqni saqlash</option><option>Eksport</option>
-        <option>Boshqa</option>
+        <option>Tibbiyot</option><option>Eksport</option><option>Boshqa</option>
       </select>
-      <input class="ob-input" id="stir" placeholder="STIR (ixtiyoriy)"/>
-      <input class="ob-input" id="dirFio" placeholder="F.I.Sh (ixtiyoriy)" style="grid-column:1/-1"/>
+      <input class="ob-inp" id="oStir" placeholder="STIR (ixtiyoriy)"/>
+      <input class="ob-inp" id="oDir" placeholder="F.I.Sh (ixtiyoriy)" style="grid-column:1/-1"/>
     </div>
-    <button class="ob-start" onclick="goStep(3)">Davom etish →</button>
+    <button class="ob-btn" onclick="goS(3)">Davom etish →</button>
   </div>
-
-  <!-- Step 3 -->
-  <div class="ob-step" id="step3">
-    <div class="ob-nav">
-      <button class="ob-back" onclick="goStep(2)">← Orqaga</button>
-      <div class="step-dots"><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot active"></div></div>
-    </div>
+  <div class="ob-step" id="s3">
+    <div class="ob-nav"><button class="ob-back" onclick="goS(2)">← Orqaga</button><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot a"></div></div></div>
     <div style="text-align:center;padding:16px 0">
       <div style="font-size:2.8rem;margin-bottom:14px">🚀</div>
-      <div class="ob-title">Siz tayyor!</div>
-      <div class="ob-sub" style="margin:0 auto 24px">Biznes profilingiz asosida <span id="matchCount" style="color:var(--teal);font-weight:600">37 ta</span> mos imtiyoz topildi.</div>
-      <button class="ob-start" onclick="startApp()">Dashboardga kirish ✓</button>
+      <div class="ob-h">Tayyor!</div>
+      <div class="ob-sub" style="margin:0 auto 24px"><span id="obMatch" style="color:var(--teal);font-weight:600">37 ta</span> mos imtiyoz topildi. Dashboardga kiring.</div>
+      <button class="ob-btn" onclick="startApp()">Dashboardga kirish ✓</button>
     </div>
   </div>
 </div>
 </div>
 
-<!-- ════════ APP ════════ -->
+<!-- APP -->
 <div id="app">
 <div class="layout">
-
   <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="s-logo" onclick="navigate('dashboard')">
-      <div class="icon">B</div>
-      <div class="s-logo-text">Benefit Nav<div class="s-logo-sub">Uzbekistan 2026</div></div>
+  <aside class="sb">
+    <div class="sb-logo" onclick="nav('dashboard')">
+      <div class="ico">B</div>
+      <div><b>Benefit Nav</b><small>Uzbekistan</small></div>
     </div>
-    <div class="s-section">Asosiy</div>
-    <div class="s-item active" id="nav-dashboard" onclick="navigate('dashboard')"><span class="ico">📊</span> Dashboard</div>
-    <div class="s-item" id="nav-yangiliklar" onclick="navigate('yangiliklar')"><span class="ico">📰</span> Yangiliklar<span class="badge">3</span></div>
-    <div class="s-item" id="nav-ai" onclick="navigate('ai')"><span class="ico">🤖</span> AI Yordamchi</div>
-    <div class="s-item" id="nav-imtiyozlar" onclick="navigate('imtiyozlar')"><span class="ico">🎁</span> Imtiyozlar<span class="badge">142</span></div>
-    <div class="s-item" id="nav-ariza" onclick="navigate('ariza')"><span class="ico">📋</span> Avto ariza</div>
-    <div class="s-item" id="nav-manbalar" onclick="navigate('manbalar')"><span class="ico">🛡️</span> Manbalar</div>
-    <div class="s-section">Boshqaruv</div>
-    <div class="s-item" id="nav-monetizatsiya" onclick="navigate('monetizatsiya')"><span class="ico">💎</span> Premium</div>
-    <div class="s-item" id="nav-profil" onclick="navigate('profil')"><span class="ico">👤</span> Profil</div>
-    <div class="s-item" id="nav-haqida" onclick="navigate('haqida')"><span class="ico">ℹ️</span> Haqida</div>
-    <div class="s-item" id="nav-shartlar" onclick="navigate('shartlar')"><span class="ico">📄</span> Foydalanish shartlari</div>
-    <div class="s-item" id="nav-sozlamalar" onclick="navigate('sozlamalar')"><span class="ico">⚙️</span> Sozlamalar</div>
-    <div class="s-bottom">
-      <div class="s-trust">
-        <span class="icon">🛡️</span>
-        <div>
-          <span class="s-trust-text">Rasmiy manbalar</span>
-          <span class="s-trust-sub">lex.uz · gov.uz · soliq.uz</span>
-        </div>
-      </div>
+    <div class="sb-lang"><span>🌐 Til</span><span style="font-size:.68rem;color:var(--text3)">O'z ▾</span></div>
+    <div class="nav-i act" id="n-dashboard" onclick="nav('dashboard')"><span class="ico">📊</span>Dashboard</div>
+    <div class="nav-i" id="n-yangiliklar" onclick="nav('yangiliklar')"><span class="ico">📰</span>Yangiliklar<span class="bdg">3</span></div>
+    <div class="nav-i" id="n-ai" onclick="nav('ai')"><span class="ico">🤖</span>AI Yordamchi</div>
+    <div class="nav-i" id="n-imtiyozlar" onclick="nav('imtiyozlar')"><span class="ico">🎁</span>Imtiyozlar<span class="bdg">142</span></div>
+    <div class="nav-i" id="n-ariza" onclick="nav('ariza')"><span class="ico">📋</span>Avto ariza</div>
+    <div class="nav-i" id="n-manbalar" onclick="nav('manbalar')"><span class="ico">🛡️</span>Manbalar</div>
+    <div class="nav-i" id="n-premium" onclick="nav('premium')"><span class="ico">⭐</span>Premium</div>
+    <div class="nav-i" id="n-profil" onclick="nav('profil')"><span class="ico">👤</span>Profil</div>
+    <div class="nav-i" id="n-haqida" onclick="nav('haqida')"><span class="ico">ℹ️</span>Haqida</div>
+    <div class="nav-i" id="n-shartlar" onclick="nav('shartlar')"><span class="ico">📄</span>Foydalanish shartlari</div>
+    <div class="nav-i" id="n-sozlamalar" onclick="nav('sozlamalar')"><span class="ico">⚙️</span>Sozlamalar</div>
+    <div class="sb-bot">
+      <div class="sb-trust"><span>🛡️</span><div><b>Ishonchli manbalar</b><span>100% Rasmiy</span></div></div>
     </div>
   </aside>
 
   <!-- MAIN -->
   <div class="main">
     <div class="topbar">
-      <div class="topbar-left">
-        <div class="page-title" id="pageTitle">Dashboard</div>
-      </div>
-      <div class="topbar-right">
-        <button class="tb-btn" onclick="openQA()">⌘ Qidirish <span class="tb-kbd">Ctrl+K</span></button>
-        <div class="tb-icon" title="Xabarnomalar" onclick="showToast('📬 3 ta yangi xabarnoma','teal')">🔔</div>
-        <div class="tb-status" id="aiStatusBar">AI Faol</div>
-        <div class="tb-icon" title="Profil" onclick="navigate('profil')">👤</div>
+      <div class="tb-l"><span class="pg-title" id="pgTitle">Dashboard</span></div>
+      <div class="tb-r">
+        <button class="tb-btn" onclick="openQA()">⌘ Quick Actions <span class="tb-kbd">Ctrl+K</span></button>
+        <div class="tb-ico">☀️</div><div class="tb-ico">🌙</div>
+        <div class="tb-status">Tizim ishlamoqda</div>
       </div>
     </div>
-
     <div class="content">
 
-      <!-- ──── DASHBOARD ──── -->
-      <div class="page active" id="page-dashboard">
-        <div class="dash-header">
+      <!-- DASHBOARD -->
+      <div class="page act" id="p-dashboard">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px">
           <div>
-            <div class="dash-welcome">Xush kelibsiz, <span id="userName">Tadbirkor</span> 👋</div>
-            <div class="dash-sub">Hudud: <span id="hududText">Barcha hududlar</span> | AI monitoring faol</div>
+            <div style="font-size:1.55rem;font-weight:700">Assalomu alaykum, <span id="gName" style="color:var(--teal)">s</span>!</div>
+            <div style="font-size:.84rem;color:var(--text2);margin-top:3px">Bugun sizning hududingizda <a href="#" onclick="nav('imtiyozlar');return false" id="gHudud" style="color:var(--teal)">Barcha hududlar</a> Hudud.</div>
           </div>
         </div>
-
-        <!-- Embed/Share bar -->
-        <div class="embed-bar">
-          <span class="embed-label">🔗 Ulashing:</span>
-          <button class="embed-btn tg" onclick="share('telegram')">✈️ Telegram</button>
-          <button class="embed-btn wa" onclick="share('whatsapp')">💬 WhatsApp</button>
-          <button class="embed-btn li" onclick="share('linkedin')">💼 LinkedIn</button>
-          <button class="embed-btn" onclick="share('copy')">📋 Nusxa olish</button>
-          <button class="embed-btn" onclick="share('embed')" style="margin-left:auto">⬛ Saytga joylashtirish</button>
-        </div>
-
-        <div class="stats-grid">
-          <div class="stat-card"><div class="stat-num" id="dashImtiyoz">—</div><div class="stat-label">Mos imtiyozlar</div><div class="stat-delta">↑ 3 ta yangi</div></div>
-          <div class="stat-card"><div class="stat-num">4</div><div class="stat-label">Rasmiy manbalar</div><div class="stat-delta">Real-time ma'lumot</div></div>
-          <div class="stat-card"><div class="stat-num">24/7</div><div class="stat-label">AI monitoring</div><div class="stat-delta">Doimiy ishlaydi</div></div>
-          <div class="stat-card"><div class="stat-num">99%</div><div class="stat-label">Aniqlik darajasi</div><div class="stat-delta">NLP asosida</div></div>
-        </div>
-
-        <!-- AI Insights -->
-        <div class="ai-insights">
-          <div style="font-size:.78rem;font-weight:600;color:var(--teal);margin-bottom:8px;display:flex;align-items:center;gap:6px">
-            <span>🤖</span> AI tavsiyalar — siz uchun
+        <div class="stat-row">
+          <div class="sc">
+            <div class="sc-lbl">Faol imtiyozlar</div>
+            <div class="sc-ico ic-teal">⚡</div>
+            <div class="sc-num" id="dImt">142</div>
+            <div class="sc-sub">Sizning hududingizda mavjud</div>
+            <div class="sc-live">Jonli</div>
           </div>
-          <div id="aiInsights"></div>
+          <div class="sc">
+            <div class="sc-lbl">Avto ariza monitoring</div>
+            <div class="sc-ico ic-amber">📝</div>
+            <div class="sc-num">24/7 <span style="font-size:.85rem;color:var(--green)">●</span></div>
+            <div class="sc-sub">Yangi arizalarni avtomatik tekshiradi</div>
+          </div>
+          <div class="sc ai-sc" onclick="nav('ai')">
+            <div class="ai-sc-ico">🤖</div>
+            <div style="font-size:.95rem;font-weight:700;margin-bottom:4px">AI Yordamchidan so'rang</div>
+            <div style="font-size:.78rem;color:var(--text2)">Yuridik yordamni soniyalar ichida oling</div>
+          </div>
         </div>
-
-        <!-- Sector Images -->
-        <div class="sec-header" style="margin-bottom:12px"><span class="sec-title">🏭 Sohalar bo'yicha imtiyozlar</span></div>
-        <div class="sector-grid" id="sectorGrid"></div>
-
-        <!-- News + Trend -->
-        <div class="grid2">
+        <div class="two-col">
           <div class="card">
-            <div class="card-title" style="margin-bottom:12px">📰 So'nggi yangiliklar</div>
-            <div id="dashNews"></div>
-            <button class="btn-outline" style="width:100%;margin-top:8px;font-size:.75rem" onclick="navigate('yangiliklar')">Barchasi →</button>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+              <div style="font-size:.88rem;font-weight:600"><span style="color:var(--teal)">AI</span> siz uchun bugun</div>
+              <span class="badge-live">Live insight</span>
+            </div>
+            <div id="dInsights"></div>
           </div>
           <div class="card">
-            <div class="card-title" style="margin-bottom:12px">📈 Haftalik faollik</div>
-            <div class="trend-chart" id="trendChart"></div>
-            <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:.7rem;color:var(--text3)">
-              <span>Du</span><span>Se</span><span>Ch</span><span>Pa</span><span>Ju</span><span>Sh</span><span style="color:var(--teal)">Ya</span>
-            </div>
-            <div style="margin-top:14px;background:var(--card2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px">
-              <div style="font-size:.72rem;color:var(--text2);margin-bottom:8px">Tezkor harakatlar</div>
-              <div style="display:flex;flex-wrap:wrap;gap:6px">
-                <button class="sugg-pill" onclick="navigate('ai');setTimeout(()=>{document.getElementById('chatInp').value='Mening soham uchun eng muhim imtiyozlar?';sendChat()},300)">🔍 Mening imtiyozlarim</button>
-                <button class="sugg-pill" onclick="navigate('ariza')">📋 Ariza berish</button>
-                <button class="sugg-pill" onclick="navigate('yangiliklar')">📰 Yangiliklar</button>
-              </div>
-            </div>
+            <div style="font-size:.88rem;font-weight:600;margin-bottom:4px">7 kunlik AI signal trendi</div>
+            <div style="font-size:.72rem;color:var(--text3);margin-bottom:6px">AI faoliyati ko'rsatkichi</div>
+            <div class="trend-wrap" id="trend"></div>
+            <div class="tl"><div class="tl-i">Du</div><div class="tl-i">Se</div><div class="tl-i">Ch</div><div class="tl-i">Pa</div><div class="tl-i">Ju</div><div class="tl-i">Sh</div><div class="tl-i" style="color:var(--teal)">Ya</div></div>
           </div>
         </div>
+        <div class="sec-hd"><span class="sec-t">So'nggi rasmiy yangiliklar</span><span class="sec-a" onclick="nav('yangiliklar')">Barchasini ko'rish ›</span></div>
+        <div id="dNews"></div>
       </div>
 
-      <!-- ──── YANGILIKLAR ──── -->
-      <div class="page" id="page-yangiliklar">
-        <div class="sec-header" style="margin-bottom:16px"><span class="sec-title">📰 Yangiliklar va e'lonlar</span></div>
-        <div id="newsGrid"></div>
+      <!-- YANGILIKLAR -->
+      <div class="page" id="p-yangiliklar">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+          <div style="font-size:1rem;font-weight:600">Rasmiy yangiliklar</div>
+          <span style="font-size:.75rem;color:var(--text3)">Oxirgi: 25.02.2026, 23:24:54</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px" id="nGrid"></div>
       </div>
 
-      <!-- ──── AI YORDAMCHI ──── -->
-      <div class="page" id="page-ai">
-        <div class="ai-page">
+      <!-- AI YORDAMCHI (offline FAQ) -->
+      <div class="page" id="p-ai">
+        <div class="ai-wrap">
           <div class="ai-main">
-            <div class="ai-header">
-              <div class="ai-header-left">
-                <div class="ai-avatar">🤖</div>
-                <div>
-                  <div class="ai-header-name">AI Legal Copilot</div>
-                  <div class="ai-header-status">Faol</div>
-                </div>
+            <div class="ai-hd">
+              <div class="ai-hd-l">
+                <div class="ai-av">🤖</div>
+                <div><div class="ai-name">AI Legal Copilot</div><div class="ai-st">Faol</div></div>
               </div>
-              <span class="badge-analysis">Live analysis</span>
+              <span class="bdg-anal">Live analysis</span>
             </div>
-            <div class="chat-messages" id="chatMessages">
+            <div class="chat-msgs" id="chatMsgs">
               <div class="msg bot">
-                <div class="msg-bbl" id="welcomeMsg">Assalomu alaykum! Men sizning biznes yuristingizman.<br/><br/>Sizning hududingiz (<span style="color:var(--teal)" id="aiHudud">Barcha hududlar</span>) bo'yicha qanday yordam bera olaman?<br/><br/>Masalan: "Mening hududimda qanday soliq imtiyozlari bor?"</div>
-                <div class="msg-time" id="aiWelcomeTime">00:00</div>
+                <div class="bbl">Assalomu alaykum! Men sizning biznes yuristingizman.<br><br>Biznes boshlash va yuritish bo'yicha savollaringizga javob beraman. Quyidagi mavzulardan birini tanlang yoki o'z savolingizni yozing.</div>
+                <div class="msg-t" id="aiTime">—</div>
               </div>
             </div>
-            <div class="suggestions" id="suggPills">
-              <button class="sugg-pill" onclick="askSugg(this)">Soliq imtiyozlari qanday?</button>
-              <button class="sugg-pill" onclick="askSugg(this)">Eksport uchun subsidiya bormi?</button>
-              <button class="sugg-pill" onclick="askSugg(this)">Kredit olish tartibi</button>
-              <button class="sugg-pill" onclick="askSugg(this)">Yangi qarorlar</button>
+            <div class="suggs" id="suggs">
+              <button class="sp" onclick="askFaq(this)">YTT qanday ro'yxatdan o'tiladi?</button>
+              <button class="sp" onclick="askFaq(this)">Soliq imtiyozlari qanday?</button>
+              <button class="sp" onclick="askFaq(this)">MCHJ ochish tartibi</button>
+              <button class="sp" onclick="askFaq(this)">Eksport qanday boshlanadi?</button>
+              <button class="sp" onclick="askFaq(this)">Biznes litsenziya olish</button>
             </div>
-            <div class="chat-input-area">
-              <textarea class="chat-inp" id="chatInp" placeholder="Savol yozing..." rows="1"
-                onkeydown="handleChatKey(event)" oninput="autoResize(this)"></textarea>
-              <button class="send-btn" id="sendBtn" onclick="sendChat()">
-                <svg width="16" height="16" fill="none" stroke="#080d18" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2L15 22 11 13 2 9l20-7z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div class="chat-in">
+              <textarea class="ci" id="ci" placeholder="Savolingizni yozing..." rows="1" onkeydown="onChatKey(event)" oninput="arR(this)"></textarea>
+              <button class="sb-btn" onclick="sendChat()">
+                <svg width="17" height="17" fill="none" stroke="#080d18" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2L15 22 11 13 2 9l20-7z" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </button>
             </div>
-            <div class="chat-disclaimer">AI javoblari rasmiy manbalar asosida. Muhim qarorlar uchun yurist bilan maslahatlashing.</div>
+            <div class="disc">Ma'lumot maqsadida. Rasmiy matn: lex.uz, soliq.uz</div>
           </div>
-          <div class="ai-sidebar">
-            <div class="ai-key-card">
-              <span class="ai-key-label">Anthropic API Kaliti</span>
-              <div class="ai-key-row">
-                <input class="key-inp" id="apiKeyInp" type="password" placeholder="sk-ant-api03-..."/>
-                <button class="key-btn" onclick="saveKey()">Saqlash</button>
-              </div>
-              <div class="key-status no" id="keyStatus">🔑 API kalitini kiriting</div>
-              <div style="margin-top:8px;font-size:.7rem;color:var(--text3)">
-                Bepul olish: <a href="https://console.anthropic.com" target="_blank" style="color:var(--teal)">console.anthropic.com</a>
-              </div>
-            </div>
-            <div class="quota-widget">
-              <div class="quota-row">
-                <span style="font-size:.78rem;font-weight:600">So'rovlar qoldi</span>
-                <span class="quota-big" id="quotaBig">100</span>
-              </div>
-              <div class="quota-bar"><div class="quota-fill" id="quotaFill" style="width:0%"></div></div>
-              <div class="quota-txt" id="quotaTxt">0 / 100 so'rov ishlatilgan</div>
+          <div class="ai-side">
+            <div class="faq-hint">
+              <span class="faq-hint-t">Ko'p so'raladigan savollar</span>
+              <div id="faqList"></div>
             </div>
             <div class="card" style="padding:16px">
-              <div class="card-title" style="margin-bottom:10px">📌 Mos imtiyozlar</div>
-              <div id="aiHints" style="display:flex;flex-direction:column;gap:6px;font-size:.78rem;color:var(--text2)"></div>
+              <div style="font-size:.8rem;font-weight:600;margin-bottom:10px">📌 Sizga mos imtiyozlar</div>
+              <div id="aiHints" style="font-size:.78rem;color:var(--text2);display:flex;flex-direction:column;gap:7px"></div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ──── IMTIYOZLAR ──── -->
-      <div class="page" id="page-imtiyozlar">
-        <div class="filter-bar">
-          <input class="search-box" placeholder="🔍 Imtiyoz qidirish..." oninput="filterImtiyoz(this.value)"/>
-          <button class="filter-pill active" onclick="filterCat('barchasi',this)">Barchasi</button>
-          <button class="filter-pill" id="myTypeBtn" onclick="filterCat('mos',this)">Sizga mos</button>
-          <button class="filter-pill" onclick="filterCat('soliq',this)">💰 Soliq</button>
-          <button class="filter-pill" onclick="filterCat('subsidiya',this)">🌱 Subsidiya</button>
-          <button class="filter-pill" onclick="filterCat('kredit',this)">💳 Kredit</button>
-          <button class="filter-pill" onclick="filterCat('grant',this)">🏆 Grant</button>
-          <button class="filter-pill" onclick="filterCat('eksport',this)">🌍 Eksport</button>
+      <!-- IMTIYOZLAR -->
+      <div class="page" id="p-imtiyozlar">
+        <div class="filt">
+          <input class="srch" placeholder="🔍 Imtiyoz qidirish..." oninput="filtI(this.value)"/>
+          <button class="fp act" onclick="filtC('barchasi',this)">Barchasi</button>
+          <button class="fp" onclick="filtC('mos',this)">Sizga mos</button>
+          <button class="fp" onclick="filtC('soliq',this)">💰 Soliq</button>
+          <button class="fp" onclick="filtC('subsidiya',this)">🌱 Subsidiya</button>
+          <button class="fp" onclick="filtC('kredit',this)">💳 Kredit</button>
+          <button class="fp" onclick="filtC('grant',this)">🏆 Grant</button>
+          <button class="fp" onclick="filtC('eksport',this)">🌍 Eksport</button>
         </div>
-        <div class="imtiyoz-grid" id="imtiyozGrid"></div>
+        <div class="im-grid" id="imGrid"></div>
       </div>
 
-      <!-- ──── AVTO ARIZA ──── -->
-      <div class="page" id="page-ariza">
-        <div class="banner">
-          <div class="banner-track">
-            <div class="banner-text">⚠️ DAVLAT TOMONIDAN RUXSAT BERILGANDAN SO'NG AVTO ARIZA XIZMATI TO'LIQ ISHLAYDI.</div>
-            <div class="banner-text">⚠️ DAVLAT TOMONIDAN RUXSAT BERILGANDAN SO'NG AVTO ARIZA XIZMATI TO'LIQ ISHLAYDI.</div>
-            <div class="banner-text">⚠️ DAVLAT TOMONIDAN RUXSAT BERILGANDAN SO'NG AVTO ARIZA XIZMATI TO'LIQ ISHLAYDI.</div>
-            <div class="banner-text">⚠️ DAVLAT TOMONIDAN RUXSAT BERILGANDAN SO'NG AVTO ARIZA XIZMATI TO'LIQ ISHLAYDI.</div>
-          </div>
-        </div>
-        <div class="ariza-form-card">
+      <!-- AVTO ARIZA -->
+      <div class="page" id="p-ariza">
+        <div class="af-card">
           <div style="display:flex;align-items:flex-start;justify-content:space-between">
             <div>
-              <h2 style="font-size:1.1rem;font-weight:700;margin-bottom:6px">Avto ariza xizmati</h2>
-              <p style="font-size:.8rem;color:var(--text2)">Yangi arizalarni davlat platformalaridan tekshiradi, profilingiz bilan to'ldiradi.</p>
+              <h2 style="font-size:1.15rem;font-weight:700;margin-bottom:5px">Avto ariza xizmati</h2>
+              <p style="font-size:.8rem;color:var(--text2)">Yangi arizalarni davlat platformalaridan tekshiradi, profilingiz bilan to'ldiradi va SMS navbatga qo'yadi.</p>
             </div>
           </div>
-          <div class="ai-auto-badge" style="margin-top:14px">AI Auto Flow Active</div>
-          <div class="form-grid">
-            <div><label class="field-label">Ism / Biznes nomi</label><input class="f-input" id="af-ism" placeholder="Ism yoki biznes nomi"/></div>
-            <div><label class="field-label">Hudud</label><select class="f-select" id="af-hudud"><option>Barcha hududlar</option><option>Toshkent shahri</option><option>Toshkent viloyati</option><option>Samarqand viloyati</option><option>Buxoro viloyati</option><option>Andijon viloyati</option><option>Farg'ona viloyati</option></select></div>
-            <div><label class="field-label">Biznes nomi</label><input class="f-input" id="af-biznes" placeholder="Biznes nomi"/></div>
-            <div><label class="field-label">STIR (TIN)</label><input class="f-input" id="af-stir" placeholder="123456789"/></div>
-            <div><label class="field-label">Tashkiliy shakl</label><select class="f-select" id="af-shakl"><option>YTT (Yakka tartibdagi tadbirkor)</option><option>MCHJ (Mas'uliyati cheklangan jamiyat)</option><option>AJ (Aksionerlik jamiyati)</option><option>XK (Xususiy korxona)</option></select></div>
-            <div><label class="field-label">Faoliyat turi</label><select class="f-select" id="af-faoliyat"><option>IT va texnologiya</option><option>Ishlab chiqarish</option><option>Savdo va xizmatlar</option><option>Qishloq xo'jaligi</option><option>Qurilish</option><option>Turizm</option><option>Eksport</option></select></div>
-            <div><label class="field-label">Direktor F.I.Sh</label><input class="f-input" id="af-dir" placeholder="Familiya Ism Sharif"/></div>
-            <div><label class="field-label">Telefon (+998...)</label><input class="f-input" id="af-tel" placeholder="+998 90 000 00 00"/></div>
-            <div><label class="field-label">Email</label><input class="f-input" id="af-email" placeholder="email@example.com"/></div>
-            <div><label class="field-label">Manzil</label><input class="f-input" id="af-manzil" placeholder="Shahar, ko'cha, uy"/></div>
+          <div class="ai-flow" style="margin-top:14px">AI Auto Flow Active</div>
+          <div style="font-size:.87rem;font-weight:600;margin-bottom:2px">Biznes profilingiz</div>
+          <div class="fgrid">
+            <div><label class="fl">Ism / Biznes nomi</label><input class="fi" id="af-ism" placeholder="Ism yoki biznes nomi"/></div>
+            <div><label class="fl">Hudud</label><select class="fsel" id="af-hud"><option>Barcha hududlar</option><option>Toshkent shahri</option><option>Toshkent viloyati</option><option>Samarqand viloyati</option><option>Buxoro viloyati</option><option>Andijon viloyati</option><option>Farg'ona viloyati</option></select></div>
+            <div><label class="fl">Biznes nomi</label><input class="fi" id="af-biz" placeholder="Kompaniya nomi"/></div>
+            <div><label class="fl">STIR (TIN)</label><input class="fi" id="af-st" placeholder="123456789"/></div>
+            <div><label class="fl">Tashkiliy shakl</label><select class="fsel" id="af-shk"><option>YTT</option><option>MCHJ</option><option>AJ</option><option>XK</option></select></div>
+            <div><label class="fl">Faoliyat turi</label><select class="fsel" id="af-fao"><option>IT va texnologiya</option><option>Ishlab chiqarish</option><option>Savdo va xizmatlar</option><option>Qishloq xo'jaligi</option><option>Qurilish</option><option>Turizm</option><option>Eksport</option></select></div>
+            <div><label class="fl">Direktor F.I.Sh</label><input class="fi" id="af-dir" placeholder="Familiya Ism Sharif"/></div>
+            <div><label class="fl">Telefon</label><input class="fi" id="af-tel" placeholder="+998 90 000 00 00"/></div>
+            <div><label class="fl">Email</label><input class="fi" id="af-email" placeholder="email@example.com"/></div>
+            <div><label class="fl">Manzil</label><input class="fi" id="af-man" placeholder="Shahar, ko'cha, uy"/></div>
           </div>
-          <div style="display:flex;gap:10px;margin-top:18px;flex-wrap:wrap">
-            <button class="btn-primary" onclick="startAriza()">🔍 Yangi arizalarni tekshirish</button>
-            <button class="btn-outline" onclick="saveProfile()">💾 Profilni saqlash</button>
+          <div style="display:flex;gap:10px;margin-top:18px">
+            <button class="btn-p" onclick="startAriza()">🔍 Arizalarni tekshirish va yuborish</button>
+            <button class="btn-o" onclick="savePro()">💾 Profilni saqlash</button>
           </div>
         </div>
-        <div class="monitoring-box" id="monitoringBox"></div>
-        <div id="arizaResults" style="display:none">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-            <div style="font-size:.88rem;font-weight:600">Topilgan imtiyozlar</div>
-            <span class="badge" id="arizaCount" style="background:var(--teal);color:#080d18;padding:3px 10px;border-radius:99px;font-size:.72rem"></span>
-          </div>
-          <div id="arizaList"></div>
+        <div class="mon-box" id="monBox">
+          <div style="font-size:1.8rem;margin-bottom:10px">🤖</div>
+          <div style="font-size:.95rem;font-weight:700;margin-bottom:5px">AI monitoring hali ishga tushmagan</div>
+          <div style="font-size:.8rem">Profil ma'lumotlarini to'ldirib, tekshiruvni boshlang.</div>
         </div>
-      </div>
-
-      <!-- ──── MANBALAR ──── -->
-      <div class="page" id="page-manbalar">
-        <div class="sec-header" style="margin-bottom:16px"><span class="sec-title">🛡️ Rasmiy manbalar</span><span style="font-size:.75rem;color:var(--text3);margin-left:auto">Real-time yangilanadi</span></div>
-        <div class="manbalar-grid">
-          <div class="manba-card">
-            <div class="manba-head">
-              <div class="manba-ico" style="background:rgba(59,130,246,.1)">📜</div>
-              <div><div class="manba-title">Lex.uz</div><a href="https://lex.uz" target="_blank" class="manba-url">lex.uz</a></div>
-            </div>
-            <div class="manba-desc">O'zbekiston Respublikasining rasmiy qonunchilik ma'lumotlar bazasi. Barcha qonunlar, farmonlar va qarorlar.</div>
-            <div class="manba-tags"><span class="manba-tag">Qonunlar</span><span class="manba-tag">Farmonlar</span><span class="manba-tag">Qarorlar</span></div>
-            <div class="manba-status">Real-time yangilanadi</div>
-          </div>
-          <div class="manba-card">
-            <div class="manba-head">
-              <div class="manba-ico" style="background:rgba(34,197,94,.1)">🏛️</div>
-              <div><div class="manba-title">Gov.uz</div><a href="https://gov.uz" target="_blank" class="manba-url">gov.uz</a></div>
-            </div>
-            <div class="manba-desc">O'zbekiston hukumatining rasmiy portali. Davlat dasturlari, subsidiyalar va grantlar haqida ma'lumotlar.</div>
-            <div class="manba-tags"><span class="manba-tag">Subsidiyalar</span><span class="manba-tag">Grantlar</span><span class="manba-tag">Dasturlar</span></div>
-            <div class="manba-status">Kuniga 2 marta yangilanadi</div>
-          </div>
-          <div class="manba-card">
-            <div class="manba-head">
-              <div class="manba-ico" style="background:rgba(245,197,66,.1)">💰</div>
-              <div><div class="manba-title">Soliq.uz</div><a href="https://soliq.uz" target="_blank" class="manba-url">soliq.uz</a></div>
-            </div>
-            <div class="manba-desc">Soliq qo'mitasining rasmiy sayti. Soliq imtiyozlari, stavkalar va qoidalar haqida to'liq ma'lumot.</div>
-            <div class="manba-tags"><span class="manba-tag">Soliq</span><span class="manba-tag">QQS</span><span class="manba-tag">Imtiyozlar</span></div>
-            <div class="manba-status">Real-time yangilanadi</div>
-          </div>
-          <div class="manba-card">
-            <div class="manba-head">
-              <div class="manba-ico" style="background:rgba(0,212,184,.1)">📊</div>
-              <div><div class="manba-title">Stat.uz</div><a href="https://stat.uz" target="_blank" class="manba-url">stat.uz</a></div>
-            </div>
-            <div class="manba-desc">Statistika qo'mitasi. Iqtisodiy ko'rsatkichlar, KOB sektori statistikasi va bozor tahlillari.</div>
-            <div class="manba-tags"><span class="manba-tag">Statistika</span><span class="manba-tag">KOB</span><span class="manba-tag">Iqtisodiyot</span></div>
-            <div class="manba-status">Haftalik yangilanadi</div>
-          </div>
-          <div class="manba-card">
-            <div class="manba-head">
-              <div class="manba-ico" style="background:rgba(255,77,109,.1)">🌐</div>
-              <div><div class="manba-title">My.gov.uz</div><a href="https://my.gov.uz" target="_blank" class="manba-url">my.gov.uz</a></div>
-            </div>
-            <div class="manba-desc">Yagona davlat xizmatlari portali. Elektron ariza topshirish va hujjatlarni rasmiy ro'yxatdan o'tkazish.</div>
-            <div class="manba-tags"><span class="manba-tag">E-xizmatlar</span><span class="manba-tag">Ariza</span><span class="manba-tag">Ro'yxat</span></div>
-            <div class="manba-status">Real-time</div>
-          </div>
-          <div class="manba-card">
-            <div class="manba-head">
-              <div class="manba-ico" style="background:rgba(59,130,246,.1)">💻</div>
-              <div><div class="manba-title">IT Park Uzbekistan</div><a href="https://itpark.uz" target="_blank" class="manba-url">itpark.uz</a></div>
-            </div>
-            <div class="manba-desc">IT Park rezidentligi, soliq imtiyozlari va IT sohasidagi startaplar uchun davlat qo'llab-quvvatlash dasturlari.</div>
-            <div class="manba-tags"><span class="manba-tag">IT</span><span class="manba-tag">Rezidentlik</span><span class="manba-tag">Startap</span></div>
-            <div class="manba-status">Yangilanadi</div>
-          </div>
+        <div id="arizaRes" style="margin-top:14px;display:none">
+          <div class="sec-hd"><span class="sec-t">📋 Topilgan arizalar</span><span id="arCnt" style="font-size:.73rem;color:var(--text3)"></span></div>
+          <div id="arList"></div>
         </div>
       </div>
 
-      <!-- ──── MONETIZATSIYA ──── -->
-      <div class="page" id="page-monetizatsiya">
-        <div class="sec-header" style="margin-bottom:4px"><span class="sec-title">💎 Premium Plans</span></div>
-        <p style="font-size:.8rem;color:var(--text2);margin-bottom:20px">Biznesingizni keyingi darajaga olib chiqish uchun mos tarifni tanlang</p>
-
-        <div class="monetize-stats">
-          <div class="rev-card"><div class="rev-num">3,200+</div><div class="rev-label">Faol foydalanuvchilar</div></div>
-          <div class="rev-card"><div class="rev-num">142+</div><div class="rev-label">Imtiyozlar bazasi</div></div>
-          <div class="rev-card"><div class="rev-num">$2,000+</div><div class="rev-label">O'rtacha tejash/yil</div></div>
-          <div class="rev-card"><div class="rev-num">99%</div><div class="rev-label">Mijoz mamnuniyati</div></div>
+      <!-- MANBALAR -->
+      <div class="page" id="p-manbalar">
+        <div style="margin-bottom:18px">
+          <h2 style="font-size:1.05rem;font-weight:700;margin-bottom:4px">Whitelisted Sources — 100% Rasmiy</h2>
+          <p style="font-size:.8rem;color:var(--text2)">Benefit Navigator faqat to'rtta rasmiy O'zbekiston manbasidan ma'lumot oladi</p>
         </div>
-
-        <div class="plan-grid">
-          <!-- Free -->
-          <div class="plan-card plan-free">
-            <span class="plan-badge">Bepul</span>
-            <div class="plan-price">0 <span style="font-size:.8rem;color:var(--text3)">so'm</span></div>
-            <div class="plan-period">Abadiy bepul</div>
-            <div class="plan-name" style="margin-top:10px">Starter</div>
-            <ul class="plan-features">
-              <li>100 ta AI so'rov/oy</li>
-              <li>142+ imtiyoz ma'lumotlari</li>
-              <li>4 ta rasmiy manba</li>
-              <li>Asosiy dashboard</li>
-              <li class="no">Cheksiz so'rovlar</li>
-              <li class="no">Shaxsiy maslahat</li>
-              <li class="no">B2B integratsiya</li>
-            </ul>
-            <button class="plan-btn plan-btn-outline" onclick="showToast('✅ Hozir Starter tarifida!','teal')">Hozirgi tarif</button>
-          </div>
-
-          <!-- Pro (featured) -->
-          <div class="plan-card plan-pro featured">
-            <span class="plan-badge">Pro</span>
-            <div class="plan-price">299,000 <span style="font-size:.75rem;color:var(--text3)">so'm/oy</span></div>
-            <div class="plan-period">~$25/oy</div>
-            <div class="plan-name" style="margin-top:10px">Professional</div>
-            <ul class="plan-features">
-              <li>Cheksiz AI so'rovlar</li>
-              <li>200+ imtiyoz bazasi</li>
-              <li>Chuqur tahlillar</li>
-              <li>SMS xabarnomalar</li>
-              <li>Avto ariza to'ldirish</li>
-              <li>Eksport hisobotlari</li>
-              <li class="no">B2B integratsiya</li>
-            </ul>
-            <button class="plan-btn plan-btn-teal" onclick="upgradePlan('pro')">Pro ga o'tish →</button>
-          </div>
-
-          <!-- Business -->
-          <div class="plan-card plan-biz">
-            <span class="plan-badge">Business</span>
-            <div class="plan-price">990,000 <span style="font-size:.75rem;color:var(--text3)">so'm/oy</span></div>
-            <div class="plan-period">~$85/oy</div>
-            <div class="plan-name" style="margin-top:10px">Enterprise</div>
-            <ul class="plan-features">
-              <li>Hamma Pro imkoniyatlar</li>
-              <li>Shaxsiy AI maslahat</li>
-              <li>B2B API integratsiya</li>
-              <li>Ko'p foydalanuvchi</li>
-              <li>Maxsus hisobotlar</li>
-              <li>Dedicated support</li>
-              <li>White-label versiya</li>
-            </ul>
-            <button class="plan-btn plan-btn-gold" onclick="upgradePlan('biz')">Bog'lanish →</button>
-          </div>
+        <div class="mn-grid">
+          <div class="mn-c"><div class="mn-vrf">✓ VERIFIED</div><div class="mn-n">Lex.uz</div><div class="mn-u">https://lex.uz</div><div class="mn-d">O'zbekiston qonunchilik bazasi. Barcha davlat qarorlari, qonunlar va me'yoriy hujjatlar.</div><div class="mn-f"><span>🔄 25.02.2026</span><span class="mn-cnt">14,200+ hujjat</span></div></div>
+          <div class="mn-c"><div class="mn-vrf">✓ VERIFIED</div><div class="mn-n">Gov.uz</div><div class="mn-u">https://gov.uz</div><div class="mn-d">O'zbekiston hukumatining rasmiy portali. Hukumat yangiliklari, qarorlar va e'lonlar.</div><div class="mn-f"><span>🔄 25.02.2026</span><span class="mn-cnt">3,400+ yangilik</span></div></div>
+          <div class="mn-c"><div class="mn-vrf">✓ VERIFIED</div><div class="mn-n">Soliq.uz</div><div class="mn-u">https://soliq.uz</div><div class="mn-d">Soliq qo'mitasining rasmiy sayti. Soliq imtiyozlari va boshqaruv ma'lumotlari.</div><div class="mn-f"><span>🔄 25.02.2026</span><span class="mn-cnt">890+ imtiyoz</span></div></div>
+          <div class="mn-c"><div class="mn-vrf">✓ VERIFIED</div><div class="mn-n">Stat.uz</div><div class="mn-u">https://stat.uz</div><div class="mn-d">Statistika agentligi. Iqtisodiy ko'rsatkichlar va KOB sektori tahlillari.</div><div class="mn-f"><span>🔄 25.02.2026</span><span class="mn-cnt">2,100+ ko'rsatkich</span></div></div>
         </div>
+      </div>
 
-        <!-- Partner programs -->
-        <div class="sec-header" style="margin-bottom:14px"><span class="sec-title">🤝 Hamkorlik dasturlari</span></div>
-        <div class="partner-grid">
-          <div class="partner-card">
-            <div class="partner-ico">🏢</div>
-            <div>
-              <div class="partner-title">B2B Assotsiatsiya hamkorligi</div>
-              <div class="partner-desc">Biznes assotsiatsiyalari uchun o'z brandingiz ostida platforma. A'zolarga imtiyozlar bazasiga to'liq kirish.</div>
-              <div class="partner-price">Oyiga 2,500,000 so'mdan</div>
-            </div>
-          </div>
-          <div class="partner-card">
-            <div class="partner-ico">🏦</div>
-            <div>
-              <div class="partner-title">Bank va moliya muassasalari</div>
-              <div class="partner-desc">Mijozlaringizga kredit imtiyozlari haqida avtomatik ma'lumot berish. API integratsiya mavjud.</div>
-              <div class="partner-price">API so'rov narxi kelishiladi</div>
-            </div>
-          </div>
-          <div class="partner-card">
-            <div class="partner-ico">🎓</div>
-            <div>
-              <div class="partner-title">Ta'lim va akselerator dasturlari</div>
-              <div class="partner-desc">Startap va akselerator dasturlari uchun imtiyozli narx. Talabalar va startaplarga subsidiyalangan kirish.</div>
-              <div class="partner-price">Alohida kelishuv asosida</div>
-            </div>
-          </div>
-          <div class="partner-card">
-            <div class="partner-ico">🌍</div>
-            <div>
-              <div class="partner-title">Affiliate marketing</div>
-              <div class="partner-desc">Har bir jalb qilgan foydalanuvchi uchun 20% komissiya. Referral dasturi orqali passiv daromad.</div>
-              <div class="partner-price">20% komissiya</div>
-            </div>
-          </div>
+      <!-- PREMIUM -->
+      <div class="page" id="p-premium">
+        <div style="text-align:center;margin-bottom:28px">
+          <div style="font-size:1.4rem;font-weight:700;margin-bottom:6px">Obuna rejasini tanlang</div>
+          <div style="font-size:.85rem;color:var(--text2)">Biznesingiz ehtiyojiga mos tarif</div>
         </div>
-
-        <div style="background:linear-gradient(135deg,rgba(0,212,184,.08),rgba(0,212,184,.03));border:1px solid rgba(0,212,184,.2);border-radius:var(--radius);padding:20px;text-align:center;margin-top:8px">
-          <div style="font-size:1rem;font-weight:600;margin-bottom:6px">Konsalting xizmati</div>
-          <div style="font-size:.8rem;color:var(--text2);margin-bottom:14px">Murakkab arizalar, investitsiya loyihalari va maxsus holatlarda yuridik ekspert maslahati</div>
-          <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap">
-            <button class="btn-primary" onclick="showToast('📞 Tez orada mutaxassis bilan bog\'lanamiz!','teal')">📞 Konsultatsiya so'rash</button>
-            <button class="btn-outline" onclick="showToast('✉️ Email: info@benefitnav.uz','teal')">✉️ Email yuborish</button>
+        <div class="pr-plans">
+          <div class="plan">
+            <div class="plan-n">Tekin</div>
+            <div class="plan-p">0 <span>so'm / oy</span></div>
+            <div class="plan-d">Boshlash uchun yetarli. Asosiy imtiyozlar va yangiliklar.</div>
+            <ul class="plan-f">
+              <li>142 ta imtiyoz ko'rish</li>
+              <li>Rasmiy yangiliklar</li>
+              <li>AI chat (10 ta savol/oy)</li>
+              <li>Manbalar sahifasi</li>
+              <li class="no">Avto ariza xizmati</li>
+              <li class="no">SMS xabarnoma</li>
+              <li class="no">Ustunlik qo'llab-quvvatlash</li>
+            </ul>
+            <button class="plan-btn" onclick="showToast('✅ Tekin rejim faol!','teal')">Hozir foydalanmoqdasiz</button>
+          </div>
+          <div class="plan pop">
+            <div class="plan-badge">Eng mashhur</div>
+            <div class="plan-n">Pro</div>
+            <div class="plan-p">20,000 <span>so'm / oy</span></div>
+            <div class="plan-d">Kichik va o'rta biznes uchun. Barcha funksiyalar ochiq.</div>
+            <ul class="plan-f">
+              <li>142 ta imtiyoz ko'rish</li>
+              <li>Rasmiy yangiliklar</li>
+              <li>AI chat (cheksiz)</li>
+              <li>Manbalar sahifasi</li>
+              <li>Avto ariza xizmati</li>
+              <li>SMS xabarnoma</li>
+              <li class="no">Ustunlik qo'llab-quvvatlash</li>
+            </ul>
+            <button class="plan-btn" onclick="showToast('📩 Pro obuna uchun: info@benefitnav.uz','teal')">Pro obunani olish</button>
+          </div>
+          <div class="plan">
+            <div class="plan-n">Yillik</div>
+            <div class="plan-p">200,000 <span>so'm / yil</span></div>
+            <div class="plan-d">Katta korxonalar uchun. Barcha funksiyalar + ustunlik xizmat.</div>
+            <ul class="plan-f">
+              <li>142 ta imtiyoz ko'rish</li>
+              <li>Rasmiy yangiliklar</li>
+              <li>AI chat (cheksiz)</li>
+              <li>Manbalar sahifasi</li>
+              <li>Avto ariza xizmati</li>
+              <li>SMS xabarnoma</li>
+              <li>Ustunlik qo'llab-quvvatlash</li>
+            </ul>
+            <button class="plan-btn" onclick="showToast('📩 Yillik obuna uchun: info@benefitnav.uz','teal')">Yillik olish (tejamli)</button>
           </div>
         </div>
       </div>
 
-      <!-- ──── PROFIL ──── -->
-      <div class="page" id="page-profil">
-        <div class="profil-grid">
-          <div class="profil-card">
-            <div class="profil-avatar" id="profilAvatar">T</div>
-            <div class="profil-name" id="profilName">Tadbirkor</div>
-            <div class="profil-type" id="profilType">YTT</div>
-            <div class="profil-row"><span class="key">Hudud</span><span class="val" id="profilHudud">Barcha hududlar</span></div>
-            <div class="profil-row"><span class="key">Soha</span><span class="val" id="profilSoha">—</span></div>
-            <div class="profil-row"><span class="key">Tashkiliy shakl</span><span class="val" id="profilShakl">—</span></div>
-            <div class="profil-row"><span class="key">Mos imtiyozlar</span><span class="val" id="profilImtiyoz" style="color:var(--teal)">—</span></div>
-            <div class="profil-row"><span class="key">Platforma</span><span class="val">Benefit Nav 2026</span></div>
+      <!-- PROFIL -->
+      <div class="page" id="p-profil">
+        <div class="pr-grid">
+          <div class="card">
+            <div class="pr-av" id="prAv">T</div>
+            <div class="pr-nm" id="prNm">Tadbirkor</div>
+            <div class="pr-tp" id="prTp">YTT</div>
+            <div class="pr-row"><span class="pr-k">Hudud</span><span class="pr-v" id="prHud">—</span></div>
+            <div class="pr-row"><span class="pr-k">Soha</span><span class="pr-v" id="prSoha">—</span></div>
+            <div class="pr-row"><span class="pr-k">Tashkiliy shakl</span><span class="pr-v" id="prShk">—</span></div>
+            <div class="pr-row"><span class="pr-k">Mos imtiyozlar</span><span class="pr-v" id="prImt" style="color:var(--teal)">—</span></div>
           </div>
           <div>
-            <div class="ariza-form-card" style="margin-bottom:14px">
-              <h3 style="font-size:.9rem;font-weight:600;margin-bottom:14px">Profil tahrirlash</h3>
-              <div class="form-grid">
-                <div><label class="field-label">Ism / Biznes nomi</label><input class="f-input" id="pr-ism" placeholder="Ism yoki biznes nomi"/></div>
-                <div><label class="field-label">Email</label><input class="f-input" id="pr-email" placeholder="email@example.com"/></div>
-                <div><label class="field-label">Telefon</label><input class="f-input" id="pr-tel" placeholder="+998 90 000 00 00"/></div>
-                <div><label class="field-label">STIR</label><input class="f-input" id="pr-stir" placeholder="123456789"/></div>
+            <div class="af-card" style="margin-bottom:14px">
+              <h3 style="font-size:.92rem;font-weight:600;margin-bottom:14px">Profil tahrirlash</h3>
+              <div class="fgrid">
+                <div><label class="fl">Ism</label><input class="fi" id="pr-ism" placeholder="Ismingiz"/></div>
+                <div><label class="fl">Email</label><input class="fi" id="pr-email" placeholder="email@example.com"/></div>
+                <div><label class="fl">Telefon</label><input class="fi" id="pr-tel" placeholder="+998 90 000 00 00"/></div>
+                <div><label class="fl">STIR</label><input class="fi" id="pr-stir" placeholder="123456789"/></div>
               </div>
-              <div style="margin-top:14px"><button class="btn-primary" onclick="saveProfil()">💾 Saqlash</button></div>
+              <div style="margin-top:14px"><button class="btn-p" onclick="saveProf()">💾 Saqlash</button></div>
             </div>
             <div class="card">
-              <div class="card-title" style="margin-bottom:12px">📊 Faoliyat statistikasi</div>
+              <div style="font-size:.87rem;font-weight:600;margin-bottom:12px">📊 Statistika</div>
               <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
-                <div class="ab-stat"><span class="ab-num" id="statQidiruv">0</span><span class="ab-label">Qidiruvlar</span></div>
-                <div class="ab-stat"><span class="ab-num" id="statSorov">0</span><span class="ab-label">AI so'rovlar</span></div>
-                <div class="ab-stat"><span class="ab-num" id="statAriza">0</span><span class="ab-label">Arizalar</span></div>
+                <div class="ab-s"><span class="ab-n" id="stQ">0</span><span class="ab-l">Qidiruvlar</span></div>
+                <div class="ab-s"><span class="ab-n" id="stC">0</span><span class="ab-l">AI savollar</span></div>
+                <div class="ab-s"><span class="ab-n" id="stA">0</span><span class="ab-l">Arizalar</span></div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ──── HAQIDA ──── -->
-      <div class="page" id="page-haqida">
-        <div class="about-hero">
-          <div class="about-title">Benefit Navigator <span>nima</span> uchun?</div>
-          <div class="about-sub">O'zbekiston tadbirkorlarini davlat imtiyozlari bilan bog'laydigan yagona aqlli platforma. AI texnologiyasi va rasmiy manbalar asosida.</div>
+      <!-- HAQIDA -->
+      <div class="page" id="p-haqida">
+        <div style="text-align:center;padding:24px 0 20px">
+          <div style="font-size:1.8rem;font-weight:700;margin-bottom:10px">Benefit Navigator <span style="color:var(--teal)">nima</span> uchun?</div>
+          <div style="color:var(--text2);font-size:.88rem;max-width:520px;margin:0 auto;line-height:1.7">O'zbekiston tadbirkorlarini davlat imtiyozlari bilan bog'laydigan yagona aqlli platforma.</div>
         </div>
-        <div class="about-stats">
-          <div class="ab-stat"><span class="ab-num">142+</span><span class="ab-label">Faol imtiyozlar</span></div>
-          <div class="ab-stat"><span class="ab-num">6</span><span class="ab-label">Rasmiy manbalar</span></div>
-          <div class="ab-stat"><span class="ab-num">24/7</span><span class="ab-label">AI monitoring</span></div>
-          <div class="ab-stat"><span class="ab-num">99%</span><span class="ab-label">Aniqlik darajasi</span></div>
+        <div class="ab-st">
+          <div class="ab-s"><span class="ab-n">142+</span><span class="ab-l">Faol imtiyozlar</span></div>
+          <div class="ab-s"><span class="ab-n">4</span><span class="ab-l">Rasmiy manba</span></div>
+          <div class="ab-s"><span class="ab-n">24/7</span><span class="ab-l">AI monitoring</span></div>
+          <div class="ab-s"><span class="ab-n">99%</span><span class="ab-l">Aniqlik darajasi</span></div>
         </div>
-        <div class="sec-header" style="margin-bottom:12px"><span class="sec-title">Platforma foydalari</span></div>
-        <div class="benefit-list-simple">
-          <div class="bl-item"><div class="bl-ico">⚡</div><div class="bl-text"><h4>Vaqt tejash</h4><p>Imtiyozlarni izlash uchun haftalar emas, soniyalar sarflaysiz. AI sizning profiling asosida mos imtiyozlarni avtomatik topadi.</p></div></div>
-          <div class="bl-item"><div class="bl-ico">💰</div><div class="bl-text"><h4>Pul tejash</h4><p>Qimmat yuridik konsalting o'rniga bepul AI Copilot. Yillik $2,000–10,000 gacha tejash imkoniyati.</p></div></div>
-          <div class="bl-item"><div class="bl-ico">🛡️</div><div class="bl-text"><h4>Ishonchlilik</h4><p>Faqat 6 ta tasdiqlangan rasmiy manbadan ma'lumot. Noto'g'ri yoki eskirgan ma'lumot xavfi yo'q.</p></div></div>
-          <div class="bl-item"><div class="bl-ico">📋</div><div class="bl-text"><h4>Avto ariza</h4><p>Profil ma'lumotlari asosida arizalarni avtomatik to'ldirish va yuborish. Muddat o'tkazib yubormaslik kafolati.</p></div></div>
-          <div class="bl-item"><div class="bl-ico">🎯</div><div class="bl-text"><h4>Shaxsiylashtirish</h4><p>Biznes turingiz, hududingiz va soha bo'yicha moslashtirilgan tavsiyalar. YTT, MCHJ, katta korxona — hammasi uchun alohida.</p></div></div>
-          <div class="bl-item"><div class="bl-ico">📱</div><div class="bl-text"><h4>SMS xabarnoma</h4><p>Yangi imtiyoz yoki ariza muddati haqida darhol SMS. Birorta ham imkoniyatni o'tkazib yubormaysiz.</p></div></div>
-        </div>
-        <!-- Presentation content from PPTX -->
-        <div class="card" style="margin-top:16px;padding:20px">
-          <div class="card-title" style="margin-bottom:12px">🏆 Benefit Nav vs An'anaviy yechimlar</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-            <div>
-              <div style="font-size:.75rem;font-weight:700;color:var(--red);margin-bottom:8px">❌ AN'ANAVIY MUAMMO</div>
-              <div style="font-size:.78rem;color:var(--text2);line-height:1.9">• Imtiyozlar turli saytlarda tarqoq<br/>• Ariza jarayoni murakkab<br/>• Muddat o'tkazib yuborish xavfi<br/>• Yuridik bilim talab etiladi<br/>• Noto'g'ri ma'lumot xavfi<br/>• Qimmat konsalting</div>
-            </div>
-            <div>
-              <div style="font-size:.75rem;font-weight:700;color:var(--teal);margin-bottom:8px">✅ BENEFIT NAVIGATOR YECHIMI</div>
-              <div style="font-size:.78rem;color:var(--text2);line-height:1.9">• 1 ta dashboard — barchasi bir joyda<br/>• AI profil bo'yicha avtomatik to'ldiradi<br/>• 24/7 monitoring + SMS xabarnoma<br/>• AI Legal Copilot — soniyada javob<br/>• Faqat rasmiy tasdiqlangan manbalar<br/>• Bepul asosiy xizmatlar</div>
-            </div>
-          </div>
-        </div>
-        <div class="card" style="margin-top:12px;padding:20px">
-          <div class="card-title" style="margin-bottom:12px">💡 Biznes modeli</div>
-          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px">
-            <div style="background:var(--card2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px"><div style="font-size:1.2rem;margin-bottom:6px">🎁</div><div style="font-size:.82rem;font-weight:600;margin-bottom:4px">Freemium modeli</div><div style="font-size:.74rem;color:var(--text2)">Asosiy xizmatlar bepul, kengaytirilgan funksiyalar pullik</div></div>
-            <div style="background:var(--card2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px"><div style="font-size:1.2rem;margin-bottom:6px">👑</div><div style="font-size:.82rem;font-weight:600;margin-bottom:4px">Premium obuna</div><div style="font-size:.74rem;color:var(--text2)">Cheksiz so'rovlar, chuqur tahlillar, ekspert maslahati</div></div>
-            <div style="background:var(--card2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px"><div style="font-size:1.2rem;margin-bottom:6px">🤝</div><div style="font-size:.82rem;font-weight:600;margin-bottom:4px">B2B hamkorlik</div><div style="font-size:.74rem;color:var(--text2)">Assotsiatsiyalar va banklar bilan integratsiya</div></div>
-            <div style="background:var(--card2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px"><div style="font-size:1.2rem;margin-bottom:6px">🎓</div><div style="font-size:.82rem;font-weight:600;margin-bottom:4px">Konsalting</div><div style="font-size:.74rem;color:var(--text2)">Murakkab arizalar va loyihalar uchun ekspert maslahati</div></div>
-          </div>
-        </div>
+        <div class="sec-hd" style="margin-bottom:12px"><span class="sec-t">Platforma foydalari</span></div>
+        <div class="bl-i"><div class="bl-ico">⚡</div><div class="bl-t"><h4>Vaqt tejash</h4><p>Imtiyozlarni izlash uchun haftalar emas — soniyalar. AI sizning profilingiz asosida mos imtiyozlarni avtomatik topadi.</p></div></div>
+        <div class="bl-i"><div class="bl-ico">💰</div><div class="bl-t"><h4>Pul tejash</h4><p>Qimmat yuridik konsalting o'rniga bepul AI Copilot. Yillik $2,000–10,000 gacha tejash.</p></div></div>
+        <div class="bl-i"><div class="bl-ico">🛡️</div><div class="bl-t"><h4>Ishonchlilik</h4><p>Faqat 4 ta tasdiqlangan rasmiy manbadan ma'lumot. Noto'g'ri yoki eskirgan ma'lumot xavfi yo'q.</p></div></div>
+        <div class="bl-i"><div class="bl-ico">📋</div><div class="bl-t"><h4>Avto ariza</h4><p>Profil ma'lumotlari asosida arizalarni avtomatik to'ldirish va yuborish. Muddat o'tkazib yubormaslik.</p></div></div>
+        <div class="bl-i"><div class="bl-ico">🎯</div><div class="bl-t"><h4>Shaxsiylashtirish</h4><p>Biznes turingiz va soha bo'yicha moslashtirilgan tavsiyalar. YTT, MCHJ, katta korxona uchun alohida.</p></div></div>
+        <div class="bl-i"><div class="bl-ico">📱</div><div class="bl-t"><h4>SMS xabarnoma</h4><p>Yangi imtiyoz yoki ariza muddati haqida darhol SMS. Birorta ham imkoniyatni o'tkazib yubormaysiz.</p></div></div>
       </div>
 
-      <!-- ──── FOYDALANISH SHARTLARI ──── -->
-      <div class="page" id="page-shartlar">
-        <div class="terms-card">
+      <!-- SHARTLAR -->
+      <div class="page" id="p-shartlar">
+        <div class="terms">
           <h2>Foydalanish shartlari va Maxfiylik siyosati</h2>
-          <div class="date">Oxirgi yangilanish: 25 fevral 2026 | Benefit Navigator © 2026</div>
+          <div class="dt">Oxirgi yangilanish: 25 fevral 2026 | Benefit Navigator © 2026</div>
           <h3>1. Umumiy qoidalar</h3>
           <p>Benefit Navigator platformasidan foydalanish ushbu shartlarga rozilik bildirishni anglatadi. Platforma O'zbekiston Respublikasi qonunlari asosida ishlaydi va faqat ma'lumot berish maqsadida xizmat qiladi.</p>
           <h3>2. Xizmat tavsifi</h3>
-          <p>Benefit Navigator quyidagi xizmatlarni taqdim etadi:</p>
           <ul><li>Davlat imtiyozlari, subsidiyalar va grantlar haqida ma'lumot berish</li><li>AI yordamida yuridik hujjatlarni tahlil qilish</li><li>Ariza to'ldirish va monitoring xizmati</li><li>Rasmiy manbalardan yangiliklar agregatsiyasi</li></ul>
           <h3>3. Ma'lumotlar to'g'riligi</h3>
-          <p>Platforma faqat lex.uz, gov.uz, soliq.uz, stat.uz, my.gov.uz va itpark.uz rasmiy manbalaridan ma'lumot oladi. Biroq, ma'lumotlar o'zgarishi mumkin — muhim qarorlar qabul qilishdan oldin rasmiy manbalarni tekshirishni tavsiya qilamiz.</p>
+          <p>Platforma faqat lex.uz, gov.uz, soliq.uz va stat.uz manbalaridan ma'lumot oladi. Muhim qarorlar uchun rasmiy manbalarni tekshirishni tavsiya qilamiz. AI javoblari yuridik maslahat hisoblanmaydi.</p>
           <h3>4. Maxfiylik siyosati</h3>
-          <p>Foydalanuvchi ma'lumotlari (STIR, ism, telefon) faqat platforma ichida ishlatiladi va uchinchi shaxslarga berilmaydi. Ma'lumotlar foydalanuvchining brauzerida (localStorage) saqlanadi — serverga yuborilmaydi.</p>
-          <h3>5. API va sun'iy intellekt</h3>
-          <p>AI Copilot xizmati Anthropic Claude API orqali ishlaydi. Foydalanuvchi o'z API kalitini o'zi kiritadi. Suhbat tarixi serverda saqlanmaydi. Har bir foydalanuvchiga 100 ta bepul so'rov ajratilgan.</p>
-          <h3>6. Mas'uliyat cheklovi</h3>
-          <p>Benefit Navigator ma'lumot beruvchi platforma bo'lib, yuridik maslahat beruvchi emas. Har doim malakali yurist yoki soliq maslahatchilar bilan maslahatlashing.</p>
-          <h3>7. Bog'lanish</h3>
-          <p>Savollar uchun: <span style="color:var(--teal)">info@benefitnav.uz</span> | Tel: +998 71 000 00 00</p>
+          <p>Foydalanuvchi ma'lumotlari (STIR, ism, telefon) faqat platforma ichida ishlatiladi va uchinchi shaxslarga berilmaydi. Ma'lumotlar faqat foydalanuvchining brauzerida saqlanadi.</p>
+          <h3>5. Mas'uliyat cheklovi</h3>
+          <p>Benefit Navigator ma'lumot beruvchi platforma. Platforma taqdim etgan ma'lumotlar asosida qabul qilingan qarorlar uchun platforma javobgar emas. Malakali yurist bilan maslahatlashing.</p>
+          <h3>6. Bog'lanish</h3>
+          <p>Savollar uchun: <span style="color:var(--teal)">info@benefitnav.uz</span></p>
         </div>
       </div>
 
-      <!-- ──── SOZLAMALAR ──── -->
-      <div class="page" id="page-sozlamalar">
-        <div class="sozl-grid">
-          <div class="sozl-nav">
-            <div class="sozl-nav-item active" onclick="switchSozl(this,'sozl-umumiy')">⚙️ Umumiy</div>
-            <div class="sozl-nav-item" onclick="switchSozl(this,'sozl-bildirishnoma')">🔔 Bildirishnomalar</div>
-            <div class="sozl-nav-item" onclick="switchSozl(this,'sozl-maxfiylik')">🔒 Maxfiylik</div>
-            <div class="sozl-nav-item" onclick="switchSozl(this,'sozl-korinish')">🎨 Ko'rinish</div>
-            <div class="sozl-nav-item" onclick="switchSozl(this,'sozl-api')">🔑 API Kaliti</div>
+      <!-- SOZLAMALAR -->
+      <div class="page" id="p-sozlamalar">
+        <div class="soz-g">
+          <div class="soz-nav">
+            <div class="soz-ni act">⚙️ Umumiy</div>
+            <div class="soz-ni">🔔 Bildirishnomalar</div>
+            <div class="soz-ni">🔒 Maxfiylik</div>
           </div>
-          <div class="sozl-content">
-            <!-- UMUMIY -->
-            <div id="sozl-umumiy">
-              <div style="font-size:.9rem;font-weight:600;margin-bottom:18px">Umumiy sozlamalar</div>
-              <div class="sozl-row">
-                <div><div class="sozl-label">SMS xabarnomalar</div><div class="sozl-desc">Yangi imtiyoz topilganda SMS jo'natilsin</div></div>
-                <button class="toggle on" id="tog-sms" onclick="toggleSetting(this,'sms')"></button>
-              </div>
-              <div class="sozl-row">
-                <div><div class="sozl-label">AI avtomatik tahlil</div><div class="sozl-desc">Har kuni profil bo'yicha yangi tavsiyalar</div></div>
-                <button class="toggle on" id="tog-ai" onclick="toggleSetting(this,'ai')"></button>
-              </div>
-              <div class="sozl-row">
-                <div><div class="sozl-label">Muddat eslatmasi</div><div class="sozl-desc">Ariza muddati tugashidan 3 kun oldin xabar</div></div>
-                <button class="toggle on" id="tog-muddat" onclick="toggleSetting(this,'muddat')"></button>
-              </div>
-              <div class="sozl-row">
-                <div><div class="sozl-label">Yangiliklar filtri</div><div class="sozl-desc">Faqat mening sohama oid yangiliklarni ko'rsat</div></div>
-                <button class="toggle" id="tog-news" onclick="toggleSetting(this,'news')"></button>
-              </div>
-              <div style="margin-top:20px;display:flex;gap:10px">
-                <button class="btn-primary" onclick="saveSozlamalar()">💾 Saqlash</button>
-                <button class="btn-outline" onclick="if(confirm('Profilni qayta sozlashni xohlaysizmi?'))resetApp()">🔄 Qayta sozlash</button>
-              </div>
-            </div>
-            <!-- BILDIRISHNOMA -->
-            <div id="sozl-bildirishnoma" style="display:none">
-              <div style="font-size:.9rem;font-weight:600;margin-bottom:18px">Bildirishnoma sozlamalari</div>
-              <div class="sozl-row">
-                <div><div class="sozl-label">Push bildirishnomalar</div><div class="sozl-desc">Brauzer orqali xabarnomalar</div></div>
-                <button class="toggle" onclick="this.classList.toggle('on');requestNotif()"></button>
-              </div>
-              <div class="sozl-row">
-                <div><div class="sozl-label">Email xabarnomalar</div><div class="sozl-desc">Haftalik imtiyozlar xulosasi emailga</div></div>
-                <button class="toggle on" onclick="this.classList.toggle('on')"></button>
-              </div>
-              <div class="sozl-row">
-                <div><div class="sozl-label">Telegram bot</div><div class="sozl-desc">@BenefitNavBot orqali real-time yangilanishlar</div></div>
-                <button class="toggle" onclick="this.classList.toggle('on');showToast('📱 @BenefitNavBot ga /start yuboring','teal')"></button>
-              </div>
-              <div style="margin-top:20px"><button class="btn-primary" onclick="saveSozlamalar()">💾 Saqlash</button></div>
-            </div>
-            <!-- MAXFIYLIK -->
-            <div id="sozl-maxfiylik" style="display:none">
-              <div style="font-size:.9rem;font-weight:600;margin-bottom:18px">Maxfiylik sozlamalari</div>
-              <div class="sozl-row">
-                <div><div class="sozl-label">Ma'lumotlarni saqlash</div><div class="sozl-desc">Faoliyat tarixi brauzerde saqlansin</div></div>
-                <button class="toggle on" onclick="this.classList.toggle('on')"></button>
-              </div>
-              <div class="sozl-row">
-                <div><div class="sozl-label">Analitika</div><div class="sozl-desc">Anonim foydalanish statistikasini yuborish</div></div>
-                <button class="toggle" onclick="this.classList.toggle('on')"></button>
-              </div>
-              <div style="margin-top:20px;display:flex;gap:10px">
-                <button class="btn-primary" onclick="saveSozlamalar()">💾 Saqlash</button>
-                <button class="btn-outline" style="color:var(--red);border-color:rgba(255,77,109,.3)" onclick="clearData()">🗑️ Ma'lumotlarni o'chirish</button>
-              </div>
-            </div>
-            <!-- KO'RINISH -->
-            <div id="sozl-korinish" style="display:none">
-              <div style="font-size:.9rem;font-weight:600;margin-bottom:18px">Ko'rinish sozlamalari</div>
-              <div class="sozl-row">
-                <div><div class="sozl-label">Qorong'u rejim</div><div class="sozl-desc">Qoramtir fon (hozir faol)</div></div>
-                <button class="toggle on" onclick="this.classList.toggle('on')"></button>
-              </div>
-              <div class="sozl-row">
-                <div><div class="sozl-label">Kompakt rejim</div><div class="sozl-desc">Kichikroq elementlar va zichroq tartib</div></div>
-                <button class="toggle" onclick="this.classList.toggle('on');showToast('🎨 Ko\'rinish o\'zgartirildi','teal')"></button>
-              </div>
-              <div class="sozl-row">
-                <div><div class="sozl-label">Animatsiyalar</div><div class="sozl-desc">Harakatlanish effektlari</div></div>
-                <button class="toggle on" onclick="this.classList.toggle('on')"></button>
-              </div>
-              <div style="margin-top:20px"><button class="btn-primary" onclick="saveSozlamalar()">💾 Saqlash</button></div>
-            </div>
-            <!-- API KALITI -->
-            <div id="sozl-api" style="display:none">
-              <div style="font-size:.9rem;font-weight:600;margin-bottom:18px">API Kaliti sozlamalari</div>
-              <div style="background:var(--card2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;margin-bottom:16px;font-size:.78rem;color:var(--text2);line-height:1.6">
-                AI Yordamchi ishlashi uchun Anthropic API kaliti kerak. Bepul olish uchun:
-                <a href="https://console.anthropic.com" target="_blank" style="color:var(--teal);display:block;margin-top:6px">→ console.anthropic.com</a>
-              </div>
-              <div class="sozl-row" style="padding-top:0">
-                <div style="flex:1">
-                  <div class="sozl-label">API Kalitingiz</div>
-                  <input class="f-input" id="sozl-api-inp" type="password" placeholder="sk-ant-api03-..." style="margin-top:6px;width:100%"/>
-                </div>
-              </div>
-              <div style="margin-top:16px;display:flex;gap:10px">
-                <button class="btn-primary" onclick="saveKeyFromSozl()">💾 Saqlash</button>
-                <button class="btn-outline" onclick="clearKey()">🗑️ O'chirish</button>
-              </div>
-              <div class="key-status no" id="sozlKeyStatus" style="margin-top:10px">🔑 API kaliti kiritilmagan</div>
+          <div class="soz-c">
+            <div style="font-size:.92rem;font-weight:600;margin-bottom:18px">Sozlamalar</div>
+            <div class="soz-row"><div><div class="soz-lbl">SMS xabarnomalar</div><div class="soz-d">Yangi imtiyoz topilganda SMS</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
+            <div class="soz-row"><div><div class="soz-lbl">AI avtomatik tahlil</div><div class="soz-d">Har kuni profil bo'yicha yangi tavsiyalar</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
+            <div class="soz-row"><div><div class="soz-lbl">Muddat eslatmasi</div><div class="soz-d">Ariza muddati tugashidan 3 kun oldin</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
+            <div class="soz-row"><div><div class="soz-lbl">Yangiliklar filtri</div><div class="soz-d">Faqat sohama oid yangiliklar</div></div><button class="tog" onclick="this.classList.toggle('on')"></button></div>
+            <div class="soz-row"><div><div class="soz-lbl">Qorong'u rejim</div><div class="soz-d">Qoramtir fon (hozir faol)</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
+            <div style="margin-top:20px;display:flex;gap:9px">
+              <button class="btn-p" onclick="showToast('✅ Sozlamalar saqlandi!','teal')">Saqlash</button>
+              <button class="btn-o" onclick="if(confirm('Qayta sozlash?'))location.reload()">🔄 Reset</button>
             </div>
           </div>
         </div>
       </div>
 
-    </div><!-- /content -->
-  </div><!-- /main -->
-</div><!-- /layout -->
-</div><!-- /app -->
-
-<!-- QUICK ACTIONS MODAL -->
-<div class="qa-modal" id="qaModal" onclick="closeQA(event)">
-  <div class="qa-box">
-    <input class="qa-input" placeholder="Qidirish yoki buyruq..." autofocus id="qaInput" oninput="filterQA(this.value)"/>
-    <div class="qa-divider"></div>
-    <div class="qa-list" id="qaList"></div>
+    </div>
   </div>
+</div>
 </div>
 
 <!-- ARIZA MODAL -->
-<div class="modal-overlay" id="arizaModal">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('arizaModal')">✕</button>
+<div class="mo" id="arMo">
+  <div class="mb">
+    <button class="mc" onclick="closeMo('arMo')">✕</button>
     <div style="font-size:1.4rem;margin-bottom:10px">📋</div>
-    <div class="modal-title" id="modalImtiyozNomi">Imtiyoz uchun ariza</div>
-    <div class="modal-sub" id="modalImtiyozDesc">Bu imtiyoz uchun ariza topshirish uchun quyidagi ma'lumotlarni to'ldiring.</div>
-    <div class="modal-field"><label class="field-label">STIR (TIN)</label><input class="f-input" id="m-stir" placeholder="123456789"/></div>
-    <div class="modal-field"><label class="field-label">Biznes nomi</label><input class="f-input" id="m-biznes" placeholder="Kompaniya nomi"/></div>
-    <div class="modal-field"><label class="field-label">Telefon</label><input class="f-input" id="m-tel" placeholder="+998 90 000 00 00"/></div>
-    <div class="modal-actions">
-      <button class="btn-primary" onclick="submitAriza()">📤 Ariza topshirish</button>
-      <button class="btn-outline" onclick="closeModal('arizaModal')">Bekor qilish</button>
+    <div class="m-t" id="moNom">Ariza</div>
+    <div class="m-s" id="moDesc">Ma'lumotlarni to'ldiring.</div>
+    <div class="m-fld"><label class="fl">STIR (TIN)</label><input class="fi" id="m-st" placeholder="123456789"/></div>
+    <div class="m-fld"><label class="fl">Biznes nomi</label><input class="fi" id="m-biz" placeholder="Kompaniya nomi"/></div>
+    <div class="m-fld"><label class="fl">Telefon</label><input class="fi" id="m-tel" placeholder="+998 90 000 00 00"/></div>
+    <div class="m-act">
+      <button class="btn-p" onclick="submitAr()">📤 Ariza topshirish</button>
+      <button class="btn-o" onclick="closeMo('arMo')">Bekor qilish</button>
     </div>
+  </div>
+</div>
+
+<!-- QA MODAL -->
+<div class="qa-mo" id="qaM" onclick="closeQA(event)">
+  <div class="qa-b">
+    <input class="qa-inp" id="qaI" placeholder="Qidirish yoki buyruq..." oninput="filtQA(this.value)"/>
+    <div class="qa-div"></div>
+    <div class="qa-li" id="qaLi"></div>
   </div>
 </div>
 
 <!-- TOAST -->
-<div class="toast" id="toast"><span class="toast-icon" id="toastIcon">✅</span><span id="toastMsg">Muvaffaqiyatli!</span></div>
+<div class="toast" id="toast"><span id="tIco">✅</span><span id="tMsg">OK</span></div>
 
 <script>
-// ══ STATE ══
-let state = {
-  biznesTuri: null,
-  biznesNomi: '',
-  hudud: 'Barcha hududlar',
-  soha: '',
-  stir: '',
-  dir: '',
-  apiKey: localStorage.getItem('bn_key') || '',
-  queryCount: parseInt(localStorage.getItem('bn_qc') || '0'),
-  arizaCount: parseInt(localStorage.getItem('bn_ac') || '0'),
-  searchCount: parseInt(localStorage.getItem('bn_sc') || '0'),
-  chatHistory: [],
-  isLoading: false,
-  currentPage: 'dashboard',
-  settings: JSON.parse(localStorage.getItem('bn_settings') || '{"sms":true,"ai":true,"muddat":true,"news":false}')
+// ══ DATA ══
+const ST = {
+  t: null, // biznes turi
+  nom: '', hudud: 'Barcha hududlar', soha: '', stir: '', dir: '',
+  qc: 0, ac: 0, sc: 0,
 };
+const TL = {ytt:'YTT',kichik:'Kichik biznes',orta:"O'rta biznes / MCHJ",katta:'Katta korxona / AJ'};
 
-const MAX_Q = 100;
-const BIZNES_TURI_LABELS = {ytt:'YTT (Yakka tartibdagi tadbirkor)',kichik:'Kichik biznes',orta:"O'rta biznes / MCHJ",katta:'Katta korxona / AJ'};
-
-// ══ SECTORS DATA with real images from Unsplash ══
-const SECTORS = [
-  {id:'it', nomi:'IT va Texnologiya', ico:'💻', img:'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=200&fit=crop', count:12},
-  {id:'ishlab', nomi:'Ishlab chiqarish', ico:'🏭', img:'https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=400&h=200&fit=crop', count:18},
-  {id:'savdo', nomi:'Savdo va xizmatlar', ico:'🏪', img:'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=200&fit=crop', count:15},
-  {id:'qishloq', nomi:'Qishloq xo\'jaligi', ico:'🌾', img:'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=400&h=200&fit=crop', count:22},
-  {id:'qurilish', nomi:'Qurilish', ico:'🏗️', img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=200&fit=crop', count:9},
-  {id:'turizm', nomi:'Turizm', ico:'✈️', img:'https://images.unsplash.com/photo-1530521954074-e64f6810b32d?w=400&h=200&fit=crop', count:11},
-  {id:'transport', nomi:'Transport & Logistika', ico:'🚛', img:'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=400&h=200&fit=crop', count:8},
-  {id:'talim', nomi:"Ta'lim", ico:'🎓', img:'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=400&h=200&fit=crop', count:14},
-  {id:'tibbiyot', nomi:'Tibbiyot', ico:'🏥', img:'https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=400&h=200&fit=crop', count:10},
+// 10 ta FAQ savol-javob
+const FAQ = [
+  {q:"YTT qanday ro'yxatdan o'tiladi?", a:`<b>YTT (Yakka tartibdagi tadbirkor) ro'yxatdan o'tish tartibi:</b><br><br>1️⃣ <b>Hujjatlar tayyorlash:</b><br>• Pasport nusxasi<br>• Ariza (my.gov.uz orqali)<br>• To'lov kvitansiyasi (davlat boji ~22,000 so'm)<br><br>2️⃣ <b>Ro'yxatdan o'tish usullari:</b><br>• <b>Online:</b> my.gov.uz → "Tadbirkorlik" → "YTT ro'yxati" (1-3 ish kuni)<br>• <b>Shaxsan:</b> Soliq inspeksiyasi yoki MFY ga borish<br><br>3️⃣ <b>Patent olish:</b><br>• Faoliyat turiga qarab oylik patent solig'i to'lanadi<br>• Toshkent shahri: tur bo'yicha 50,000–500,000 so'm/oy<br><br>✅ <b>Afzalliklari:</b> Sodda hisob-kitob, QQS yo'q, kamroq hujjat.<br><br><i>Manba: soliq.uz, my.gov.uz</i>`},
+  {q:"Soliq imtiyozlari qanday?", a:`<b>O'zbekistonda asosiy soliq imtiyozlari:</b><br><br>💰 <b>YTT uchun:</b><br>• Patent solig'i — qat'iy belgilangan, QQS yo'q<br>• Ijara ijarasi uchun 50% chegirma<br>• Ijtimoiy sug'urtada 30% imtiyoz<br><br>🏪 <b>Kichik biznes (1 mlrd so'mgacha):</b><br>• QQS dan to'liq ozod<br>• Soddalashtirilgan soliq tizimi (foyda solig'i 4%)<br><br>💻 <b>IT va texnologiya:</b><br>• IT Park rezidentlari: 7 yil foyda solig'i va QQS = 0<br>• Texnopark kompaniyalari: to'liq ozodlik<br><br>🌍 <b>Eksport:</b><br>• Eksport qiymatining 15% subsidiya (2026)<br>• Import o'rnini bosuvchilar: 5 yil 50% chegirma<br><br>🏙️ <b>SEZ rezidentlari:</b><br>• 10 yil barcha soliqlardan to'liq ozod<br><br><i>Manba: soliq.uz, lex.uz</i>`},
+  {q:"MCHJ ochish tartibi", a:`<b>MCHJ (Mas'uliyati cheklangan jamiyat) ochish tartibi:</b><br><br>1️⃣ <b>Hujjatlar:</b><br>• Nizom (ustav) — standart yoki o'ziga xos<br>• Asoschilargning pasport nusxalari<br>• Ustav fondi o'tkazma (minimal 400,000 so'm)<br>• Yuridik manzil (ijara shartnomasi yoki mulk)<br><br>2️⃣ <b>Jarayon (my.gov.uz orqali):</b><br>• Davlat ro'yxatidan o'tish (1-3 ish kuni, BEPUL)<br>• STIR olish — avtomatik<br>• Bank hisob-raqami ochish<br>• Soliq organida ro'yxat<br><br>3️⃣ <b>Xarajatlar:</b><br>• Davlat boji: 0 so'm (2019 yildan beri bepul)<br>• Notarius: ~150,000–300,000 so'm (ixtiyoriy)<br><br>⏱️ <b>Muddati:</b> Jami 1-5 ish kuni<br><br><i>Manba: my.gov.uz, soliq.uz</i>`},
+  {q:"Eksport qanday boshlanadi?", a:`<b>O'zbekistondan eksport boshlash qo'llanmasi:</b><br><br>1️⃣ <b>Eksport kodini (TNVED) aniqlash</b><br>• Mahsulot uchun bojxona kodi<br>• customs.uz da tekshirish<br><br>2️⃣ <b>Qo'shimcha talablar:</b><br>• Sifat sertifikati (tegishli bo'lsa)<br>• Sanitariya ruxsatnomasi (oziq-ovqat uchun)<br>• Kelib chiqish sertifikati<br><br>3️⃣ <b>Bojxona rasmiylashtiruvi:</b><br>• e-Declaration tizimi: e-customs.uz<br>• Vaqt: 1-2 kun (oddiy tovarlar)<br><br>4️⃣ <b>Subsidiyalar (2026):</b><br>• Tayyor mahsulot eksporti: 15% subsidiya<br>• Qishloq xo'jaligi: alohida imtiyozlar<br><br>5️⃣ <b>Foydali tashkilotlar:</b><br>• MIFT (mift.uz) — eksport ko'magi<br>• UzExport (uzexport.uz)<br><br><i>Manba: customs.uz, mift.uz, gov.uz</i>`},
+  {q:"Biznes litsenziya olish", a:`<b>Litsenziya talab qilinadigan faoliyat turlari:</b><br><br>📋 <b>Litsenziya kerak bo'lgan sohalar:</b><br>• Tibbiy xizmatlar<br>• Ta'lim muassasalari<br>• Bank va moliya<br>• Qurilish (muhandislik xizmatlar)<br>• Dori-darmon savdosi<br>• Alkogol va tamaki<br>• Telekommunikatsiya<br><br>🔑 <b>Qanday olish:</b><br>• my.gov.uz → "Litsenziyalar" bo'limi<br>• Tegishli vazirlikka murojaat<br>• Hujjatlar ro'yxati: soha bo'yicha farq qiladi<br><br>⏱️ <b>Muddati:</b> 15-30 ish kuni (sohaga qarab)<br>💰 <b>Narxi:</b> 1 BHM dan ~50 BHM gacha (sohaga qarab)<br><br>✅ Ko'pchilik faoliyat turlari uchun litsenziya KERAK EMAS.<br><br><i>Manba: gov.uz, my.gov.uz</i>`},
+  {q:"Bank krediti qanday olinadi?", a:`<b>Biznes uchun bank krediti olish qo'llanmasi:</b><br><br>1️⃣ <b>Kerakli hujjatlar:</b><br>• Biznes-reja<br>• Moliyaviy hisobotlar (oxirgi 6-12 oy)<br>• STIR va ro'yxatga olish guvohnomasi<br>• Garov (ko'chmas mulk, transport)<br><br>2️⃣ <b>Davlat banklari (qulay shartlar):</b><br>• Xalq banki: KOB uchun 15-18% yillik<br>• Asaka bank: Sanoat uchun imtiyozli<br>• O'zSanoatqurilish bank: Ishlab chiqarish<br><br>3️⃣ <b>Davlat kafolati (Tadbirkorlik fondi):</b><br>• Garov yetishmaganida kreditning 50% kafolat<br>• Murojaat: tadbirkorlar.uz<br><br>4️⃣ <b>Imtiyozli kreditlar:</b><br>• Yoshlar: 0% yoki kam foizli kredit<br>• Qishloq xo'jaligi: subsidiyalangan<br>• Eksport: maxsus shart<br><br><i>Manba: cbu.uz, tadbirkorlar.uz</i>`},
+  {q:"QQS bo'yicha ma'lumot", a:`<b>QQS (Qo'shilgan qiymat solig'i) O'zbekistonda:</b><br><br>📊 <b>Asosiy stavkalar (2026):</b><br>• Standart: <b>12%</b><br>• Eksport: <b>0%</b><br>• Oziq-ovqat mahsulotlari: <b>0%</b> (ba'zilari)<br><br>✅ <b>QQS dan ozod bo'lish (to'liq):</b><br>• Yillik aylanmasi 1 mlrd so'mdan kam (kichik biznes)<br>• YTT (yakka tadbirkorlar)<br>• Ta'lim xizmatlari<br>• Tibbiy xizmatlar<br>• IT Park rezidentlari<br><br>📋 <b>QQS to'laydigan bo'lsangiz:</b><br>• Har oy deklaratsiya: soliq.uz orqali<br>• To'lov muddati: hisobot oyidan keyingi oyning 25-si<br><br>💡 <b>Maslahat:</b> 1 mlrd chegarasiga yetayotgan bo'lsangiz, oldindan soliq maslahatchilar bilan maslahatlashing.<br><br><i>Manba: soliq.uz, lex.uz</i>`},
+  {q:"Mehnat kodeksi — xodim ishga olish", a:`<b>Xodim ishga olish qoidalari (O'zbekiston MK):</b><br><br>📝 <b>Mehnat shartnomasi:</b><br>• Yozma shaklda (majburiy)<br>• Muddatli yoki muddatsiz<br>• Probatsion davr: 3 oygacha (rahbar lavozimlar 6 oy)<br><br>💰 <b>Minimal ish haqi (2026):</b><br>• 1 BHM = 340,000 so'm<br>• Minimal ish haqi = 980,000 so'm/oy<br><br>📋 <b>Ish beruvchi to'lovlari (xodim uchun):</b><br>• Ijtimoiy sug'urta: 12% (ish beruvchi)<br>• JSST: 12% (xodim maoshidan)<br><br>🏖️ <b>Ta'til huquqi:</b><br>• Asosiy ta'til: 15 ish kuni<br>• Uzoq xizmat: +3-5 ish kuni qo'shimcha<br><br>⚠️ <b>Muhim:</b> Xorijiy fuqaroni ishga olish uchun alohida ruxsat kerak.<br><br><i>Manba: mehnat.uz, lex.uz</i>`},
+  {q:"Intellektual mulk himoyasi", a:`<b>O'zbekistonda intellektual mulkni himoya qilish:</b><br><br>🏷️ <b>Tovar belgisi (Trademark):</b><br>• Ro'yxatga olish: intellektualxususiyat.uz<br>• Muddati: 10 yil (yangilanadi)<br>• Xarajat: ~3-5 mln so'm<br>• Vaqt: 12-18 oy<br><br>💡 <b>Patent (ixtiro):</b><br>• Faoliyat ixtirosi uchun 20 yil himoya<br>• Utility model: 10 yil<br>• Murojaat: Intellektual mulk agentligi<br><br>©️ <b>Mualliflik huquqi:</b><br>• Avtomatik — ro'yxatdan o'tish shart emas<br>• Dasturiy ta'minot ham himoyalanadi<br><br>🌍 <b>Xalqaro himoya:</b><br>• Madrid tizimi orqali (45+ mamlakat)<br>• PCT pateniti (xalqaro)<br><br><i>Manba: intellektualxususiyat.uz</i>`},
+  {q:"Soliq hisobotlarini topshirish", a:`<b>Soliq hisobotlarini topshirish tartibi:</b><br><br>🗓️ <b>Asosiy muddatlar:</b><br>• Har oylik (QQS, JSST, foyda solig'i avans): har oyning 25-si<br>• Har chorak: 30 aprel, 31 iyul, 31 oktabr<br>• Yillik: 1 aprel<br><br>💻 <b>Online topshirish (tavsiya etiladi):</b><br>• Soliq.uz → "Shaxsiy kabinet"<br>• my.gov.uz → "Soliq xizmatlari"<br>• ERI (elektron raqamli imzo) kerak<br><br>📋 <b>YTT uchun (sodda):</b><br>• Patent solig'i: har oy to'lov<br>• Hisobot majburiy emas (patent asosida)<br>• Xodim bo'lsa: JSST hisoboti<br><br>⚠️ <b>Kechikish jarimalari:</b><br>• 15 kungacha: hisobot summasining 10%<br>• 15 kundan ortiq: 20%<br><br><i>Manba: soliq.uz</i>`},
 ];
 
-// ══ IMTIYOZLAR DATA ══
 const IMTIYOZLAR = [
-  {id:1, nomi:"Patent asosida faoliyat — soddalashtirilgan soliq", tur:"soliq", mos:["ytt"], badge:"active", icon:"💰", manba:"Soliq.uz", desc:"Yakka tadbirkorlar patent asosida ish yuritib, oylik belgilangan soliq to'lashadi. Murakkab hisob-kitob talab qilinmaydi.", tags:["YTT","Patent","Oylik"], muddat:"Doimiy", qiymat:"Qat'iy belgilangan"},
-  {id:2, nomi:"STIR ro'yxatdan o'tkazish — bepul va tezlashtirilgan", tur:"subsidiya", mos:["ytt","kichik"], badge:"active", icon:"📝", manba:"Gov.uz", desc:"Yakka tadbirkorlar va kichik biznes uchun STIR ro'yxatdan o'tkazish 1 kun ichida, davlat boji to'lanmaydi.", tags:["YTT","Kichik","Bepul"], muddat:"Doimiy", qiymat:"Bepul"},
-  {id:3, nomi:"Ijara bo'yicha soliq imtiyozi (YTT)", tur:"soliq", mos:["ytt"], badge:"active", icon:"🏠", manba:"Lex.uz", desc:"Tijorat ko'chmas mulk ijarasi uchun YTT ga 50% soliq imtiyozi. Savdo punktlari va ofislar uchun amal qiladi.", tags:["YTT","Ijara","50% chegirma"], muddat:"2026 yil oxirigacha", qiymat:"50% chegirma"},
-  {id:4, nomi:"Ijtimoiy sug'urta imtiyozi (YTT)", tur:"subsidiya", mos:["ytt"], badge:"active", icon:"🛡️", manba:"Soliq.uz", desc:"Yakka tadbirkorlar uchun ijtimoiy sug'urta to'lovlarida 30% imtiyoz. Pensiya va sog'liqni saqlash sug'urtasi uchun.", tags:["YTT","Sug'urta","30%"], muddat:"Doimiy", qiymat:"30% chegirma"},
-  {id:5, nomi:"QQS dan ozod (1 mlrd so'mgacha)", tur:"soliq", mos:["kichik","ytt"], badge:"active", icon:"💳", manba:"Soliq.uz", desc:"Yillik daromad 1 mlrd so'm dan oshmaydigan korxonalar QQS to'lashdan ozod. 2026 yildan chegarasi oshirildi.", tags:["Kichik","QQS ozod","1 mlrd"], muddat:"Doimiy", qiymat:"QQS=0"},
-  {id:6, nomi:"Texnopark rezidentlari uchun soliq imtiyozi", tur:"soliq", mos:["kichik","orta"], badge:"new", icon:"💻", manba:"Lex.uz", desc:"IT Texnopark rezidentlari 7 yil davomida foyda solig'i va QQS dan ozod. IT Park Toshkent va viloyat parklari uchun.", tags:["IT","Texnopark","7 yil"], muddat:"7 yil", qiymat:"100% ozodlik"},
-  {id:7, nomi:"Yangi ish joylari uchun subsidiya", tur:"subsidiya", mos:["kichik","orta"], badge:"active", icon:"👥", manba:"Gov.uz", desc:"Yangi ish o'rni ochgan korxonalarga har bir xodim uchun 3 oy mobaynida ijtimoiy sug'urta to'lovlari qaytariladi.", tags:["Ish joyi","Subsidiya","3 oy"], muddat:"2026 yil", qiymat:"3 oylik kompensatsiya"},
-  {id:8, nomi:"Kichik biznes uchun kredit kafolati", tur:"kredit", mos:["kichik"], badge:"active", icon:"🏦", manba:"Gov.uz", desc:"Kredit olishda girov yetishmasligi muammosini hal qilish uchun davlat kafolati. Kreditning 50% gacha kafolatlanadi.", tags:["Kredit","Kafolat","50%"], muddat:"Doimiy", qiymat:"50% kafolat"},
-  {id:9, nomi:"Eksport subsidiyasi 2026", tur:"eksport", mos:["orta","katta"], badge:"new", icon:"🌍", manba:"Gov.uz", desc:"2026 yil uchun yangi eksport subsidiya dasturi. Tayyor mahsulot eksportchilari uchun eksport qiymatining 15% gacha subsidiya.", tags:["Eksport","MCHJ","2026"], muddat:"2026 yil 31 dekabr", qiymat:"15% subsidiya"},
-  {id:10, nomi:"Importga qaram sanoat mahsulotlari uchun imtiyoz", tur:"soliq", mos:["orta","katta"], badge:"active", icon:"🏭", manba:"Lex.uz", desc:"Import o'rnini bosuvchi mahsulot ishlab chiqaruvchilarga 5 yil davomida foyda solig'i 50% kamaytirish.", tags:["Import almashtirish","Sanoat","5 yil"], muddat:"5 yil", qiymat:"50% chegirma"},
-  {id:11, nomi:"Investitsiya dasturi — kapital qurilish imtiyozi", tur:"grant", mos:["orta","katta"], badge:"active", icon:"🏗️", manba:"Gov.uz", desc:"$500,000 dan ortiq investitsiya loyihalari uchun qurilish materiallari importida bojxona imtiyozi va QQS qaytarish.", tags:["Investitsiya","Qurilish","Bojxona"], muddat:"Loyiha muddati", qiymat:"Bojxona=0 + QQS qaytarish"},
-  {id:12, nomi:"R&D xarajatlarida soliq chegirmasi", tur:"soliq", mos:["orta","katta"], badge:"active", icon:"🔬", manba:"Soliq.uz", desc:"Ilmiy-tadqiqot va ishlanmalar (R&D) xarajatlari soliqqa tortiladigan bazadan 150% qilib chiqariladi.", tags:["R&D","Ilmiy","150%"], muddat:"Doimiy", qiymat:"150% chegirma"},
-  {id:13, nomi:"SEZ (Erkin iqtisodiy zona) imtiyozlari", tur:"soliq", mos:["katta"], badge:"active", icon:"🏙️", manba:"Lex.uz", desc:"Erkin iqtisodiy zona rezidentlari 10 yil davomida barcha soliqlardan to'liq ozod. Navoiy, Angren, Jizzax SEZ lar.", tags:["SEZ","10 yil","To'liq ozodlik"], muddat:"10 yil", qiymat:"100% ozodlik"},
-  {id:14, nomi:"Xorijiy mutaxassis jalb qilish imtiyozi", tur:"subsidiya", mos:["katta"], badge:"active", icon:"✈️", manba:"Gov.uz", desc:"Xorijiy yuqori malakali mutaxassislar uchun 3 yil davomida shaxsiy daromad solig'i imtiyozi.", tags:["Xorijiy","Mutaxassis","3 yil"], muddat:"3 yil", qiymat:"Shaxsiy daromad solig'i imtiyozi"},
-  {id:15, nomi:"Qishloq xo'jaligi texnikasi imtiyozli lizing", tur:"kredit", mos:["ytt","kichik","orta"], badge:"active", icon:"🚜", manba:"Gov.uz", desc:"Fermer va dehqon xo'jaliklari uchun qishloq xo'jaligi texnikasini 0% foiz bilan ijaraga olish dasturi.", tags:["Fermer","Lizing","0%"], muddat:"2026 yil", qiymat:"0% foiz"},
-  {id:16, nomi:"Yoshlar tadbirkorligi granti", tur:"grant", mos:["ytt","kichik"], badge:"new", icon:"🏆", manba:"Gov.uz", desc:"30 yoshgacha bo'lgan yoshlar uchun 50 mln so'mgacha qaytarilmaydigan grant. Yangi biznes boshlash uchun.", tags:["Yoshlar","Grant","50 mln"], muddat:"2026 yil 1 iyul", qiymat:"50 mln so'm"},
-  {id:17, nomi:"Raqamli transformatsiya dasturi", tur:"subsidiya", mos:["kichik","orta"], badge:"new", icon:"📱", manba:"Gov.uz", desc:"Raqamli texnologiyalarni joriy etgan korxonalarga xarajatlarning 30% ini qaytarib berish subsidiyasi.", tags:["Raqamlashtirish","30%","2026"], muddat:"2026 yil", qiymat:"30% kompensatsiya"},
-  {id:18, nomi:"Sog'liqni saqlash sohasida imtiyoz", tur:"soliq", mos:["kichik","orta"], badge:"active", icon:"🏥", manba:"Soliq.uz", desc:"Tibbiy xizmatlar ko'rsatuvchi korxonalar uchun QQS dan ozodlik va foyda solig'i 50% imtiyozi.", tags:["Tibbiyot","QQS ozod","50%"], muddat:"Doimiy", qiymat:"QQS=0 + 50% chegirma"},
+  {id:1,t:"Patent — soddalashtirilgan soliq (YTT)",cat:"soliq",mos:["ytt"],bdg:"active",ico:"💰",src:"Soliq.uz",d:"Yakka tadbirkorlar patent asosida oylik belgilangan soliq to'lashadi. QQS va foyda solig'i yo'q.",tags:["YTT","Patent","Oylik"],mud:"Doimiy",q:"Qat'iy belgilangan"},
+  {id:2,t:"QQS dan ozod (1 mlrd so'mgacha)",cat:"soliq",mos:["kichik","ytt"],bdg:"active",ico:"💳",src:"Soliq.uz",d:"Yillik daromad 1 mlrd so'm dan oshmaydigan korxonalar QQS to'lashdan ozod. 2026 yildan chegarasi oshirildi.",tags:["Kichik","QQS=0","1 mlrd"],mud:"Doimiy",q:"QQS = 0"},
+  {id:3,t:"IT Park rezidentlari — 7 yil imtiyoz",cat:"soliq",mos:["kichik","orta"],bdg:"new",ico:"💻",src:"Lex.uz",d:"IT Texnopark rezidentlari 7 yil davomida foyda solig'i va QQS dan to'liq ozod.",tags:["IT","Texnopark","7 yil"],mud:"7 yil",q:"100% ozodlik"},
+  {id:4,t:"Eksport subsidiyasi 2026 — 15%",cat:"eksport",mos:["orta","katta"],bdg:"new",ico:"🌍",src:"Gov.uz",d:"Tayyor mahsulot eksportchilari uchun eksport qiymatining 15% gacha subsidiya.",tags:["Eksport","MCHJ","2026"],mud:"2026 yil 31 dekabr",q:"15% subsidiya"},
+  {id:5,t:"SEZ rezidentlari — 10 yil to'liq ozod",cat:"soliq",mos:["katta"],bdg:"active",ico:"🏙️",src:"Lex.uz",d:"Erkin iqtisodiy zona rezidentlari 10 yil davomida barcha soliqlardan to'liq ozod.",tags:["SEZ","10 yil","To'liq"],mud:"10 yil",q:"100% ozodlik"},
+  {id:6,t:"Kichik biznes kredit kafolati",cat:"kredit",mos:["kichik"],bdg:"active",ico:"🏦",src:"Gov.uz",d:"Kredit olishda garov yetishmasligi muammosi uchun davlat kafolati. Kreditning 50% gacha.",tags:["Kredit","50%","Kafolat"],mud:"Doimiy",q:"50% kafolat"},
+  {id:7,t:"Yoshlar tadbirkorligi granti",cat:"grant",mos:["ytt","kichik"],bdg:"new",ico:"🏆",src:"Gov.uz",d:"30 yoshgacha bo'lgan yoshlar uchun 50 mln so'mgacha qaytarilmaydigan grant.",tags:["Yoshlar","Grant","50 mln"],mud:"2026 yil 1 iyul",q:"50 mln so'm"},
+  {id:8,t:"Yangi ish joylari uchun subsidiya",cat:"subsidiya",mos:["kichik","orta"],bdg:"active",ico:"👥",src:"Gov.uz",d:"Yangi ish o'rni ochgan korxonalarga har xodim uchun 3 oy mobaynida ijtimoiy sug'urta to'lovlari qaytariladi.",tags:["Ish joyi","3 oy","Kompensatsiya"],mud:"2026 yil",q:"3 oylik"},
+  {id:9,t:"R&D xarajatlari 150% chegirma",cat:"soliq",mos:["orta","katta"],bdg:"active",ico:"🔬",src:"Soliq.uz",d:"Ilmiy-tadqiqot xarajatlari soliqqa tortiladigan bazadan 150% qilib chiqariladi.",tags:["R&D","150%","Ilmiy"],mud:"Doimiy",q:"150% chegirma"},
+  {id:10,t:"Qishloq xo'jaligi texnikasi 0% lizing",cat:"kredit",mos:["ytt","kichik","orta"],bdg:"active",ico:"🚜",src:"Gov.uz",d:"Fermer xo'jaliklari uchun qishloq xo'jaligi texnikasini 0% foiz bilan ijaraga olish.",tags:["Fermer","Lizing","0%"],mud:"2026 yil",q:"0% foiz"},
+  {id:11,t:"Raqamli transformatsiya subsidiyasi",cat:"subsidiya",mos:["kichik","orta"],bdg:"new",ico:"📱",src:"Gov.uz",d:"Raqamli texnologiyalarni joriy etgan korxonalarga xarajatlarning 30% ini qaytarish.",tags:["Raqamlashtirish","30%","2026"],mud:"2026 yil",q:"30% kompensatsiya"},
+  {id:12,t:"Import o'rnini bosuvchi — 5 yil 50%",cat:"soliq",mos:["orta","katta"],bdg:"active",ico:"🏭",src:"Lex.uz",d:"Import o'rnini bosuvchi mahsulot ishlab chiqaruvchilarga 5 yil foyda solig'i 50% kamaytirish.",tags:["Import almashtirish","5 yil","50%"],mud:"5 yil",q:"50% chegirma"},
 ];
 
 const YANGILIKLAR = [
-  {manba:"Lex.uz", yol:"/docs/8062424", sarlavha:"Tadbirkorlik subyektlari va ilmiy hamjamiyat o'rtasida o'zaro hamkorlik chora-tadbirlari to'g'risida", matn:"O'zbekiston Respublikasi Vazirlar Mahkamasining 75-son qarori. Kuchga kirish sanasi: 24.02.2026", sana:"23.02.2026", muhim:true},
-  {manba:"Gov.uz", yol:"/press/2026/02", sarlavha:"2026 yil uchun yangi eksport subsidiyasi dasturi e'lon qilindi", matn:"Iqtisodiyot vazirligi tayyor mahsulot eksportchilari uchun eksport qiymatining 15% subsidiya to'lash dasturini 2026 yil 1 martdan boshlab amalga oshiradi.", sana:"22.02.2026", muhim:true},
-  {manba:"Soliq.uz", yol:"/news/qqs-2026", sarlavha:"2026 yildan QQS bo'yicha yangi chegaralar belgilandi", matn:"Kichik biznes uchun QQS dan ozod bo'lish chegarasi 1 milliard so'mga oshirildi. 800,000 dan ortiq tadbirkor yangi qoidadan foyda ko'radi.", sana:"20.02.2026", muhim:false},
-  {manba:"Lex.uz", yol:"/docs/8061100", sarlavha:"IT Park rezidentlari uchun imtiyozlar muddati 2030 yilgacha uzaytirildi", matn:"IT Park Toshkent va viloyat IT parklari rezidentlari uchun soliq imtiyozlari 2030 yil 1 yanvarga qadar uzaytirildi.", sana:"18.02.2026", muhim:false},
-  {manba:"Gov.uz", yol:"/press/2026/01", sarlavha:"Yoshlar tadbirkorligi granti — 2026 yil yangi tur e'lon qilindi", matn:"30 yoshgacha bo'lgan tadbirkorlar uchun 50 mln so'm gacha qaytarilmaydigan grant ajratish davlat dasturining yangi turi e'lon qilindi.", sana:"15.02.2026", muhim:true},
-  {manba:"Stat.uz", yol:"/analytics/kob-2025", sarlavha:"2025 yil KOB sektori natijalariga doir hisobot chop etildi", matn:"2025 yilda O'zbekistonda kichik va o'rta biznes soni 12% ga oshdi. IT sohasida o'sish 34% ni tashkil etdi.", sana:"10.02.2026", muhim:false},
+  {src:"Lex.uz",yol:"/docs/8062424",t:"Tadbirkorlik subyektlari hamda ilmiy hamjamiyat o'rtasida hamkorlik chora-tadbirlari to'g'risida",s:"Vazirlar Mahkamasining 75-son qarori. Qabul: 23.02.2026. Kuchga kirish: 24.02.2026",dt:"23.02.2026",m:true},
+  {src:"Gov.uz",yol:"/press/2026/02",t:"2026 yil yangi eksport subsidiyasi dasturi e'lon qilindi",s:"Tayyor mahsulot eksportchilari uchun eksport qiymatining 15% subsidiya. 2026 yil 1 martdan.",dt:"22.02.2026",m:true},
+  {src:"Soliq.uz",yol:"/news/qqs-2026",t:"2026 yildan QQS bo'yicha yangi chegaralar belgilandi",s:"Kichik biznes uchun QQS dan ozod bo'lish chegarasi 1 milliard so'mga oshirildi.",dt:"20.02.2026",m:false},
+  {src:"Lex.uz",yol:"/docs/8061100",t:"IT Park rezidentlari uchun imtiyozlar muddati uzaytirildi",s:"IT Park Toshkent va viloyat IT parklari uchun soliq imtiyozlari 2030 yil 1 yanvarga qadar.",dt:"18.02.2026",m:false},
+  {src:"Gov.uz",yol:"/press/2026/01",t:"Yoshlar tadbirkorligi granti — 2026 yil yangi tur",s:"30 yoshgacha bo'lgan tadbirkorlar uchun 50 mln so'm gacha grant.",dt:"15.02.2026",m:true},
+  {src:"Stat.uz",yol:"/analytics/kob-2025",t:"2025 yil KOB sektori natijalariga doir hisobot",s:"2025 yilda O'zbekistonda kichik va o'rta biznes soni 12% ga oshdi.",dt:"10.02.2026",m:false},
 ];
 
-const QA_ACTIONS = [
-  {ico:"📊",label:"Dashboard",fn:"navigate('dashboard')"},
-  {ico:"🤖",label:"AI Yordamchi",fn:"navigate('ai')"},
-  {ico:"🎁",label:"Imtiyozlar",fn:"navigate('imtiyozlar')"},
-  {ico:"📋",label:"Avto ariza",fn:"navigate('ariza')"},
-  {ico:"📰",label:"Yangiliklar",fn:"navigate('yangiliklar')"},
-  {ico:"🛡️",label:"Manbalar",fn:"navigate('manbalar')"},
-  {ico:"💎",label:"Premium",fn:"navigate('monetizatsiya')"},
-  {ico:"👤",label:"Profil",fn:"navigate('profil')"},
-  {ico:"⚙️",label:"Sozlamalar",fn:"navigate('sozlamalar')"},
-  {ico:"💰",label:"Soliq imtiyozlari haqida so'rash",fn:"navigate('ai')"},
+const QA_LIST = [
+  {i:"📊",l:"Dashboard",f:"nav('dashboard')"},
+  {i:"🤖",l:"AI Yordamchi",f:"nav('ai')"},
+  {i:"🎁",l:"Imtiyozlar",f:"nav('imtiyozlar')"},
+  {i:"📋",l:"Avto ariza",f:"nav('ariza')"},
+  {i:"📰",l:"Yangiliklar",f:"nav('yangiliklar')"},
+  {i:"🛡️",l:"Manbalar",f:"nav('manbalar')"},
+  {i:"⭐",l:"Premium",f:"nav('premium')"},
+  {i:"👤",l:"Profil",f:"nav('profil')"},
+  {i:"⚙️",l:"Sozlamalar",f:"nav('sozlamalar')"},
 ];
 
 // ══ ONBOARDING ══
-function selectType(el){
-  document.querySelectorAll('.ob-type').forEach(e=>e.classList.remove('selected'));
-  el.classList.add('selected');
-  state.biznesTuri = el.dataset.type;
-  document.getElementById('nextBtn1').disabled = false;
+function selType(el){
+  document.querySelectorAll('.ob-type').forEach(e=>e.classList.remove('sel'));
+  el.classList.add('sel'); ST.t=el.dataset.t;
+  document.getElementById('nb1').disabled=false;
 }
-function goStep(n){
-  document.querySelectorAll('.ob-step').forEach((s,i)=>s.classList.toggle('active',i===n-1));
+function goS(n){
+  ['s1','s2','s3'].forEach((id,i)=>document.getElementById(id).classList.toggle('act',i===n-1));
   if(n===3){
-    const cnt = IMTIYOZLAR.filter(x=>x.mos.includes(state.biznesTuri)).length;
-    document.getElementById('matchCount').textContent = cnt + " ta";
-    state.hudud = document.getElementById('hudud').value || 'Barcha hududlar';
-    state.soha = document.getElementById('soha').value || '';
-    state.biznesNomi = document.getElementById('biznesNomi').value || '';
-    state.stir = document.getElementById('stir').value || '';
-    state.dir = document.getElementById('dirFio').value || '';
+    ST.nom=document.getElementById('oBizNom').value||'';
+    ST.hudud=document.getElementById('oHudud').value||'Barcha hududlar';
+    ST.soha=document.getElementById('oSoha').value||'';
+    ST.stir=document.getElementById('oStir').value||'';
+    ST.dir=document.getElementById('oDir').value||'';
+    const cnt=IMTIYOZLAR.filter(x=>x.mos.includes(ST.t)).length;
+    document.getElementById('obMatch').textContent=cnt+' ta';
   }
 }
 function startApp(){
-  document.getElementById('onboarding').style.display='none';
+  document.getElementById('ob').style.display='none';
   document.getElementById('app').style.display='block';
-  initApp();
+  init();
 }
-function resetApp(){location.reload()}
 
 // ══ INIT ══
-function initApp(){
-  initTrendChart();
-  renderDashNews();
-  renderImtiyozlar('barchasi');
-  renderNewsGrid();
-  renderSectorGrid();
-  updateAiWelcome();
-  updateProfilePage();
-  updateQuota();
-  checkApiKey();
-  renderAiHints();
-  prefillAriza();
-  loadSettings();
-  document.addEventListener('keydown',e=>{
-    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();openQA()}
-    if(e.key==='Escape'){closeQA();closeModal('arizaModal')}
-  });
-  renderQAList('');
-  const now = new Date();
-  const t = now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0');
-  document.getElementById('aiWelcomeTime').textContent = t;
-}
-
-// ══ SECTOR GRID WITH REAL IMAGES ══
-function renderSectorGrid(){
-  const grid = document.getElementById('sectorGrid');
-  grid.innerHTML = SECTORS.map(s=>`
-    <div class="sector-card" onclick="filterBySector('${s.id}')">
-      <img class="sector-img" src="${s.img}" alt="${s.nomi}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy"/>
-      <div class="sector-img-placeholder" style="display:none">${s.ico}</div>
-      <div class="sector-info">
-        <div class="sector-name">${s.ico} ${s.nomi}</div>
-        <div class="sector-count">${s.count} ta imtiyoz</div>
-      </div>
-    </div>`).join('');
-}
-function filterBySector(id){
-  navigate('imtiyozlar');
-  const sector = SECTORS.find(s=>s.id===id);
-  if(sector){
-    document.querySelector('.search-box').value = sector.nomi;
-    filterImtiyoz(sector.nomi);
+function init(){
+  // trend
+  const v=[40,55,35,70,65,80,90];
+  document.getElementById('trend').innerHTML=v.map((h,i)=>`<div class="bar${i===6?' td':''}" style="height:${h}%"></div>`).join('');
+  // greeting
+  const nm=ST.nom||ST.dir||'s';
+  document.getElementById('gName').textContent=nm;
+  document.getElementById('gHudud').textContent=ST.hudud;
+  document.getElementById('dImt').textContent=IMTIYOZLAR.filter(x=>x.mos.includes(ST.t)).length;
+  // insights per type
+  const ins={ytt:["📌 YTT uchun 4 ta maxsus soliq imtiyozi topildi.","⚡ Yoshlar granti: muddati 1 iyul 2026.","🏦 Patent solig'ini optimallashtirish mumkin."],kichik:["💰 QQS dan ozodlik: 1 mlrd so'mgacha — sizga mos.","📱 Raqamli transformatsiya subsidiyasi 30%.","👥 Yangi ish joyi: 3 oylik kompensatsiya."],orta:["🌍 Eksport subsidiyasi: 15% — yangi 2026.","🔬 R&D xarajatlaringiz 150% chegirmaga loyiq.","💻 IT Texnopark: 7 yil soliqdan ozod."],katta:["🏙️ SEZ: 10 yil barcha soliqlardan ozod.","📊 Investitsiya $500K+: bojxona va QQS imtiyozi.","🔬 R&D 150% chegirma amal qiladi."]};
+  const il=ins[ST.t]||ins.ytt;
+  document.getElementById('dInsights').innerHTML=il.map(i=>`<div class="insight-i">${i}</div>`).join('');
+  // news
+  document.getElementById('dNews').innerHTML=YANGILIKLAR.slice(0,3).map(n=>`<div class="news-c" onclick="nav('yangiliklar')"><div><span class="src-tag">${n.src}</span><span class="news-path">${n.yol}</span></div><div class="news-t">${n.t}</div><div class="news-s">${n.s}</div><div class="news-m"><span>📅 ${n.dt}</span>${n.m?'<span style="color:var(--red)">🔴 Muhim</span>':''}</div></div>`).join('');
+  // news grid
+  document.getElementById('nGrid').innerHTML=YANGILIKLAR.map(n=>`<div class="news-c"><div><span class="src-tag">${n.src}</span><span class="news-path">${n.yol}</span>${n.m?'<span style="float:right;font-size:.65rem;color:var(--red);font-weight:600">🔴 MUHIM</span>':''}</div><div class="news-t">${n.t}</div><div class="news-s">${n.s}</div><div class="news-m"><span>📅 ${n.dt}</span><a href="https://${n.src.toLowerCase()}" target="_blank" style="color:var(--teal);text-decoration:none;margin-left:auto">↗ Rasmiy</a></div></div>`).join('');
+  // imtiyozlar
+  renderI('barchasi');
+  // faq list sidebar
+  document.getElementById('faqList').innerHTML=FAQ.map(f=>`<div class="fq" onclick="clickFaq('${f.q.replace(/'/g,"\\'")}')"><span>${f.q.length>38?f.q.slice(0,38)+'…':f.q}</span></div>`).join('');
+  // ai hints
+  document.getElementById('aiHints').innerHTML=IMTIYOZLAR.filter(x=>x.mos.includes(ST.t)).slice(0,5).map(h=>`<div style="cursor:pointer;padding:4px 6px;border-radius:5px;transition:background .15s;display:flex;align-items:center;gap:6px" onmouseenter="this.style.background='var(--teal-soft)'" onmouseleave="this.style.background=''" onclick="clickHint('${h.t.replace(/'/g,"\\'")}')"><span>${h.ico}</span><span>${h.t.length>32?h.t.slice(0,32)+'…':h.t}</span></div>`).join('');
+  // profile
+  updProfil();
+  // time
+  const now=new Date();
+  document.getElementById('aiTime').textContent=now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0');
+  // ariza prefill
+  if(ST.nom) document.getElementById('af-ism').value=ST.nom;
+  if(ST.stir){document.getElementById('af-st').value=ST.stir;}
+  if(ST.dir) document.getElementById('af-dir').value=ST.dir;
+  const shkl={ytt:'YTT',kichik:'MCHJ',orta:'MCHJ',katta:'AJ'};
+  document.getElementById('af-shk').value=shkl[ST.t]||'YTT';
+  if(ST.hudud!=='Barcha hududlar'){
+    try{document.getElementById('af-hud').value=ST.hudud;}catch(e){}
   }
+  // QA
+  renderQA('');
+  // keydown
+  document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();openQA();}if(e.key==='Escape'){document.getElementById('qaM').classList.remove('open');closeMo('arMo');}});
 }
 
-function updateAiWelcome(){
-  document.getElementById('aiHudud').textContent = state.hudud;
-  const name = state.biznesNomi || state.dir || 'Tadbirkor';
-  document.getElementById('userName').textContent = name;
-  document.getElementById('hududText').textContent = state.hudud;
-  document.getElementById('dashImtiyoz').textContent = IMTIYOZLAR.filter(x=>x.mos.includes(state.biznesTuri)).length;
-  const insights = {
-    ytt:["📌 YTT uchun 4 ta maxsus soliq imtiyozi topildi.","⚡ Yoshlar tadbirkorligi granti: muddati 1 iyul 2026.","🏦 Patent solig'ingizni optimallashtirish uchun AI Copilotdan so'rang."],
-    kichik:["💰 QQS dan ozodlik: 1 mlrd so'mgacha — sizga mos.","📱 Raqamli transformatsiya subsidiyasi 30% — yangi.","👥 Yangi ish joyi ochsangiz, 3 oylik kompensatsiya olasiz."],
-    orta:["🌍 2026 yil eksport subsidiyasi: 15% — siz uchun yangi.","🔬 R&D xarajatlaringiz 150% chegirmaga loyiq.","💻 IT Texnopark rezidentligi 7 yil soliqdan ozod qiladi."],
-    katta:["🏙️ SEZ ga kirish: 10 yil barcha soliqlardan ozod.","✈️ Xorijiy mutaxassis jalb qilsangiz, 3 yil imtiyoz.","📊 Investitsiya $500K+ bo'lsa, bojxona va QQS imtiyozi."]
-  };
-  const list = insights[state.biznesTuri] || insights.ytt;
-  document.getElementById('aiInsights').innerHTML = list.map(i=>`<div class="ai-insight-item">${i}</div>`).join('');
+// ══ NAV ══
+const TITLES={dashboard:'Dashboard',yangiliklar:'Yangiliklar',ai:'AI Yordamchi',imtiyozlar:'Imtiyozlar',ariza:'Avto ariza',manbalar:'Manbalar',premium:'Premium',profil:'Profil',haqida:'Haqida',shartlar:'Foydalanish shartlari',sozlamalar:'Sozlamalar'};
+function nav(p){
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('act'));
+  document.querySelectorAll('.nav-i').forEach(x=>x.classList.remove('act'));
+  const pg=document.getElementById('p-'+p);
+  if(pg)pg.classList.add('act');
+  const ni=document.getElementById('n-'+p);
+  if(ni)ni.classList.add('act');
+  document.getElementById('pgTitle').textContent=TITLES[p]||p;
+  if(p==='profil')updProfil();
+  document.getElementById('qaM').classList.remove('open');
+}
+function updProfil(){
+  const nm=ST.nom||ST.dir||'Tadbirkor';
+  document.getElementById('prAv').textContent=nm[0]?.toUpperCase()||'T';
+  document.getElementById('prNm').textContent=nm;
+  document.getElementById('prTp').textContent=TL[ST.t]||'YTT';
+  document.getElementById('prHud').textContent=ST.hudud;
+  document.getElementById('prSoha').textContent=ST.soha||'—';
+  document.getElementById('prShk').textContent=ST.t==='ytt'?'YTT':'MCHJ';
+  document.getElementById('prImt').textContent=IMTIYOZLAR.filter(x=>x.mos.includes(ST.t)).length+' ta mos';
+  document.getElementById('stQ').textContent=ST.sc;
+  document.getElementById('stC').textContent=ST.qc;
+  document.getElementById('stA').textContent=ST.ac;
 }
 
-function updateProfilePage(){
-  const n = state.biznesNomi || state.dir || 'Tadbirkor';
-  document.getElementById('profilName').textContent = n;
-  document.getElementById('profilAvatar').textContent = n[0]?.toUpperCase()||'T';
-  document.getElementById('profilType').textContent = BIZNES_TURI_LABELS[state.biznesTuri]||'YTT';
-  document.getElementById('profilHudud').textContent = state.hudud;
-  document.getElementById('profilSoha').textContent = state.soha||'—';
-  document.getElementById('profilShakl').textContent = state.biznesTuri==='ytt'?'YTT':'MCHJ';
-  document.getElementById('profilImtiyoz').textContent = IMTIYOZLAR.filter(x=>x.mos.includes(state.biznesTuri)).length+' ta mos';
-  document.getElementById('statQidiruv').textContent = state.searchCount;
-  document.getElementById('statSorov').textContent = state.queryCount;
-  document.getElementById('statAriza').textContent = state.arizaCount;
-  if(state.biznesNomi) document.getElementById('pr-ism').value = state.biznesNomi;
-  if(state.stir){document.getElementById('pr-stir').value=state.stir;document.getElementById('af-stir').value=state.stir;}
-  if(state.dir) document.getElementById('af-dir').value = state.dir;
-}
-function prefillAriza(){
-  if(state.biznesNomi) document.getElementById('af-biznes').value = state.biznesNomi;
-  if(state.stir) document.getElementById('af-stir').value = state.stir;
-  if(state.dir) document.getElementById('af-dir').value = state.dir;
-  const shakl={ytt:'YTT (Yakka tartibdagi tadbirkor)',kichik:"MCHJ (Mas'uliyati cheklangan jamiyat)",orta:"MCHJ (Mas'uliyati cheklangan jamiyat)",katta:'AJ (Aksionerlik jamiyati)'};
-  document.getElementById('af-shakl').value = shakl[state.biznesTuri]||shakl.ytt;
-}
-
-function initTrendChart(){
-  const vals=[40,55,35,70,65,80,90];
-  document.getElementById('trendChart').innerHTML = vals.map((v,i)=>`<div class="bar${i===6?' today':''}" style="height:${v}%"></div>`).join('');
-}
-function renderDashNews(){
-  document.getElementById('dashNews').innerHTML = YANGILIKLAR.slice(0,3).map(n=>`
-    <div class="news-card" onclick="navigate('yangiliklar')">
-      <div class="news-source"><span class="source-tag">${n.manba}</span><span class="news-path">${n.yol}</span></div>
-      <div class="news-title">${n.sarlavha}</div>
-      <div class="news-snippet">${n.matn.substring(0,100)}...</div>
-      <div class="news-meta"><span>📅 ${n.sana}</span>${n.muhim?'<span style="color:var(--red)">🔴 Muhim</span>':''}</div>
-    </div>`).join('');
-}
-function renderNewsGrid(){
-  document.getElementById('newsGrid').innerHTML = YANGILIKLAR.map(n=>`
-    <div class="news-full-card">
-      <div class="news-source"><span class="source-tag">${n.manba}</span><span class="news-path">${n.yol}</span>${n.muhim?'<span style="margin-left:auto;font-size:.68rem;color:var(--red);font-weight:600">🔴 MUHIM</span>':''}</div>
-      <div class="news-title">${n.sarlavha}</div>
-      <div class="news-snippet">${n.matn}</div>
-      <div class="news-meta" style="margin-top:10px">
-        <span>📅 ${n.sana}</span>
-        <a href="https://${n.manba.toLowerCase()}" target="_blank" style="color:var(--teal);text-decoration:none;margin-left:auto">Rasmiy manba ↗</a>
-      </div>
-    </div>`).join('');
-}
-
-let currentCat='barchasi';
-function renderImtiyozlar(cat){
-  currentCat=cat;
+// ══ IMTIYOZLAR ══
+let curCat='barchasi';
+function renderI(cat){
+  curCat=cat;
   let list=IMTIYOZLAR;
-  if(cat==='mos') list=list.filter(x=>x.mos.includes(state.biznesTuri));
-  else if(cat!=='barchasi') list=list.filter(x=>x.tur===cat);
-  document.getElementById('imtiyozGrid').innerHTML=list.map(im=>`
-    <div class="imtiyoz-card">
-      <div class="im-head">
-        <div style="display:flex;align-items:center;gap:8px">
-          <span class="im-icon">${im.icon}</span>
-          <div><div class="im-title">${im.nomi}</div><div class="im-source">📌 ${im.manba}</div></div>
-        </div>
-        <span class="im-badge badge-${im.badge}">${im.badge==='active'?'Faol':im.badge==='new'?'Yangi':'Tugayapti'}</span>
-      </div>
-      <div class="im-desc">${im.desc}</div>
-      <div class="im-meta"><span class="im-tag">📅 ${im.muddat}</span><span class="im-tag">💰 ${im.qiymat}</span>${im.tags.slice(0,2).map(t=>`<span class="im-tag">${t}</span>`).join('')}</div>
-      <button class="im-apply" onclick="openArizaModal('${im.nomi.replace(/'/g,"\\'")}','${im.desc.replace(/'/g,"\\'")}')">📋 Ariza topshirish</button>
-    </div>`).join('');
+  if(cat==='mos')list=list.filter(x=>x.mos.includes(ST.t));
+  else if(cat!=='barchasi')list=list.filter(x=>x.cat===cat);
+  document.getElementById('imGrid').innerHTML=list.length?list.map(im=>`<div class="im-c"><div class="im-hd"><div style="display:flex;align-items:center;gap:7px"><span style="font-size:1.2rem">${im.ico}</span><div><div class="im-t">${im.t}</div><div class="im-src">📌 ${im.src}</div></div></div><span class="im-bdg ${im.bdg==='active'?'ba':'bn'}">${im.bdg==='active'?'Faol':'Yangi'}</span></div><div class="im-d">${im.d}</div><div class="im-tags">${im.tags.slice(0,3).map(t=>`<span class="im-tag">${t}</span>`).join('')}<span class="im-tag">📅 ${im.mud}</span></div><button class="im-ap" onclick="openArMo('${im.t.replace(/'/g,"\\'")}','${im.d.replace(/'/g,"\\'")}')">📋 Ariza topshirish</button></div>`).join(''):`<div style="grid-column:1/-1;text-align:center;padding:36px;color:var(--text3)">Natija topilmadi</div>`;
 }
-function filterCat(cat,el){
-  document.querySelectorAll('.filter-pill').forEach(p=>p.classList.remove('active'));
-  el.classList.add('active');
-  renderImtiyozlar(cat);
-  state.searchCount++;localStorage.setItem('bn_sc',state.searchCount);
-  updateProfilePage();
+function filtC(cat,el){
+  document.querySelectorAll('.fp').forEach(p=>p.classList.remove('act'));
+  el.classList.add('act');renderI(cat);ST.sc++;updProfil();
 }
-function filterImtiyoz(q){
-  const low=q.toLowerCase();
-  let list=IMTIYOZLAR.filter(im=>im.nomi.toLowerCase().includes(low)||im.desc.toLowerCase().includes(low)||im.tags.some(t=>t.toLowerCase().includes(low)));
-  if(currentCat==='mos') list=list.filter(x=>x.mos.includes(state.biznesTuri));
-  else if(currentCat!=='barchasi') list=list.filter(x=>x.tur===currentCat);
-  document.getElementById('imtiyozGrid').innerHTML=list.length?list.map(im=>`
-    <div class="imtiyoz-card">
-      <div class="im-head"><div style="display:flex;align-items:center;gap:8px"><span class="im-icon">${im.icon}</span><div><div class="im-title">${im.nomi}</div><div class="im-source">📌 ${im.manba}</div></div></div><span class="im-badge badge-${im.badge}">${im.badge==='active'?'Faol':im.badge==='new'?'Yangi':'Tugayapti'}</span></div>
-      <div class="im-desc">${im.desc}</div>
-      <div class="im-meta">${im.tags.slice(0,3).map(t=>`<span class="im-tag">${t}</span>`).join('')}<span class="im-tag">📅 ${im.muddat}</span></div>
-      <button class="im-apply" onclick="openArizaModal('${im.nomi.replace(/'/g,"\\'")}','${im.desc.replace(/'/g,"\\'")}')">📋 Ariza topshirish</button>
-    </div>`).join('')
-  :`<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--text3)">🔍 "${q}" bo'yicha natija topilmadi</div>`;
-}
-function renderAiHints(){
-  const hints=IMTIYOZLAR.filter(x=>x.mos.includes(state.biznesTuri)).slice(0,5);
-  document.getElementById('aiHints').innerHTML=hints.map(h=>`
-    <div style="display:flex;align-items:center;gap:8px;cursor:pointer;padding:5px;border-radius:5px;transition:background .15s" onmouseenter="this.style.background='var(--teal-soft)'" onmouseleave="this.style.background=''" onclick="askAbout('${h.nomi.replace(/'/g,"\\'")}')">
-      <span>${h.icon}</span><span>${h.nomi.length>34?h.nomi.slice(0,34)+'…':h.nomi}</span>
-    </div>`).join('');
-}
-function askAbout(name){
-  navigate('ai');
-  setTimeout(()=>{document.getElementById('chatInp').value=name+" haqida batafsil ma'lumot bering";sendChat();},300);
+function filtI(q){
+  const lo=q.toLowerCase();
+  let list=IMTIYOZLAR.filter(im=>im.t.toLowerCase().includes(lo)||im.d.toLowerCase().includes(lo)||im.tags.some(t=>t.toLowerCase().includes(lo)));
+  if(curCat==='mos')list=list.filter(x=>x.mos.includes(ST.t));
+  else if(curCat!=='barchasi')list=list.filter(x=>x.cat===curCat);
+  document.getElementById('imGrid').innerHTML=list.length?list.map(im=>`<div class="im-c"><div class="im-hd"><div style="display:flex;align-items:center;gap:7px"><span style="font-size:1.2rem">${im.ico}</span><div><div class="im-t">${im.t}</div><div class="im-src">📌 ${im.src}</div></div></div><span class="im-bdg ${im.bdg==='active'?'ba':'bn'}">${im.bdg==='active'?'Faol':'Yangi'}</span></div><div class="im-d">${im.d}</div><div class="im-tags">${im.tags.slice(0,3).map(t=>`<span class="im-tag">${t}</span>`).join('')}</div><button class="im-ap" onclick="openArMo('${im.t.replace(/'/g,"\\'")}','${im.d.replace(/'/g,"\\'")}')">📋 Ariza topshirish</button></div>`).join(''):`<div style="grid-column:1/-1;text-align:center;padding:36px;color:var(--text3)">🔍 "${q}" bo'yicha natija topilmadi</div>`;
 }
 
-// ══ NAVIGATION ══
-function navigate(page){
-  const titles={dashboard:'Dashboard',yangiliklar:'Yangiliklar',ai:'AI Yordamchi',imtiyozlar:'Imtiyozlar',ariza:'Avto ariza',manbalar:'Manbalar',monetizatsiya:'Premium & Monetizatsiya',profil:'Profil',haqida:'Haqida',shartlar:'Foydalanish shartlari',sozlamalar:'Sozlamalar'};
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.s-item').forEach(s=>s.classList.remove('active'));
-  const pg=document.getElementById('page-'+page);
-  if(pg) pg.classList.add('active');
-  const nav=document.getElementById('nav-'+page);
-  if(nav) nav.classList.add('active');
-  document.getElementById('pageTitle').textContent=titles[page]||page;
-  state.currentPage=page;
-  if(page==='profil') updateProfilePage();
-  closeQA();
-}
-
-// ══ AI CHAT ══
-function checkApiKey(){
-  const v = state.apiKey;
-  const statusEl = document.getElementById('keyStatus');
-  const sozlStatus = document.getElementById('sozlKeyStatus');
-  if(v){
-    document.getElementById('apiKeyInp').value='●'.repeat(20);
-    if(statusEl){statusEl.className='key-status ok';statusEl.textContent='✓ API kaliti saqlangan — tayyor';}
-    if(sozlStatus){sozlStatus.className='key-status ok';sozlStatus.textContent='✓ API kaliti saqlangan';}
-    document.getElementById('sozl-api-inp').value='●'.repeat(20);
-    document.getElementById('aiStatusBar').textContent='AI Faol';
-    document.getElementById('aiStatusBar').style.background='rgba(34,197,94,.1)';
-  } else {
-    if(statusEl){statusEl.className='key-status no';statusEl.textContent='🔑 API kalitini kiriting';}
-    if(sozlStatus){sozlStatus.className='key-status no';sozlStatus.textContent='🔑 API kaliti kiritilmagan';}
-    document.getElementById('aiStatusBar').textContent='API kerak';
-    document.getElementById('aiStatusBar').style.background='rgba(255,77,109,.1)';
-    document.getElementById('aiStatusBar').style.color='var(--red)';
-  }
-}
-function saveKey(){
-  const v=document.getElementById('apiKeyInp').value.trim();
-  if(!v||v.startsWith('●')) return showToast("❌ To'g'ri API kalitini kiriting",'red');
-  if(!v.startsWith('sk-ant')) return showToast('❌ Kalit sk-ant- bilan boshlanishi kerak','red');
-  state.apiKey=v; localStorage.setItem('bn_key',v);
-  checkApiKey(); showToast('✅ API kaliti saqlandi!','teal');
-}
-function saveKeyFromSozl(){
-  const v=document.getElementById('sozl-api-inp').value.trim();
-  if(!v||v.startsWith('●')) return showToast("❌ To'g'ri API kalitini kiriting",'red');
-  if(!v.startsWith('sk-ant')) return showToast('❌ Kalit sk-ant- bilan boshlanishi kerak','red');
-  state.apiKey=v; localStorage.setItem('bn_key',v);
-  document.getElementById('apiKeyInp').value='●'.repeat(20);
-  checkApiKey(); showToast('✅ API kaliti saqlandi!','teal');
-}
-function clearKey(){
-  state.apiKey=''; localStorage.removeItem('bn_key');
-  document.getElementById('apiKeyInp').value='';
-  document.getElementById('sozl-api-inp').value='';
-  checkApiKey(); showToast('🗑️ API kaliti o\'chirildi','red');
-}
-function updateQuota(){
-  const rem=MAX_Q-state.queryCount;
-  const pct=(state.queryCount/MAX_Q)*100;
-  document.getElementById('quotaBig').textContent=rem;
-  document.getElementById('quotaFill').style.width=pct+'%';
-  document.getElementById('quotaTxt').textContent=`${state.queryCount} / ${MAX_Q} so'rov ishlatilgan`;
-}
-
-const SYS=(t,h,s)=>`Siz Benefit Navigator platformasining AI Copilotisiz. O'zbekiston davlat imtiyozlari mutaxassisi.
-
-Foydalanuvchi ma'lumotlari:
-- Biznes turi: ${t}
-- Hudud: ${h}
-- Soha: ${s||"ko'rsatilmagan"}
-
-Vazifangiz: O'zbekiston davlat imtiyozlari, subsidiyalar, grantlar va soliq masalalari bo'yicha to'g'ri, aniq va foydali ma'lumot berish.
-
-Asosiy mavzular:
-1. Soliq imtiyozlari (IT texnopark, eksport, ishlab chiqarish, YTT)
-2. Davlat subsidiyalari va grantlari (Yoshlar, KOB, fermer)
-3. Kredit va kafolat dasturlari (SME fund, davlat kafolati)
-4. KOB qo'llab-quvvatlash dasturlari
-5. SEZ va investitsiya imtiyozlari
-6. 2025-2026 yangi qarorlar va farmonlar
-
-Manbalar: lex.uz, gov.uz, soliq.uz, stat.uz, my.gov.uz, itpark.uz
-
-Javob uslubi:
-- O'zbek tilida, sodda va amaliy
-- Konkret miqdorlar va foizlarni ko'rsating
-- Qadamba-qadam yo'riqnomalar bering
-- Rasmiy manba ko'rsating
-- Javob 200-400 so'z
-- Har doim foydalanuvchining biznes turi va hududini hisobga oling
-
-Eslatma: Bu ma'lumot maqsadida. Muhim qarorlar uchun yurist bilan maslahatlashing.`;
-
-async function sendChat(){
-  if(state.isLoading) return;
-  const inp=document.getElementById('chatInp');
+// ══ AI CHAT (offline FAQ) ══
+let chatLocked=false;
+function sendChat(){
+  if(chatLocked)return;
+  const inp=document.getElementById('ci');
   const txt=inp.value.trim();
-  if(!txt) return;
-  if(!state.apiKey){
-    appendMsg('bot','🔑 AI Copilot ishlashi uchun API kaliti kerak.\n\nIltimos, o\'ng paneldagi "Anthropic API Kaliti" maydoniga kalitingizni kiriting.\n\nBepul API kaliti olish: <a href="https://console.anthropic.com" target="_blank" style="color:var(--teal)">console.anthropic.com</a>');
-    navigate('ai');
-    return;
-  }
-  if(state.queryCount>=MAX_Q){
-    appendMsg('bot',"⚠️ 100 ta bepul so'rovdan foydalandingiz. Premium versiya uchun biz bilan bog'laning. →\n\n<button onclick=\"navigate('monetizatsiya')\" style=\"background:var(--teal);color:#080d18;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:.8rem;margin-top:8px\">💎 Premium ko'rish</button>");
-    return;
-  }
-  inp.value=''; inp.style.height='auto';
-  appendMsg('user',txt);
-  state.chatHistory.push({role:'user',content:txt});
-  state.isLoading=true;
-  document.getElementById('sendBtn').disabled=true;
-  const typing=showTyping();
-  try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','x-api-key':state.apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1024,system:SYS(BIZNES_TURI_LABELS[state.biznesTuri],state.hudud,state.soha),messages:state.chatHistory.slice(-10)})
-    });
-    typing.remove();
-    if(!res.ok){const e=await res.json();appendMsg('bot','❌ '+(e.error?.message||'Xato yuz berdi'));state.chatHistory.pop();}
-    else{
-      const d=await res.json();
-      const reply=d.content?.[0]?.text||'Javob olishda xatolik';
-      appendMsg('bot',reply);
-      state.chatHistory.push({role:'assistant',content:reply});
-      state.queryCount++;localStorage.setItem('bn_qc',state.queryCount);
-      updateQuota();updateProfilePage();
+  if(!txt)return;
+  inp.value='';inp.style.height='auto';
+  addMsg('usr',txt);
+  ST.qc++;updProfil();
+  chatLocked=true;
+  const td=addTyping();
+  setTimeout(()=>{
+    td.remove();
+    const ans=findFaq(txt);
+    addMsg('bot',ans);
+    chatLocked=false;
+  },600+Math.random()*400);
+}
+function findFaq(q){
+  const lo=q.toLowerCase();
+  // exact or partial match
+  for(const f of FAQ){
+    if(lo.includes(f.q.toLowerCase().slice(0,10))||f.q.toLowerCase().includes(lo.slice(0,10))){
+      return f.a;
     }
-  }catch(e){typing.remove();appendMsg('bot','❌ Tarmoq xatosi: '+e.message);state.chatHistory.pop();}
-  state.isLoading=false;document.getElementById('sendBtn').disabled=false;
+  }
+  // keyword match
+  const kw=[
+    {k:['ytt','yakka','patent','ro\'yxat'],i:0},
+    {k:['soliq','imtiyoz','chegirma'],i:1},
+    {k:['mchj','mas\'uliyati','kompaniya','ochish'],i:2},
+    {k:['eksport','xorij','savdo'],i:3},
+    {k:['litsenziya','ruxsat'],i:4},
+    {k:['kredit','bank','qarz'],i:5},
+    {k:['qqs','qo\'shilgan'],i:6},
+    {k:['xodim','ishga','mehnat'],i:7},
+    {k:['intellektual','tovar belgisi','patent'],i:8},
+    {k:['hisobot','deklaratsiya','topshirish'],i:9},
+  ];
+  for(const {k,i} of kw){
+    if(k.some(w=>lo.includes(w))) return FAQ[i].a;
+  }
+  return `Tushunarliq savol. Biznes boshlash va yuritish bo'yicha quyidagi mavzularda javob bera olaman:<br><br>• YTT ro'yxatdan o'tish<br>• Soliq imtiyozlari<br>• MCHJ ochish<br>• Eksport boshlash<br>• Litsenziya olish<br>• Bank krediti<br>• QQS tartib-qoidalari<br>• Mehnat kodeksi<br>• Intellektual mulk<br>• Soliq hisobotlari<br><br>Yuqoridagilardan birini tanlang yoki aniqroq savol yozing.`;
 }
-function appendMsg(role,text){
-  const c=document.getElementById('chatMessages');
+function clickFaq(q){nav('ai');setTimeout(()=>{document.getElementById('ci').value=q;sendChat();},200);}
+function clickHint(t){nav('ai');setTimeout(()=>{document.getElementById('ci').value=t+' haqida batafsil';sendChat();},200);}
+function askFaq(el){document.getElementById('ci').value=el.textContent;sendChat();}
+function addMsg(role,txt){
+  const c=document.getElementById('chatMsgs');
   const d=document.createElement('div');d.className='msg '+role;
-  const t=new Date();
-  const tm=t.getHours().toString().padStart(2,'0')+':'+t.getMinutes().toString().padStart(2,'0');
-  d.innerHTML=`<div class="msg-bbl">${fmt(text)}</div><div class="msg-time">${tm}</div>`;
-  c.appendChild(d);c.scrollTop=c.scrollHeight;
-}
-function showTyping(){
-  const c=document.getElementById('chatMessages');
-  const d=document.createElement('div');d.className='msg bot';
-  d.innerHTML='<div class="typing-ind"><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div></div>';
+  const now=new Date();const tm=now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0');
+  d.innerHTML=`<div class="bbl">${txt}</div><div class="msg-t">${tm}</div>`;
   c.appendChild(d);c.scrollTop=c.scrollHeight;return d;
 }
-function fmt(t){
-  return t.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
-    .replace(/\*(.*?)\*/g,'<em>$1</em>')
-    .replace(/`([^`]+)`/g,'<code style="background:rgba(0,212,184,.15);padding:1px 5px;border-radius:4px;font-size:.85em">$1</code>')
-    .replace(/\n/g,'<br>');
+function addTyping(){
+  const c=document.getElementById('chatMsgs');
+  const d=document.createElement('div');d.className='msg bot';
+  d.innerHTML='<div class="typing"><div class="td"></div><div class="td"></div><div class="td"></div></div>';
+  c.appendChild(d);c.scrollTop=c.scrollHeight;return d;
 }
-function askSugg(el){
-  const m={
-    'Soliq imtiyozlari qanday?':`${BIZNES_TURI_LABELS[state.biznesTuri]} uchun qanday soliq imtiyozlari mavjud? Batafsil aytib bering.`,
-    'Eksport uchun subsidiya bormi?':`${state.hudud} da joylashgan eksport qiluvchi korxonalar uchun 2026 yil subsidiyalari haqida batafsil`,
-    'Kredit olish tartibi':"O'zbekistonda davlat kafolatlangan kredit olish tartibi va kerakli hujjatlar",
-    'Yangi qarorlar':'2026 yil yangi qabul qilingan biznes uchun muhim hukumat qarorlari va imtiyozlar'
-  };
-  document.getElementById('chatInp').value=m[el.textContent]||el.textContent;
-  sendChat();
-}
-function handleChatKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat();}}
-function autoResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,120)+'px';}
+function onChatKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat();}}
+function arR(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,100)+'px';}
 
 // ══ ARIZA ══
-function openArizaModal(nomi,desc){
-  document.getElementById('modalImtiyozNomi').textContent=nomi;
-  document.getElementById('modalImtiyozDesc').textContent=desc;
-  if(state.stir) document.getElementById('m-stir').value=state.stir;
-  if(state.biznesNomi) document.getElementById('m-biznes').value=state.biznesNomi;
-  document.getElementById('arizaModal').classList.add('open');
+function openArMo(nom,desc){
+  document.getElementById('moNom').textContent=nom;
+  document.getElementById('moDesc').textContent=desc;
+  if(ST.stir)document.getElementById('m-st').value=ST.stir;
+  if(ST.nom)document.getElementById('m-biz').value=ST.nom;
+  document.getElementById('arMo').classList.add('open');
 }
-function closeModal(id){document.getElementById(id).classList.remove('open');}
-function submitAriza(){
-  const s=document.getElementById('m-stir').value;
-  const b=document.getElementById('m-biznes').value;
-  if(!s&&!b) return showToast('❌ STIR yoki biznes nomini kiriting','red');
-  closeModal('arizaModal');
-  state.arizaCount++;localStorage.setItem('bn_ac',state.arizaCount);
-  updateProfilePage();
-  showToast('✅ Ariza muvaffaqiyatli topshirildi!','teal');
+function closeMo(id){document.getElementById(id).classList.remove('open');}
+function submitAr(){
+  const s=document.getElementById('m-st').value,b=document.getElementById('m-biz').value;
+  if(!s&&!b)return showToast('❌ STIR yoki biznes nomini kiriting','red');
+  closeMo('arMo');ST.ac++;updProfil();showToast('✅ Ariza muvaffaqiyatli topshirildi!','teal');
 }
-function saveProfile(){
+function savePro(){
   showToast('✅ Profil saqlandi. AI monitoring ishga tushdi!','teal');
-  const mb=document.getElementById('monitoringBox');
-  mb.classList.add('active');
-  mb.innerHTML=`<div style="font-size:2rem;margin-bottom:10px">🤖</div><div class="monitoring-title green">AI monitoring ishlamoqda</div><div style="font-size:.78rem;color:var(--text2);margin-top:6px">Tizim doimiy ravishda yangi arizalarni tekshiradi.</div>`;
-  simulateArizaSearch();
+  document.getElementById('monBox').classList.add('on');
+  document.getElementById('monBox').innerHTML='<div style="font-size:1.8rem;margin-bottom:10px">🤖</div><div style="font-size:.95rem;font-weight:700;margin-bottom:5px;color:var(--teal)">AI monitoring ishlamoqda</div><div style="font-size:.8rem;color:var(--text2)">Tizim doimiy ravishda yangi arizalarni tekshiradi.</div>';
+  simulateAr();
 }
-function startAriza(){saveProfile();showToast('🔍 AI imtiyozlarni tekshiryapti...','teal');setTimeout(()=>simulateArizaSearch(),500);}
-function simulateArizaSearch(){
-  const found=IMTIYOZLAR.filter(x=>x.mos.includes(state.biznesTuri)).slice(0,5);
-  document.getElementById('arizaResults').style.display='block';
-  document.getElementById('arizaCount').textContent=found.length+' ta topildi';
-  document.getElementById('arizaList').innerHTML=found.map(im=>`
-    <div class="result-item">
-      <div class="result-left"><span class="result-icon">${im.icon}</span><div><div class="result-name">${im.nomi}</div><div class="result-sub">${im.manba}</div></div></div>
-      <span class="result-status ${im.badge==='new'?'status-found':'status-wait'}">${im.badge==='new'?'Topildi':'Tekshirilmoqda'}</span>
-    </div>`).join('');
+function startAriza(){savePro();}
+function simulateAr(){
+  const found=IMTIYOZLAR.filter(x=>x.mos.includes(ST.t)).slice(0,5);
+  document.getElementById('arizaRes').style.display='block';
+  document.getElementById('arCnt').textContent=found.length+' ta topildi';
+  document.getElementById('arList').innerHTML=found.map(im=>`<div class="res-i"><div style="display:flex;align-items:center;gap:9px"><span>${im.ico}</span><div><div style="font-size:.84rem;font-weight:500">${im.t}</div><div style="font-size:.7rem;color:var(--text3)">${im.src}</div></div></div><span class="res-st ${im.bdg==='new'?'st-f':'st-w'}">${im.bdg==='new'?'Topildi':'Tekshirilmoqda'}</span></div>`).join('');
 }
-function saveProfil(){
-  const ism=document.getElementById('pr-ism').value;
-  if(ism) state.biznesNomi=ism;
-  state.stir=document.getElementById('pr-stir').value;
-  updateProfilePage();
-  showToast('✅ Profil saqlandi!','teal');
-}
+function saveProf(){const ism=document.getElementById('pr-ism').value;if(ism)ST.nom=ism;ST.stir=document.getElementById('pr-stir').value;updProfil();showToast('✅ Profil saqlandi!','teal');}
 
-// ══ SOZLAMALAR ══
-function switchSozl(el,id){
-  document.querySelectorAll('.sozl-nav-item').forEach(i=>i.classList.remove('active'));
-  el.classList.add('active');
-  document.querySelectorAll('#sozl-umumiy,#sozl-bildirishnoma,#sozl-maxfiylik,#sozl-korinish,#sozl-api').forEach(d=>d.style.display='none');
-  document.getElementById(id).style.display='block';
-  if(id==='sozl-api') checkApiKey();
+// ══ QA ══
+function renderQA(q){
+  const li=q?QA_LIST.filter(a=>a.l.toLowerCase().includes(q.toLowerCase())):QA_LIST;
+  document.getElementById('qaLi').innerHTML=li.map(a=>`<div class="qa-i" onclick="${a.f}"><div class="qa-ico">${a.i}</div>${a.l}</div>`).join('');
 }
-function toggleSetting(btn,key){
-  btn.classList.toggle('on');
-  state.settings[key]=btn.classList.contains('on');
-  localStorage.setItem('bn_settings',JSON.stringify(state.settings));
-}
-function loadSettings(){
-  Object.keys(state.settings).forEach(k=>{
-    const btn=document.getElementById('tog-'+k);
-    if(btn) btn.classList.toggle('on',!!state.settings[k]);
-  });
-}
-function saveSozlamalar(){showToast('✅ Sozlamalar saqlandi!','teal');}
-function clearData(){
-  if(confirm("Barcha ma'lumotlarni o'chirmoqchimisiz?")){
-    localStorage.clear();
-    showToast('🗑️ Barcha ma\'lumotlar o\'chirildi','red');
-    setTimeout(()=>location.reload(),1500);
-  }
-}
-function requestNotif(){
-  if('Notification' in window) Notification.requestPermission().then(p=>showToast(p==='granted'?'🔔 Bildirishnomalar yoqildi':'❌ Ruxsat rad etildi',p==='granted'?'teal':'red'));
-}
-
-// ══ SHARING ══
-function share(type){
-  const url=encodeURIComponent(window.location.href);
-  const text=encodeURIComponent("O'zbekiston tadbirkorlari uchun AI asosida davlat imtiyozlari platformasi — Benefit Navigator!");
-  const links={
-    telegram:`https://t.me/share/url?url=${url}&text=${text}`,
-    whatsapp:`https://wa.me/?text=${text}%20${url}`,
-    linkedin:`https://linkedin.com/sharing/share-offsite/?url=${url}`
-  };
-  if(type==='copy'){
-    navigator.clipboard?.writeText(window.location.href).then(()=>showToast('📋 Havola nusxa olindi!','teal')).catch(()=>showToast('❌ Nusxa olishda xato','red'));
-    return;
-  }
-  if(type==='embed'){
-    const code=`<iframe src="${window.location.href}" width="100%" height="600" frameborder="0" style="border-radius:12px"></iframe>`;
-    navigator.clipboard?.writeText(code).then(()=>showToast('⬛ Embed kodi nusxa olindi!','teal'));
-    return;
-  }
-  if(links[type]) window.open(links[type],'_blank');
-}
-
-// ══ MONETIZATION ══
-function upgradePlan(plan){
-  if(plan==='pro') showToast("💎 Pro tarif: +998 71 000 00 00 yoki info@benefitnav.uz",'teal');
-  else showToast("🏢 Enterprise: info@benefitnav.uz ga yozing",'teal');
-}
-
-// ══ QUICK ACTIONS ══
-function renderQAList(q){
-  const filtered=q?QA_ACTIONS.filter(a=>a.label.toLowerCase().includes(q.toLowerCase())):QA_ACTIONS;
-  document.getElementById('qaList').innerHTML=filtered.map(a=>`<div class="qa-item" onclick="${a.fn};closeQA()"><div class="qa-ico">${a.ico}</div>${a.label}</div>`).join('');
-}
-function filterQA(v){renderQAList(v);}
-function openQA(){document.getElementById('qaModal').classList.add('open');setTimeout(()=>document.getElementById('qaInput').focus(),50);}
-function closeQA(e){if(!e||e.target===document.getElementById('qaModal'))document.getElementById('qaModal').classList.remove('open');}
+function filtQA(v){renderQA(v);}
+function openQA(){document.getElementById('qaM').classList.add('open');setTimeout(()=>document.getElementById('qaI').focus(),40);}
+function closeQA(e){if(!e||e.target===document.getElementById('qaM'))document.getElementById('qaM').classList.remove('open');}
 
 // ══ TOAST ══
-let toastTimer;
+let tT;
 function showToast(msg,type){
-  clearTimeout(toastTimer);
+  clearTimeout(tT);
+  document.getElementById('tMsg').textContent=msg;
   const t=document.getElementById('toast');
-  document.getElementById('toastMsg').textContent=msg;
-  t.style.borderColor=type==='red'?'rgba(255,77,109,.3)':'rgba(0,212,184,.3)';
-  t.classList.add('show');
-  toastTimer=setTimeout(()=>t.classList.remove('show'),3200);
+  t.style.borderColor=type==='red'?'rgba(255,77,109,.3)':'rgba(0,212,184,.28)';
+  t.classList.add('show');tT=setTimeout(()=>t.classList.remove('show'),3000);
 }
 </script>
 </body>
